@@ -1,0 +1,8 @@
+.grid-item {
+  float: left;
+  width: 160px;
+}
+.grid-item div, .grid-item img {
+width: 100%;
+height: 100%;
+}

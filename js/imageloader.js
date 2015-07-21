@@ -1,21 +1,28 @@
-$("#demo").innerHTML = "My First JavaScript";
-$(document).ready() {
-	$("#demo").innerHTML = "My First JavaScript";
-	// make sure to do this onLoad, for example jQuery's $()
-	//var illustrationArray = array('placeholder1', 'placeholder2');
-// 	alert("yo");
-// 	var foo = document.createElement("img");
-// 	foo.src = "images/illustrations/Lava.png";
 
-// 	$(new Image()).attr('src', '' + "images/illustrations/Lava.png").appendTo($('.grid-item'));
-// 	document.getElementById("fooHolder").innerHTML = foo.toString();
-	
-// 	//$(".grid-item").src.appendChild(foo);
-// 	$(".grid-item").innerHTML("foo");
+$(document).ready(function() {
 
-// 	$('.grid').masonry({
-// 		// options
-// 		itemSelector: '.grid-item',
-// 		columnWidth: 200
-// });
-}
+	$("#demo").html("My First JavaScript");
+	$('.grid-item').prepend('<img class="ill" src="images/illustrations/Lava.png" />');
+
+	var illustrationArray = [
+		'<img class="ill" src="images/illustrations/img670.png"/>',
+		'<img class="ill" src="images/illustrations/img671.png"/>',
+		'<img class="ill" src="images/illustrations/img674.png"/>',
+		'<img class="ill" src="images/illustrations/img679.png"/>',
+		'<img class="ill" src="images/illustrations/img676.png"/>',
+		'<img class="ill" src="images/illustrations/img679.png"/>',
+		'<img class="ill" src="images/illustrations/img682.png"/>',
+		'<img class="ill" src="images/illustrations/img683.png"/>',
+		'<img class="ill" src="images/illustrations/TinachaunPoint.png">',
+		'<img class="ill" src="images/illustrations/Christmas2013Dad.png"/>',
+		];
+
+	for (i = 0; i < illustrationArray.length; i++) { 
+    	$('.grid').append('<div class="grid-item">' + illustrationArray[i] + '</div>');
+	}
+
+	$('.grid').masonry({
+		itemSelector: '.grid-item',
+		columnWidth: 200
+	});
+});
