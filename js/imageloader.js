@@ -21,10 +21,12 @@ $(document).ready(function() {
     	$('.grid').append('<div class="grid-item">' + illustrationArray[i] + '</div>');
 	}
 
-	$('.grid-item').height(this.child.clientHeight); 
-	
-	// $('.grid').masonry({
-	// 	itemSelector: '.grid-item',
-	// 	columnWidth: 200
-	// });
+	//layout Masonry after each image loads
+	$('.grid').imagesLoaded(function() {
+    	$('.grid').masonry({
+			itemSelector: '.grid-item',
+			columnWidth: 200,
+			gutter: 10,
+		});
+    });
 });
