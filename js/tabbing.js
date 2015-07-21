@@ -19,11 +19,8 @@ $(document).ready(function() {
 		}
 	};
 
-	$('#tab1').click(function() {
-		tab("tab1");
-	});
-
-	$('#tab2').click(function() {
-		tab("tab2");
+	$('.tab').click(function() {
+		target = $(this).attr('id')
+		tab(target);
 	});
 });
