@@ -17,6 +17,7 @@ $(document).ready(function() {
 		'<img class="ill" src="images/illustrations/Christmas2013Dad.png"/>',
 		];
 
+	//put all the images into the html
 	for (i = 0; i < illustrationArray.length; i++) { 
     	$('.grid').append('<div class="grid-item">' + illustrationArray[i] + '</div>');
 	}
