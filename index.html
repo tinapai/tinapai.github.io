@@ -16,15 +16,20 @@
 <body>
 	<div id='Tabs'>
 		<ul>
-			<li id='li_tab1' onclick='tab("tab1")'><a>Tab 1</a></li>
-			<li id='li_tab2' onclick='tab("tab2")'><a>Tab 2</a></li>
+			<li class='tab' id='tab1'><a>Tab 1</a></li>
+			<li class='tab' id='tab2'><a>Tab 2</a></li>
 		</ul>
 		<div id='Content_Area'>
-			<div id="tab1">
+			<div class='tabContent' id="tab1Content">
 				<p>This is the text for tab 1</p>
+				<p>Here are some pictures.</p>
+	
+				<div class="grid">
+				</div>
+
 			</div>
 
-			<div id="tab2" style="display: none;"> <!-- We set its display as none because 
+			<div class='tabContent' id="tab2Content" style="display: none;"> <!-- We set its display as none because 
 													we don't want to make this tab visible 
 													by default. The only visible/active tab
 													should be Tab 1 until the visitor clicks
@@ -34,10 +39,7 @@
 		</div> <!-- End of Content_Area Div -->
 	</div> <!-- End of Tabs Div -->
 	hi. 
-	Here are some pictures.
-	
-	<div class="grid">
-	</div>
+
 
 </body>
 </html>

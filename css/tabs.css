@@ -40,10 +40,11 @@ font-weight: bold;
 }
 
 #Tabs ul li a:hover {
-text-decoration: underline; // a very simple effect when hovering the mouse on tab
+text-decoration: underline;
+cursor: pointer;
 }
 
-#Tabs #Content_Area { // this is the css class for the content displayed in each tab
+#Tabs #Content_Area { /*this is the css class for the content displayed in each tab*/
 padding: 0 15px;
 clear:both;
 overflow:hidden;
@@ -51,6 +52,5 @@ line-height:19px;
 position: relative;
 top: 20px;
 z-index: 5;
-height: 150px;
 overflow: hidden;
 }
