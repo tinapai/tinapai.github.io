@@ -2,9 +2,9 @@
 $(document).ready(function() {
 
 	$("#demo").html("My First JavaScript");
-	$('.grid-item').prepend('<img class="ill" src="images/illustrations/Lava.png" />');
 
 	var illustrationArray = [
+		'<img class="ill" src="images/illustrations/Lava.png"/>',
 		'<img class="ill" src="images/illustrations/img670.png"/>',
 		'<img class="ill" src="images/illustrations/img671.png"/>',
 		'<img class="ill" src="images/illustrations/img674.png"/>',
@@ -21,8 +21,10 @@ $(document).ready(function() {
     	$('.grid').append('<div class="grid-item">' + illustrationArray[i] + '</div>');
 	}
 
-	$('.grid').masonry({
-		itemSelector: '.grid-item',
-		columnWidth: 200
-	});
+	$('.grid-item').height(this.child.clientHeight); 
+	
+	// $('.grid').masonry({
+	// 	itemSelector: '.grid-item',
+	// 	columnWidth: 200
+	// });
 });
