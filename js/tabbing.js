@@ -1,7 +1,7 @@
 // tabbing stuff
 $(document).ready(function() {
 
-	var availableTabs = ['#tab1', '#tab2'];
+	var availableTabs = ['#tab1', '#tab2', '#tab3'];
 
 	function tab(tab) {
 		if (!$.inArray(tab, availableTabs)) {
@@ -11,10 +11,12 @@ $(document).ready(function() {
 			for (var i = 0; i < arrayLength; i++) {
 				//maybe have problems where tab doesn't exist
 			    $(availableTabs[i] + 'Content').hide();
-			    $(availableTabs[i] + 'Content').css('class', '');
+			    $(availableTabs[i] + 'Content').css({'class': ''});
+			    $(availableTabs[i]).css({'background': '#B4B6BD'});
 			}
 			$("#" + tab + 'Content').show();
-			$("#" + tab + 'Content').css('class', 'active');;
+			$("#" + tab + 'Content').css({'class': 'active'});
+			$("#" + tab).css({'background': '#E8E3E3'});
 
 		}
 	};

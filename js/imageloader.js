@@ -3,16 +3,16 @@ $(document).ready(function() {
 
 	var illustrationArray = [
 		'<img class="ill" src="images/illustrations/Lava.png"/>',
+		'<img class="ill" src="images/illustrations/icecreamtruck.jpg"/>',
+		'<img class="ill" src="images/illustrations/TinachaunPoint.png">',
+		'<img class="ill" src="images/illustrations/Christmas2013Dad.png"/>',
 		'<img class="ill" src="images/illustrations/img670.png"/>',
 		'<img class="ill" src="images/illustrations/img671.png"/>',
 		'<img class="ill" src="images/illustrations/img674.png"/>',
-		'<img class="ill" src="images/illustrations/img679.png"/>',
 		'<img class="ill" src="images/illustrations/img676.png"/>',
 		'<img class="ill" src="images/illustrations/img679.png"/>',
 		'<img class="ill" src="images/illustrations/img682.png"/>',
 		'<img class="ill" src="images/illustrations/img683.png"/>',
-		'<img class="ill" src="images/illustrations/TinachaunPoint.png">',
-		'<img class="ill" src="images/illustrations/Christmas2013Dad.png"/>',
 		];
 
 	//put all the images into the html
