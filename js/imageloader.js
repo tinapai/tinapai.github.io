@@ -1,8 +1,6 @@
 
 $(document).ready(function() {
 
-	$("#demo").html("My First JavaScript");
-
 	var illustrationArray = [
 		'<img class="ill" src="images/illustrations/Lava.png"/>',
 		'<img class="ill" src="images/illustrations/img670.png"/>',

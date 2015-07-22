@@ -1,3 +1,25 @@
+/*general*/
+p {
+    font-family: sans-serif;
+    font-size: 18;
+    font-weight: 400;
+}
+h3 {
+    font-family: sans-serif;
+    font-size: 18;
+    font-weight: 200;
+    margin: 0; /* <-- added this */
+}
+#headerContainer {
+    height: 100px;
+}
+#header {
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 48;
+    
+}
+/*grid stuff*/
 .grid {
     background: #EEE;
     max-width: 1200px;
