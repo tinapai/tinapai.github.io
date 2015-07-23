@@ -3,14 +3,7 @@ $(document).ready(function() {
 	//start by loading tab 1
 	tab('tab1'); //see tab() in tabbing.js
 
-	//layout Masonry after each image loads
-	$('.grid').imagesLoaded(function() {
-    	$('.grid').masonry({
-			itemSelector: '.grid-item',
-			columnWidth: 200,
-			gutter: 10,
-		});
-    });
+	layoutMasonry('tab1Grid');
 });
 
 //put all the images in ARRAY into the html
@@ -18,6 +11,19 @@ function loadImages(array) {
 	for (var i = 0; i < array.length; i++) { 
     	$('#' + activeTab + 'Grid').append('<div class="grid-item">' + array[i] + '</div>');
 	}
+	layoutMasonry(activeTab + 'Grid');
+}
+
+//layout Masonry after every image has loaded
+//parameter GRIDID is a String; example 'tab1Grid', 'tab2Grid', etc.
+function layoutMasonry(gridId) {
+	$('#' + gridId).imagesLoaded(function() {
+    	$('#' + gridId).masonry({
+			itemSelector: '.grid-item',
+			columnWidth: 200,
+			gutter: 10,
+		});
+    });
 }
 
 var illustrationArray = [
@@ -61,7 +67,7 @@ var photoArray = [
 	];
 
 var tabArrayMap = {
-    'tab1': illustrationArray,
-    'tab2': graphicsArray,
+    'tab1': graphicsArray,
+    'tab2': illustrationArray,
     'tab3': photoArray
 };

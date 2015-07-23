@@ -35,6 +35,7 @@ function tab(tab) {
 	}
 };
 
+
 //Loads the images for the tab you want
 //parameter TAB is type String; should look like 'tab1' or 'tab2' etc.
 function loadTab(tab) {
