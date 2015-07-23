@@ -27,6 +27,7 @@ function layoutMasonry(gridId) {
 }
 
 var illustrationArray = [
+	'<img class="ill" src="images/illustrations/20150716 visa illustration.png"/>',
 	'<img class="ill" src="images/illustrations/Lava.png"/>',
 	'<img class="ill" src="images/illustrations/icecreamtruck.jpg"/>',
 	'<img class="ill" src="images/illustrations/TinachaunPoint.png">',
@@ -42,7 +43,7 @@ var illustrationArray = [
 
 var graphicsArray = [
 	'<img class="gra" src="images/infographics/20150619.budget.tpai-02.png"/>',
-	'<img class="gra" src="images/infographics/administration.tpai.png"/>',
+	'<img class="gra" src="images/infographics/Administration.tpai.png"/>',
 	'<img class="gra" src="images/infographics/Berkeley.tpai.png">',
 	'<img class="gra" src="images/infographics/bitcoin.tpai0.png"/>',
 	'<img class="gra" src="images/infographics/budget.tpai.png"/>',
@@ -53,7 +54,7 @@ var graphicsArray = [
 	];
 
 var photoArray = [
-	'<img class="pho" src="images/photos/IMG_7713.jpg"/>',
+	'<img class="pho" src="images/photos/IMG_7713.jpg"/>'
 	// '<img class="pho" src="images/photos/icecreamtruck.jpg"/>',
 	// '<img class="pho" src="images/photos/TinachaunPoint.png">',
 	// '<img class="pho" src="images/photos/Christmas2013Dad.png"/>',
