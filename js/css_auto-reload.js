@@ -1,4 +1,5 @@
 //from http://nv.github.io/css_auto-reload/css_auto-reload.js
+
 StyleSheetList.prototype.reload_interval = 1000; // 1 second
 
 CSSStyleSheet.prototype.reload = function reload(){
