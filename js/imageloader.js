@@ -54,12 +54,12 @@ var graphicsArray = [
 	];
 
 var photoArray = [
-	'<img class="pho" src="images/photos/IMG_7713.jpg"/>'
-	// '<img class="pho" src="images/photos/icecreamtruck.jpg"/>',
-	// '<img class="pho" src="images/photos/TinachaunPoint.png">',
-	// '<img class="pho" src="images/photos/Christmas2013Dad.png"/>',
-	// '<img class="pho" src="images/photos/img670.png"/>',
-	// '<img class="pho" src="images/photos/img671.png"/>',
+	'<img class="pho" src="images/photos/IMG_7713.jpg"/>',
+	'<img class="pho" src="images/photos/IMG_8393.jpg"/>',
+	'<img class="pho" src="images/photos/IMG_8395.jpg">',
+	'<img class="pho" src="images/photos/IMG_8677.jpg"/>',
+	'<img class="pho" src="images/photos/IMG_8679.jpg"/>',
+	'<img class="pho" src="images/photos/TeaTasting.gif"/>',
 	// '<img class="pho" src="images/photos/img674.png"/>',
 	// '<img class="pho" src="images/photos/img676.png"/>',
 	// '<img class="pho" src="images/photos/img679.png"/>',
