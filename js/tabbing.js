@@ -7,7 +7,7 @@ $(document).ready(function() {
 	});
 });
 
-var availableTabs = ['tab1', 'tab2', 'tab3']; //used to be: var availableTabs = ['#tab1', '#tab2', '#tab3'];
+var availableTabs = ['tab1', 'tab2', 'tab3', 'tab4']; //used to be: var availableTabs = ['#tab1', '#tab2', '#tab3'];
 var activeTab = 'tab1';
 var loadedTabs = [];
 
@@ -22,12 +22,12 @@ function tab(tab) {
 			//maybe have problems where tab doesn't exist
 		    $("#"+availableTabs[i] + 'Content').hide(); //added #'s
 		    $("#"+availableTabs[i] + 'Content').css({'class': ''});
-		    $("#"+availableTabs[i]).css({'background': '#B4B6BD'});
+		    $("#"+availableTabs[i]).css({'background': 'rgb(61, 101, 33)'});
 		}
 		$("#" + tab + 'Content').show();
 		$("#" + tab + 'Content').css({'class': 'active'});
 		activeTab = tab;
-		$("#" + tab).css({'background': '#E8E3E3'});
+		$("#" + tab).css({'background': 'rgb(81, 121, 53)'});
 		if ($.inArray(tab, loadedTabs) == -1) {
 			loadTab(activeTab);
 		}

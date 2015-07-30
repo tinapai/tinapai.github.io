@@ -67,8 +67,13 @@ var photoArray = [
 	// '<img class="pho" src="images/photos/img683.png"/>',
 	];
 
+var uiArray = [
+	'<img class="ui" src="images/uis/AAA web ui 3.pdf/>',
+	]
+
 var tabArrayMap = {
     'tab1': graphicsArray,
     'tab2': illustrationArray,
-    'tab3': photoArray
+    'tab3': photoArray,
+    'tab4': uiArray,
 };
