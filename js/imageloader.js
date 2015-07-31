@@ -11,6 +11,7 @@ function loadImages(array) {
 	for (var i = 0; i < array.length; i++) { 
     	$('#' + activeTab + 'Grid').append('<div class="grid-item">' + array[i] + '</div>');
 	}
+
 	layoutMasonry(activeTab + 'Grid');
 }
 
@@ -68,8 +69,9 @@ var photoArray = [
 	];
 
 var uiArray = [
-	'<img class="ui" src="images/uis/AAA web ui 3.pdf/>',
-	]
+	// '<img class="ui" src="images/uis/AAA web ui 3.pdf"/>',
+	'<img class="pho" src="images/uis/AAAWebUi2.png"/>',
+	];
 
 var tabArrayMap = {
     'tab1': graphicsArray,

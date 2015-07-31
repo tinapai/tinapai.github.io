@@ -19,7 +19,6 @@ $(document).ready(function() {
     // console.log(doc);
     // console.log(doc.find('grid-item'));
 	$('.grid').on("click", '.grid-item', function() {
-		console.log("a");
 		var imgLink = $(this).html();
 		makeModal(imgLink);
 	});
