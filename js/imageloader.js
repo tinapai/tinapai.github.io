@@ -54,28 +54,30 @@ var graphicsArray = [
 	'<img class="gra" src="images/infographics/PAC-color.tpai.png"/>',
 	];
 
-var photoArray = [
-	'<img class="pho" src="images/photos/IMG_7713.jpg"/>',
-	'<img class="pho" src="images/photos/IMG_8393.jpg"/>',
-	'<img class="pho" src="images/photos/IMG_8395.jpg">',
-	'<img class="pho" src="images/photos/IMG_8677.jpg"/>',
-	'<img class="pho" src="images/photos/IMG_8679.jpg"/>',
-	'<img class="pho" src="images/photos/TeaTasting.gif"/>',
-	// '<img class="pho" src="images/photos/img674.png"/>',
-	// '<img class="pho" src="images/photos/img676.png"/>',
-	// '<img class="pho" src="images/photos/img679.png"/>',
-	// '<img class="pho" src="images/photos/img682.png"/>',
-	// '<img class="pho" src="images/photos/img683.png"/>',
-	];
+// var photoArray = [
+// 	'<img class="pho" src="images/photos/IMG_7713.jpg"/>',
+// 	'<img class="pho" src="images/photos/IMG_8393.jpg"/>',
+// 	'<img class="pho" src="images/photos/IMG_8395.jpg">',
+// 	'<img class="pho" src="images/photos/IMG_8677.jpg"/>',
+// 	'<img class="pho" src="images/photos/IMG_8679.jpg"/>',
+// 	//'<img class="pho" src="images/photos/TeaTasting.gif"/>',
+// 	// '<img class="pho" src="images/photos/img674.png"/>',
+// 	// '<img class="pho" src="images/photos/img676.png"/>',
+// 	// '<img class="pho" src="images/photos/img679.png"/>',
+// 	// '<img class="pho" src="images/photos/img682.png"/>',
+// 	// '<img class="pho" src="images/photos/img683.png"/>',
+// 	];
 
 var uiArray = [
 	// '<img class="ui" src="images/uis/AAA web ui 3.pdf"/>',
 	'<img class="pho" src="images/uis/AAAWebUi2.png"/>',
 	];
 
+var abtMeArray = [];
+
 var tabArrayMap = {
     'tab1': graphicsArray,
     'tab2': illustrationArray,
-    'tab3': photoArray,
-    'tab4': uiArray,
+    'tab3': uiArray,
+    'tab4': abtMeArray,
 };
