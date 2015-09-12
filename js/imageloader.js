@@ -29,7 +29,6 @@ function layoutMasonry(gridId) {
 
 var illustrationArray = [
 	'<img class="ill" src="images/illustrations/20150716 visa illustration.png"/>',
-	// '<img class="ill" src="images/illustrations/Lava.png"/>',
 	'<img class="ill" src="images/illustrations/icecreamtruck.jpg"/>',
 	'<img class="ill" src="images/illustrations/TinachaunPoint.png">',
 	'<img class="ill" src="images/illustrations/Christmas2013Dad.png"/>',
