@@ -76,8 +76,8 @@ var uiArray = [
 var abtMeArray = [];
 
 var tabArrayMap = {
-    'tab1': graphicsArray,
+    'tab1': abtMeArray,
     'tab2': illustrationArray,
-    'tab3': uiArray,
-    'tab4': abtMeArray,
+    'tab3': graphicsArray,
+    'tab4': uiArray,
 };

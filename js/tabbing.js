@@ -20,14 +20,14 @@ function tab(tab) {
 		var arrayLength = availableTabs.length;
 		for (var i = 0; i < arrayLength; i++) {
 			//maybe have problems where tab doesn't exist
-		    $("#"+availableTabs[i] + 'Content').hide(); //added #'s
+		    $("#"+availableTabs[i] + 'Content').hide(); 
 		    $("#"+availableTabs[i] + 'Content').css({'class': ''});
-		    $("#"+availableTabs[i]).css({'background': 'rgb(61, 101, 33)'});
+		    $("#"+availableTabs[i]).css({'background': 'rgb(0, 45, 60)'});
 		}
 		$("#" + tab + 'Content').show();
 		$("#" + tab + 'Content').css({'class': 'active'});
 		activeTab = tab;
-		$("#" + tab).css({'background': 'rgb(81, 121, 53)'});
+		$("#" + tab).css({'background': 'rgb(67, 153, 152)'});
 		if ($.inArray(tab, loadedTabs) == -1) {
 			loadTab(activeTab);
 		}

@@ -1,5 +1,5 @@
 /*tabs
-from http://www.webhostingtalk.com/showthread.php?t=1045871*/
+adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 #Tabs ul {
 	padding: 0px;
 	margin: 0px;
@@ -42,9 +42,9 @@ from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	text-decoration: underline;
 	cursor: pointer;
 }
-/*end decoration*/
 
-#Tabs #Content_Area { /*this is the css class for the content displayed in each tab*/
+/*the css class for the content displayed in each tab*/
+#Tabs #Content_Area { 
 	padding: 0 15px;
 	clear:both;
 	overflow:hidden;
@@ -52,5 +52,5 @@ from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	position: relative;
 	z-index: 5;
 	overflow: hidden;
-	background: rgb(81, 121, 53);
+	background: rgb(67, 153, 152);
 }
