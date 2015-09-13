@@ -33,6 +33,11 @@ body:before {
     margin-top: 20px;
 }
 
+#emailIcon {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #footer {
     width: 1000px;
     margin-left: auto;
@@ -48,7 +53,7 @@ body:before {
 #header {
     font-weight: 600;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 30pt;
+    font-size: 36pt;
     text-align: center;
     margin-top: 10px;
     color: white;
