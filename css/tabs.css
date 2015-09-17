@@ -18,14 +18,14 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 .tab {
 	font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
-    font-size: 13pt;
+    font-size: 17px;
 	position: relative;
 	display: block;
 	margin-left: 6px;
 	padding: 10px;
 	background: rgb(94, 247, 196);
 	z-index: 99;
-	width: 130px;
+	width: 140px;
 	text-decoration: none;
 
 
@@ -56,9 +56,9 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	background: rgb(67, 153, 152);
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 720px) {
 	.tab {
-		font-size: 16px;
+		font-size: 18px;
 		width: 200px;
 	}
 

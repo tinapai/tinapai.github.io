@@ -108,9 +108,8 @@ body:before {
     width: 200px;
     border-radius: 100px;
     overflow: hidden;
-    margin: 10px;
-    display: inline-block;
-    margin-left: 60px;
+    margin-left: auto;
+    margin-right: auto;   
     margin-top: 60px;
     border: 5px solid white;
     background: white;
@@ -118,12 +117,12 @@ body:before {
 #myBio {
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
-    width: 50%;
+    width: 70%;
     display: inline-block;
     padding: 50px;
 }
 #bioContainer {
-    display: inline-block;
+    /*display: inline-block;*/
 }
 .secretPhotos {
     display: none;
@@ -160,7 +159,12 @@ body:before {
     border-radius: 2px;
     margin-bottom: 10px;
 }
+@media screen and (min-width: 500px) {
+    #myBio {
+        width: 80%;
+    }
 
+}
 @media screen and (min-width: 1050px) {
     #container {
         width: 1000px;
@@ -171,6 +175,14 @@ body:before {
         width: 1000px;
         margin-left: auto;
         margin-right: auto;
+    }
+    #myBio {
+        width: 50%;
+    }
+    #portraitWrapper {
+        margin: 10px;
+        display: inline-block;
+        margin-left: 60px;
     }
 
 }
