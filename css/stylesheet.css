@@ -25,13 +25,11 @@ body:before {
     -webkit-transform-origin: top left;
     -webkit-filter: blur(2px);
 }
-
 #container {
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     margin-top: 20px;
 }
+
 
 #emailIcon {
     margin-left: auto;
@@ -39,9 +37,7 @@ body:before {
 }
 
 #footer {
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     margin-bottom: 50px;
     background: white;
     height: 120px;
@@ -163,4 +159,18 @@ body:before {
     float: left;
     border-radius: 2px;
     margin-bottom: 10px;
+}
+
+@media screen and (min-width: 1050px) {
+    #container {
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #footer {
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }

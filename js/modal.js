@@ -19,7 +19,7 @@ $(document).ready(function() {
     // console.log(doc);
     // console.log(doc.find('grid-item'));
 	$('.grid').on("click", '.grid-item', function() {
-		var imgLink = $(this).html();
+		var imgLink = findFullRes($(this).html());
 		makeModal(imgLink);
 	});
 
@@ -37,4 +37,16 @@ function hideModal() {
 	$('#modal').hide();
 	$('#modalImg').remove();
 	$('#modal').css('class: ""');
+}
+
+// When IMAGEHTML is in format images/examplefolder/example.png
+function findThumbnail(imageHtml) {
+	tokens = imageHtml.split("/");
+	newUrl = tokens[0] + "/" + tokens[1] + "/thumbnails" + tokens[2];
+	return newUrl;
+}
+function findFullRes(thumbHtml) {
+	tokens = thumbHtml.split("/");
+	newUrl = tokens[0] + "/" + tokens[1] + "/" + tokens[3];
+	return newUrl;
 }

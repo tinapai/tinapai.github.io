@@ -14,6 +14,7 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	color: white;
 }
 
+
 .tab {
 	font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
@@ -53,4 +54,19 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	z-index: 5;
 	overflow: hidden;
 	background: rgb(67, 153, 152);
+}
+
+@media screen and (max-width: 680px) {
+	.tab {
+		font-size: 16px;
+		width: 200px;
+	}
+
+}
+@media screen and (max-width: 500px) {
+	.tab {
+		font-size: 13px;
+		width: 130px;
+	}
+
 }
