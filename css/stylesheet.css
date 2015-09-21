@@ -8,6 +8,7 @@ p {
 }
 
 body {
+    --isMobile: false;
     position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;
     height: 100%;
@@ -26,8 +27,10 @@ body:before {
     -webkit-filter: blur(2px);
 }
 #container {
-    width: 100%;
     margin-top: 20px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -37,7 +40,9 @@ body:before {
 }
 
 #footer {
-    width: 100%;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 50px;
     background: white;
     height: 120px;
@@ -107,19 +112,20 @@ body:before {
     height: 200px;
     width: 200px;
     border-radius: 100px;
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;   
+    overflow: hidden;  
     margin-top: 60px;
     border: 5px solid white;
     background: white;
+    margin: 10px;
+    display: inline-block;
+    margin-left: 60px;
 }
 #myBio {
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
-    width: 70%;
     display: inline-block;
     padding: 50px;
+    width: 50%;
 }
 #bioContainer {
     /*display: inline-block;*/
@@ -165,11 +171,25 @@ body:before {
     }
 
 }
-@media screen and (min-width: 1050px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     #container {
-        width: 1000px;
+        width: 100%;
+        }
+    #footer {
+        width: 100%;
+    }
+    #myBio {
+    width: 70%;
+
+    }
+    #portraitWrapper {
         margin-left: auto;
-        margin-right: auto;
+        margin-right: auto; 
+    }
+}
+@media only screen and (min-device-width: 1050px) {
+    #container {
+
     }
     #footer {
         width: 1000px;
@@ -183,6 +203,7 @@ body:before {
         margin: 10px;
         display: inline-block;
         margin-left: 60px;
+        
     }
 
 }
