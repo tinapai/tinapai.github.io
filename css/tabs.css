@@ -49,13 +49,20 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	padding: 0 15px;
 	clear:both;
 	overflow:hidden;
-	line-height:19px;
+	line-height:24pt;
 	position: relative;
 	z-index: 5;
 	overflow: hidden;
 	background: rgb(67, 153, 152);
 }
 
+@media screen and (max-width: 720px) {
+	.tab {
+		font-size: 18px;
+		width: 200px;
+	}
+
+}
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 	.tab {
 	font-size: 16pt;
@@ -63,19 +70,3 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	font-color: blue;
 	}
 }
-
-
-/*@media screen and (max-width: 720px) {
-	.tab {
-		font-size: 18px;
-		width: 200px;
-	}
-
-}*/
-/*@media screen and (max-width: 500px) {
-	.tab {
-		font-size: 13px;
-		width: 130px;
-	}
-
-}*/
