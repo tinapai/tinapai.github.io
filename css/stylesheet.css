@@ -180,8 +180,9 @@ body:before {
         background: blue;
     }
     #myBio {
-    width: 70%;
-
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
     }
     #portraitWrapper {
         margin-left: auto;

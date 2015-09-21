@@ -56,13 +56,21 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	background: rgb(67, 153, 152);
 }
 
-@media screen and (max-width: 720px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	.tab {
+	font-size: 18px;
+	width: 200px;
+	}
+}
+
+
+/*@media screen and (max-width: 720px) {
 	.tab {
 		font-size: 18px;
 		width: 200px;
 	}
 
-}
+}*/
 /*@media screen and (max-width: 500px) {
 	.tab {
 		font-size: 13px;
