@@ -165,18 +165,19 @@ body:before {
     border-radius: 2px;
     margin-bottom: 10px;
 }
-@media screen and (min-width: 500px) {
+/*@media screen and (min-width: 500px) {
     #myBio {
         width: 80%;
     }
 
-}
+}*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     #container {
         width: 100%;
         }
     #footer {
         width: 100%;
+        background: blue;
     }
     #myBio {
     width: 70%;
@@ -187,7 +188,7 @@ body:before {
         margin-right: auto; 
     }
 }
-@media only screen and (min-device-width: 1050px) {
+/*@media only screen and (min-device-width: 1050px) {
     #container {
 
     }
@@ -204,6 +205,6 @@ body:before {
         display: inline-block;
         margin-left: 60px;
         
-    }
+    }*/
 
 }
