@@ -119,7 +119,7 @@ body:before {
     color: white;
     width: 70%;
     display: inline-block;
-    padding: 50px;
+    padding: 10%;
 }
 #bioContainer {
     /*display: inline-block;*/
@@ -180,29 +180,39 @@ body:before {
         width: 50%;
     }
     #portraitWrapper {
-        margin: 10px;
+        margin-top: -40px;
         display: inline-block;
         margin-left: 60px;
+
     }
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    p {
+        font-size: 36pt;
+    }
     #container {
         width: 100%;
-        font-size: 24pt;
-        }
+    }
     #footer {
         width: 100%;
-        background: red;
+        height: 400px;
+        background: white;
+    }
+    #header {
+        font-size: 64pt;
+    }
+    #subheading {
+        font-size: 36pt;
     }
     #myBio {
         width: 70%;
-        margin-left: 15%;
+        margin-left: 10%;
         margin-right: auto;
-        text-align: center;
+        text-align: justify;
     }
     #portraitWrapper {
-        margin-left: 35%;
+        margin-left: auto;
         margin-right: auto; 
     }
 }
