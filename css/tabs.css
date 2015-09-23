@@ -63,8 +63,8 @@ adapted from http://www.webhostingtalk.com/showthread.php?t=1045871*/
 	}
 
 }
-/*@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {*/
-@media screen and (min-width: 1000px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/*@media screen and (min-width: 1000px) {*/
 
 	.tab {
 		font-size: 28pt;
