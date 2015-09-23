@@ -31,7 +31,11 @@ function tab(tab) {
 		if ($.inArray(tab, loadedTabs) == -1) {
 			loadTab(activeTab);
 		}
-		
+		if (window.mobilecheck()) {
+			layoutMobileMasonry(activeTab + 'Grid');
+		} else {
+			layoutMasonry(activeTab + 'Grid');
+		}
 	}
 };
 
