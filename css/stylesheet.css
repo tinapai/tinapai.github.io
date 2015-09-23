@@ -38,7 +38,8 @@ body:before {
 
 #footer {
     width: 90%;
-    padding: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     margin-bottom: 50px;
     background: white;
     height: 120px;
@@ -173,7 +174,9 @@ body:before {
         margin-right: auto;
     }
     #footer {
-        width: 1000px;
+        width: 900px;
+        padding-left: 50px;
+        padding-right: 50px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -194,7 +197,8 @@ body:before {
         width: 100%;
     }
     #footer {
-        width: 100%;
+        width: 90%;
+        padding: 5%;
         height: 400px;
         font-size: 36pt;
         background: white;
