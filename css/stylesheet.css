@@ -198,6 +198,9 @@ body:before {
         font-size: 36pt;
         background: white;
     }
+    .grid-item {
+        width: 400px;
+    }
     #header {
         font-size: 64pt;
     }

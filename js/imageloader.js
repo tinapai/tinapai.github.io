@@ -21,8 +21,10 @@ function loadImages(array) {
 	for (var i = 0; i < array.length; i++) { 
     	$('#' + activeTab + 'Grid').append('<div class="grid-item">' + array[i] + '</div>');
 	}
-	if (window.mobilecheck) {
-		layoutMobileMasonry(activeTab + 'Grid')
+	var isMobile = window.mobilecheck();
+	if (isMobile) {
+		console.log(isMobile);
+		layoutMobileMasonry(activeTab + 'Grid');
 	} else {
 		layoutMasonry(activeTab + 'Grid');
 	}
@@ -45,7 +47,7 @@ function layoutMobileMasonry(gridId) {
     	$('#' + gridId).masonry({
 			itemSelector: '.grid-item',
 			columnWidth: 400,
-			gutter: 20,
+			gutter: 10,
 		});
     });
 }
