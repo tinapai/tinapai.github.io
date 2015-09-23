@@ -47,7 +47,7 @@ function layoutMobileMasonry(gridId) {
     	$('#' + gridId).masonry({
 			itemSelector: '.grid-item',
 			columnWidth: 400,
-			gutter: 10,
+			gutter: 20,
 		});
     });
 }

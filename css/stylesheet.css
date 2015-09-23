@@ -37,7 +37,8 @@ body:before {
 }
 
 #footer {
-    width: 100%;
+    width: 90%;
+    padding: 10%;
     margin-bottom: 50px;
     background: white;
     height: 120px;
