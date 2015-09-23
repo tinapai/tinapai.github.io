@@ -1,5 +1,5 @@
 $(document).ready(function() { 
 	if (window.mobilecheck()) {
-		// $("#subheading").html("");
+		$("#subheading").html("Digital art portfolio");
 	}
 });
