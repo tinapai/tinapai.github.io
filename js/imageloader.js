@@ -3,7 +3,11 @@ $(document).ready(function() {
 	//start by loading tab 1
 	tab('tab1'); //see tab() in tabbing.js
 	console.log("mobilechecking: " + window.mobilecheck());
-	layoutMasonry('tab1Grid');
+	if (window.mobilecheck) {
+		layoutMobileMasonry('tab1Grid')
+	} else {
+		layoutMasonry('tab1Grid');		
+	}
 });
 
 window.mobilecheck = function() { //credits go to http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
@@ -17,8 +21,11 @@ function loadImages(array) {
 	for (var i = 0; i < array.length; i++) { 
     	$('#' + activeTab + 'Grid').append('<div class="grid-item">' + array[i] + '</div>');
 	}
-
-	layoutMasonry(activeTab + 'Grid');
+	if (window.mobilecheck) {
+		layoutMobileMasonry(activeTab + 'Grid')
+	} else {
+		layoutMasonry(activeTab + 'Grid');
+	}
 }
 
 //layout Masonry after every image has loaded
@@ -29,6 +36,16 @@ function layoutMasonry(gridId) {
 			itemSelector: '.grid-item',
 			columnWidth: 200,
 			gutter: 10,
+		});
+    });
+}
+
+function layoutMobileMasonry(gridId) {
+	$('#' + gridId).imagesLoaded(function() {
+    	$('#' + gridId).masonry({
+			itemSelector: '.grid-item',
+			columnWidth: 400,
+			gutter: 20,
 		});
     });
 }
