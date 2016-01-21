@@ -79,12 +79,12 @@ var graphicsArray = [
 	];
 
 var photoArray = [
-	'<img class="pho" src="images/photos/thumbnails/IMG_1085.jpg"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_2965.jpg"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_3043.jpg">',
-	'<img class="pho" src="images/photos/thumbnails/IMG_5371.jpg"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_8393.jpg"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_8656.jpg"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_1085.JPG"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_2965.JPG"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_3043.JPG">',
+	'<img class="pho" src="images/photos/thumbnails/IMG_5371.JPG"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_8393.JPG"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_8656.JPG"/>',
 	// '<img class="pho" src="images/photos/img674.png"/>',
 	// '<img class="pho" src="images/photos/img676.png"/>',
 	// '<img class="pho" src="images/photos/img679.png"/>',
