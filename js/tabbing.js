@@ -7,7 +7,7 @@ $(document).ready(function() {
 	});
 });
 
-var availableTabs = ['tab1', 'tab2', 'tab3', 'tab4']; //used to be: var availableTabs = ['#tab1', '#tab2', '#tab3'];
+var availableTabs = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5']; //used to be: var availableTabs = ['#tab1', '#tab2', '#tab3'];
 var activeTab = 'tab1';
 var loadedTabs = [];
 
@@ -43,6 +43,7 @@ function tab(tab) {
 //Loads the images for the tab you want
 //parameter TAB is type String; should look like 'tab1' or 'tab2' etc.
 function loadTab(tab) {
+	console.log(tab)
 	var arrayToLoad = tabArrayMap[tab]; //see Array tabArrayMap in imageloader.js
 	loadImages(arrayToLoad);
 	loadedTabs.push(tab);

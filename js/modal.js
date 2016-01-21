@@ -29,6 +29,7 @@ $(document).ready(function() {
 });
 	
 function makeModal(imageHtml) {
+	console.log(imageHtml)
 	$('#modal').show();
 	$('#modal').after('<div id="modalImg">' + imageHtml + '</div>');
 	$('#modal').css('class: active');
@@ -46,6 +47,7 @@ function findThumbnail(imageHtml) {
 	return newUrl;
 }
 function findFullRes(thumbHtml) {
+	console.log(thumbHtml)
 	tokens = thumbHtml.split("/");
 	newUrl = tokens[0] + "/" + tokens[1] + "/" + tokens[3];
 	return newUrl;
