@@ -69,13 +69,11 @@ var illustrationArray = [
 var graphicsArray = [
 	'<img class="gra" src="images/infographics/thumbnails/3.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/4.png"/>',
+	'<img class="gra" src="images/infographics/thumbnails/Calso.tpai.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/20150619.budget.tpai-02.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/Administration.tpai.png"/>',
-	'<img class="gra" src="images/infographics/thumbnails/Berkeley.tpai.png">',
 	'<img class="gra" src="images/infographics/thumbnails/bitcoin.tpai0.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/budget.tpai.png"/>',
-	'<img class="gra" src="images/infographics/thumbnails/Calso.tpai.png"/>',
-	'<img class="gra" src="images/infographics/thumbnails/descriptions.tpai.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/lawsuit.tpai.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/PAC-color.tpai.png"/>',
 	];
