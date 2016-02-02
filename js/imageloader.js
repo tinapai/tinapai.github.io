@@ -67,6 +67,8 @@ var illustrationArray = [
 	];
 
 var graphicsArray = [
+	'<img class="gra" src="images/infographics/thumbnails/3.png"/>',
+	'<img class="gra" src="images/infographics/thumbnails/4.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/20150619.budget.tpai-02.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/Administration.tpai.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/Berkeley.tpai.png">',
