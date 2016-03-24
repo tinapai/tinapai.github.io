@@ -67,6 +67,7 @@ var illustrationArray = [
 	];
 
 var graphicsArray = [
+	'<img class="pho" src="images/uis/thumbnails/AAAWebUi2.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/3.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/4.png"/>',
 	'<img class="gra" src="images/infographics/thumbnails/Calso.tpai.png"/>',
@@ -83,7 +84,7 @@ var photoArray = [
 	'<img class="pho" src="images/photos/thumbnails/IMG_2965.JPG"/>',
 	'<img class="pho" src="images/photos/thumbnails/IMG_3043.JPG">',
 	'<img class="pho" src="images/photos/thumbnails/IMG_5371.JPG"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_8393.JPG"/>',
+	// '<img class="pho" src="images/photos/thumbnails/IMG_8393.JPG"/>',
 	'<img class="pho" src="images/photos/thumbnails/IMG_8656.JPG"/>',
 	// '<img class="pho" src="images/photos/img674.png"/>',
 	// '<img class="pho" src="images/photos/img676.png"/>',
@@ -92,17 +93,17 @@ var photoArray = [
 	// '<img class="pho" src="images/photos/img683.png"/>',
 	];
 
-var uiArray = [
+var demoReelArray = [
 	// '<img class="ui" src="images/uis/AAA web ui 3.pdf"/>',
-	'<img class="pho" src="images/uis/thumbnails/AAAWebUi2.png"/>',
+	
 	];
 
 var abtMeArray = [];
 
 var tabArrayMap = {
     'tab1': abtMeArray,
-    'tab2': illustrationArray,
-    'tab3': graphicsArray,
-    'tab4': uiArray,
+    'tab2': graphicsArray,
+    'tab3': demoReelArray,
+    'tab4': illustrationArray,
     'tab5': photoArray
 };
