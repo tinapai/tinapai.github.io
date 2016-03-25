@@ -53,17 +53,15 @@ function layoutMobileMasonry(gridId) {
 }
 
 var illustrationArray = [
+	'<img class="ill" src="images/illustrations/thumbnails/sampleEnv3.png"/>',
 	'<img class="ill" src="images/illustrations/thumbnails/20150716 visa illustration.png"/>',
-	'<img class="ill" src="images/illustrations/thumbnails/icecreamtruck.jpg"/>',
+	// '<img class="ill" src="images/illustrations/thumbnails/icecreamtruck.jpg"/>',
 	'<img class="ill" src="images/illustrations/thumbnails/TinachaunPoint.png">',
-	'<img class="ill" src="images/illustrations/thumbnails/Christmas2013Dad.png"/>',
+	// '<img class="ill" src="images/illustrations/thumbnails/Christmas2013Dad.png"/>',
 	'<img class="ill" src="images/illustrations/thumbnails/img670.png"/>',
 	'<img class="ill" src="images/illustrations/thumbnails/img671.png"/>',
 	'<img class="ill" src="images/illustrations/thumbnails/img674.png"/>',
-	'<img class="ill" src="images/illustrations/thumbnails/img676.png"/>',
-	'<img class="ill" src="images/illustrations/thumbnails/img679.png"/>',
-	'<img class="ill" src="images/illustrations/thumbnails/img682.png"/>',
-	'<img class="ill" src="images/illustrations/thumbnails/img683.png"/>',
+	// '<img class="ill" src="images/illustrations/thumbnails/img676.png"/>',
 	];
 
 var graphicsArray = [
@@ -80,11 +78,14 @@ var graphicsArray = [
 	];
 
 var photoArray = [
+	'<img class="pho" src="images/photos/thumbnails/IMG_5996_CatSuStairs.jpg"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_5940_CatSuLedge.jpg"/>',
+	'<img class="pho" src="images/photos/thumbnails/JabaBricks.jpg"/>',
+	'<img class="pho" src="images/photos/thumbnails/JabaCables.jpg"/>',
 	'<img class="pho" src="images/photos/thumbnails/IMG_1085.JPG"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_2965.JPG"/>',
-	'<img class="pho" src="images/photos/thumbnails/IMG_3043.JPG">',
-	'<img class="pho" src="images/photos/thumbnails/IMG_5371.JPG"/>',
-	// '<img class="pho" src="images/photos/thumbnails/IMG_8393.JPG"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_2965_pie.JPG"/>',
+	'<img class="pho" src="images/photos/thumbnails/IMG_3043_whale.JPG">',
+	// '<img class="pho" src="images/photos/thumbnails/IMG_5371.JPG"/>',
 	'<img class="pho" src="images/photos/thumbnails/IMG_8656.JPG"/>',
 	// '<img class="pho" src="images/photos/img674.png"/>',
 	// '<img class="pho" src="images/photos/img676.png"/>',
