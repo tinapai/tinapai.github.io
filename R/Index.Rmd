@@ -1,0 +1,12 @@
+---
+title: "Home"
+author: "Tina Pai"
+date: "3/25/2020"
+output: html_document
+---
+
+# About Tina Pai
+
+I am a student at SMU getting my masters in data science!
+
+![Alt text](myPortrait.jpg)

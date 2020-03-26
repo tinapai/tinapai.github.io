@@ -1,0 +1,298 @@
+#case study 1
+
+Link to rshiny app!  https://tinapai.shinyapps.io/rshiny/
+
+```{r}
+library(tidyverse)
+library(VIM)
+library(lattice)
+library(DMwR)
+library(mice)
+library(ggplot2)
+library(ggthemes)
+library(stringr)
+library(class)
+library(caret)
+```
+
+```{r}
+# Reading in the data and observing the first 6 observations for each data set
+beers = read.csv("Beers.csv")
+breweries = read.csv("Breweries.csv")
+head(beers)
+head(breweries)
+```
+
+
+#question 1: how many breweries are present in each state?
+
+There are ranging from 1 to 47 breweries in the states of the US. The state with the most breweries is CO (with 47 breweries) and the states with the fewest are NV, DC, ND, and SD (with 1 brewery).
+
+```{r}
+# We create a new data set where we group it by State and create a tally of of how many breweries are in each state, arrange it in descending order and show the 6  highest and lowest state frequencies
+state_breweries <- breweries %>%
+  group_by(State) %>%
+  tally() %>%
+  arrange(desc(n))
+head(state_breweries)
+tail(state_breweries)
+
+#We create a bar graph of our previous results
+
+state_breweries %>%
+  ggplot(aes(x=reorder(State, -n), y=n)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Number of Breweries by State") +
+  xlab("State") +
+  ylab("Number of Breweries")
+```
+
+#question 2: merge data
+
+```{r}
+#Merging the data sets with key Brew_ID and Brewery_id since they are the same but have different names
+head(breweries)
+head(beers)
+beer_breweries = breweries %>%
+  left_join(beers, by = c("Brew_ID" = "Brewery_id"))
+names(beer_breweries) <- c("Brew_ID","Brewery_Name","City","State","Beer_Name", "Beer_ID","ABV","IBU","Style","Ounces")
+head(beer_breweries)
+```
+
+
+#question 3: fix nas
+```{r}
+
+#Plot the NAs and look the proportion of NAs per column
+beer_breweries_miss = aggr(beer_breweries, col=mdc(1:2), numbers=TRUE, sortVars=TRUE, labels=names(beer_breweries), cex.axis=.7, gap=3, ylab=c("Proportion of NAs","NA Pattern"))
+
+#Using Knn imputation as means to fill in the NA values
+beer_breweries_impute <- knnImputation(beer_breweries)
+beer_breweries <- beer_breweries_impute
+```
+
+
+#question 4: Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
+
+Median alcohol content by state ranged from .04 ABV in UT to just over .06 ABV in DC. Below shows graphs of the median ABV by state.
+
+Median bitterness by state ranged from about 20 IBU in KS to just under 60 IBU in WV. Below shows graphs of the median IBU by state.
+```{r}
+#median abv by state
+state_abv = beer_breweries %>%
+  group_by(State) %>%
+  summarise(median = median(ABV, na.rm = TRUE))
+head(state_abv)
+
+#Bar plot of median abv by state
+state_abv %>%
+  ggplot(aes(x=reorder(State, -median), y=median)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Median ABV by State") +
+  xlab("State") +
+  ylab("Median ABV")
+
+#median ibu by state
+state_ibu = beer_breweries %>%
+  group_by(State) %>%
+  summarise(median = median(IBU, na.rm = TRUE))
+head(state_ibu)
+#Bar plot of median IBU by state
+state_ibu %>%
+  ggplot(aes(x=reorder(State, -median), y=median)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Median IBU by State") +
+  xlab("State") +
+  ylab("Median IBU")
+```
+
+
+
+#question 5: Which state has the maximum alcoholic (ABV) beer? Which state has the most bitter (IBU) beer?
+
+The beer with most alcoholic content is the Lee Hill Quadruple Ale from Upslope Brewing Company in Colorado, at .128 ABV.
+
+The beer with the most bitterness is Bitter Bitch Imperial IPA from Astoria Brewing Company in Oregon, at 138 IBU.
+
+```{r}
+#Create a dataset where we arrange the beer with highest ABV in descending order
+#CO has the beer with the highest ABV
+top_ABV <- beer_breweries %>% 
+  arrange(desc(ABV)) %>%
+  top_n(10, ABV)
+head(top_ABV[c("State", "Brewery_Name", "Beer_Name", "ABV")])
+
+#Create a dataset where we arrange the beer with highest IBU in descending order
+#OR has the beer with the highest IBU
+top_IBU <- beer_breweries %>%
+  arrange(desc(IBU)) %>%
+  top_n(10, IBU)
+head(top_IBU[c("State", "Brewery_Name", "Beer_Name", "IBU")])
+
+```
+
+
+#question 6: Comment on the summary statistics and distribution of the ABV variable.
+The ABV ranges from .027 to .125, with a median of .057 and mean of .0599. The distribution looks somewhat right skewed.
+
+```{r}
+#Plot a histogram of the ABV distribution
+summary(beer_breweries$ABV)
+beer_breweries %>%
+  ggplot(aes(x=ABV)) +
+  geom_histogram() +
+  ggtitle("Histogram of ABV")
+```
+
+
+#question 7: Is there a relationship between the bitterness of the beer and its alcoholic content?
+
+There seems to be a positive correlation between ABV and IBU. So that means there is a positive relationship betwen ABV and IBU so as ABV increases, so does IBU.
+
+```{r}
+#Plot a scatterplot comparing the two variables ABV and IBU with a regression line
+beer_breweries %>% ggplot(aes(x=ABV,y=IBU)) + theme_fivethirtyeight() + geom_point()+geom_smooth(method=lm) +
+  xlab("Alcohol By Volume (ABV)") +
+  ylab("International Bitterness Unit (IBU)") + 
+  ggtitle( "Relationship Between ABV and IBU")
+
+#Calculate the correlation betwen ABV and IBU
+cor(beer_breweries$ABV,beer_breweries$IBU)
+
+```
+
+#question 8: IPA vs Ale
+
+```{r}
+# We use Regex to find which style is an Ale and create a boolean column for that
+summary(as.factor(beer_breweries$Style))
+
+beer_breweries$Style <- as.character(beer_breweries$Style)
+beer_breweries$is_ale <- str_detect(beer_breweries$Style, "\\bAle\\b")
+summary(beer_breweries$is_ale)
+beer_breweries %>%
+  filter(is_ale) %>%
+  select(Style) %>%
+  count(Style)
+# We use Regex to find which style is an IPA and create a boolean column for that
+beer_breweries$is_IPA <- str_detect(beer_breweries$Style, "\\bIPA\\b")
+summary(beer_breweries$is_IPA)
+beer_breweries %>%
+  filter(is_IPA) %>%
+  select(Style) %>%
+  count(Style)
+  
+beer_breweries
+#Based on the two previous columns we create a new column which labels the observations as IPA or Ale
+for(i in 1:dim(beer_breweries)[1])
+{
+  if (beer_breweries$is_ale[i]=="TRUE"& beer_breweries$is_IPA[i]== "FALSE")
+  {
+    beer_breweries$IPA_Ale[i] <- "Ale"
+  }
+ else if (beer_breweries$is_IPA[i]=="TRUE" & beer_breweries$is_ale[i]=="FALSE")
+  {
+    beer_breweries$IPA_Ale[i] <- "IPA"
+ }
+  else
+  {
+    beer_breweries$IPA_Ale[i] <- "Other"
+  }
+  
+}
+beer_breweries
+```
+
+#question 8 Pt. 2: Knn for IPA Vs. Ale
+```{r}
+# We do Knn where we loop for many K  and find the average accuracy with one training and test partion set
+
+#Filter the classifications and then create the training set
+beer_breweriesKnn<-beer_breweries %>% filter(IPA_Ale=="IPA"|IPA_Ale=="Ale")
+set.seed(6)
+splitPerc = .7
+trainIndices = sample(1:dim(beer_breweriesKnn)[1],round(splitPerc * dim(beer_breweriesKnn)[1]))
+train = beer_breweriesKnn[trainIndices,]
+test = beer_breweriesKnn[-trainIndices,]
+accs = data.frame(accuracy = numeric(100), k = numeric(100))
+
+#Use Knn for when k = 1-100 and find the accuracy for each value of K
+for(i in c(1, 10, 50, 100))
+{
+styles = knn.cv(beer_breweriesKnn[,c(7,8)],beer_breweriesKnn$IPA_Ale, prob = TRUE, k = i)
+  table(beer_breweriesKnn$IPA_Ale,styles)
+  CM = confusionMatrix(table(beer_breweriesKnn$IPA_Ale,styles))
+  accs$accuracy[i] = CM$overall[1]
+  accs$k[i] = i
+}
+#Plot the accuracy of of value of k
+plot(accs$k,accs$accuracy, type = "l", xlab = "k")
+accu = accs$accuracy
+max(accu)
+```
+
+
+#question 8 Pt. 3: Knn with multiiple iterations for IPA Vs. Ale
+```{r}
+# We loop for many K where we take the average accuracy of many training and partition sets
+
+#Create 5 different iterations of training and test sets
+iterations = 5
+numks = 100
+
+masterAcc = matrix(nrow = iterations, ncol = numks)
+  
+for(j in 1:iterations)
+{
+accs = data.frame(accuracy = numeric(100), k = numeric(100))
+trainIndices = sample(1:dim(beer_breweriesKnn)[1],round(splitPerc * dim(beer_breweriesKnn)[1]))
+train = beer_breweriesKnn[trainIndices,]
+test = beer_breweriesKnn[-trainIndices,]
+
+# Find the average accuracy with each iteration of the training and tests sets where k = 1-10
+for(i in 1:numks)
+{
+  classifications = knn(train[,c(7,8)],test[,c(7,8)],train$IPA_Ale, prob = TRUE, k = i)
+  table(classifications,test$IPA_Ale)
+  CM = confusionMatrix(table(classifications,test$IPA_Ale))
+  masterAcc[j,i] = CM$overall[1]
+}
+
+}
+
+MeanAcc = colMeans(masterAcc)
+
+#Plot the average accuracy of K
+plot(seq(1,numks,1),MeanAcc, type = "l",xlab = "k",ylab = "Mean Accuracy")
+
+#Find the maximum average accuracy
+max(MeanAcc)
+```
+
+
+#question 9: freeform EDA--most common word used in Beer_Names?
+
+An interesting fact: in beer names, the most common words after the types of beers themselves are colors (red, blonde, brown), then "Wheat", "Porter", and "Summer".
+
+```{r}
+#Look at beer names and remove duplicates
+head(beer_breweries$Beer_Name)
+beer_breweries = beer_breweries %>%
+  distinct(Beer_Name)
+
+#put all the names into one big long string of words
+Beer_Words = str_c(beer_breweries$Beer_Name, collapse = " ")
+Beer_Words
+
+#parse the individual words out into a data frame
+Beer_words_distinct = str_match_all(Beer_Words, "(\\b\\w+\\b)")
+head(Beer_words_distinct, 15)
+Beer_words_df = data.frame(Beer_words_distinct)
+
+#tally the count of each word
+Beer_words_df %>%
+  count(X1) %>%
+  arrange(desc(n))
+  
+```
+

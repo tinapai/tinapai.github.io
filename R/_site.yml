@@ -1,0 +1,10 @@
+name: "my-website"
+navbar:
+  title: "Tina's Website"
+  left:
+    - text: "Home"
+      href: Index.html
+    - text: "Studies"
+      href: CaseStudy.html
+    - text: "Berkeley"
+      href: Berkeley.html

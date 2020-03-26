@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>CaseStudy.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Tina's Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Index.html">Home</a>
+</li>
+<li>
+  <a href="CaseStudy.html">Studies</a>
+</li>
+<li>
+  <a href="Berkeley.html">Berkeley</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p>#case study 1</p>
+<p>Link to rshiny app! <a href="https://tinapai.shinyapps.io/rshiny/" class="uri">https://tinapai.shinyapps.io/rshiny/</a></p>
+<pre class="r"><code>library(tidyverse)
+library(VIM)
+library(lattice)
+library(DMwR)
+library(mice)
+library(ggplot2)
+library(ggthemes)
+library(stringr)
+library(class)
+library(caret)</code></pre>
+<pre class="r"><code># Reading in the data and observing the first 6 observations for each data set
+beers = read.csv(&quot;Beers.csv&quot;)
+breweries = read.csv(&quot;Breweries.csv&quot;)
+head(beers)</code></pre>
+<pre><code>##                  Name Beer_ID   ABV IBU Brewery_id                          Style Ounces
+## 1            Pub Beer    1436 0.050  NA        409            American Pale Lager     12
+## 2         Devil&#39;s Cup    2265 0.066  NA        178        American Pale Ale (APA)     12
+## 3 Rise of the Phoenix    2264 0.071  NA        178                   American IPA     12
+## 4            Sinister    2263 0.090  NA        178 American Double / Imperial IPA     12
+## 5       Sex and Candy    2262 0.075  NA        178                   American IPA     12
+## 6        Black Exodus    2261 0.077  NA        178                  Oatmeal Stout     12</code></pre>
+<pre class="r"><code>head(breweries)</code></pre>
+<pre><code>##   Brew_ID                      Name          City State
+## 1       1        NorthGate Brewing    Minneapolis    MN
+## 2       2 Against the Grain Brewery    Louisville    KY
+## 3       3  Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 4       4 Mike Hess Brewing Company     San Diego    CA
+## 5       5   Fort Point Beer Company San Francisco    CA
+## 6       6     COAST Brewing Company    Charleston    SC</code></pre>
+<p>#question 1: how many breweries are present in each state?</p>
+<p>There are ranging from 1 to 47 breweries in the states of the US. The state with the most breweries is CO (with 47 breweries) and the states with the fewest are NV, DC, ND, and SD (with 1 brewery).</p>
+<pre class="r"><code># We create a new data set where we group it by State and create a tally of of how many breweries are in each state, arrange it in descending order and show the 6  highest and lowest state frequencies
+state_breweries &lt;- breweries %&gt;%
+  group_by(State) %&gt;%
+  tally() %&gt;%
+  arrange(desc(n))
+head(state_breweries)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   State     n
+##   &lt;fct&gt; &lt;int&gt;
+## 1 &quot; CO&quot;    47
+## 2 &quot; CA&quot;    39
+## 3 &quot; MI&quot;    32
+## 4 &quot; OR&quot;    29
+## 5 &quot; TX&quot;    28
+## 6 &quot; PA&quot;    25</code></pre>
+<pre class="r"><code>tail(state_breweries)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   State     n
+##   &lt;fct&gt; &lt;int&gt;
+## 1 &quot; MS&quot;     2
+## 2 &quot; NV&quot;     2
+## 3 &quot; DC&quot;     1
+## 4 &quot; ND&quot;     1
+## 5 &quot; SD&quot;     1
+## 6 &quot; WV&quot;     1</code></pre>
+<pre class="r"><code>#We create a bar graph of our previous results
+
+state_breweries %&gt;%
+  ggplot(aes(x=reorder(State, -n), y=n)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  ggtitle(&quot;Number of Breweries by State&quot;) +
+  xlab(&quot;State&quot;) +
+  ylab(&quot;Number of Breweries&quot;)</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>#question 2: merge data</p>
+<pre class="r"><code>#Merging the data sets with key Brew_ID and Brewery_id since they are the same but have different names
+head(breweries)</code></pre>
+<pre><code>##   Brew_ID                      Name          City State
+## 1       1        NorthGate Brewing    Minneapolis    MN
+## 2       2 Against the Grain Brewery    Louisville    KY
+## 3       3  Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 4       4 Mike Hess Brewing Company     San Diego    CA
+## 5       5   Fort Point Beer Company San Francisco    CA
+## 6       6     COAST Brewing Company    Charleston    SC</code></pre>
+<pre class="r"><code>head(beers)</code></pre>
+<pre><code>##                  Name Beer_ID   ABV IBU Brewery_id                          Style Ounces
+## 1            Pub Beer    1436 0.050  NA        409            American Pale Lager     12
+## 2         Devil&#39;s Cup    2265 0.066  NA        178        American Pale Ale (APA)     12
+## 3 Rise of the Phoenix    2264 0.071  NA        178                   American IPA     12
+## 4            Sinister    2263 0.090  NA        178 American Double / Imperial IPA     12
+## 5       Sex and Candy    2262 0.075  NA        178                   American IPA     12
+## 6        Black Exodus    2261 0.077  NA        178                  Oatmeal Stout     12</code></pre>
+<pre class="r"><code>beer_breweries = breweries %&gt;%
+  left_join(beers, by = c(&quot;Brew_ID&quot; = &quot;Brewery_id&quot;))
+names(beer_breweries) &lt;- c(&quot;Brew_ID&quot;,&quot;Brewery_Name&quot;,&quot;City&quot;,&quot;State&quot;,&quot;Beer_Name&quot;, &quot;Beer_ID&quot;,&quot;ABV&quot;,&quot;IBU&quot;,&quot;Style&quot;,&quot;Ounces&quot;)
+head(beer_breweries)</code></pre>
+<pre><code>##   Brew_ID       Brewery_Name        City State     Beer_Name Beer_ID   ABV IBU
+## 1       1 NorthGate Brewing  Minneapolis    MN  Get Together    2692 0.045  50
+## 2       1 NorthGate Brewing  Minneapolis    MN Maggie&#39;s Leap    2691 0.049  26
+## 3       1 NorthGate Brewing  Minneapolis    MN    Wall&#39;s End    2690 0.048  19
+## 4       1 NorthGate Brewing  Minneapolis    MN       Pumpion    2689 0.060  38
+## 5       1 NorthGate Brewing  Minneapolis    MN    Stronghold    2688 0.060  25
+## 6       1 NorthGate Brewing  Minneapolis    MN   Parapet ESB    2687 0.056  47
+##                                 Style Ounces
+## 1                        American IPA     16
+## 2                  Milk / Sweet Stout     16
+## 3                   English Brown Ale     16
+## 4                         Pumpkin Ale     16
+## 5                     American Porter     16
+## 6 Extra Special / Strong Bitter (ESB)     16</code></pre>
+<p>#question 3: fix nas</p>
+<pre class="r"><code>#Plot the NAs and look the proportion of NAs per column
+beer_breweries_miss = aggr(beer_breweries, col=mdc(1:2), numbers=TRUE, sortVars=TRUE, labels=names(beer_breweries), cex.axis=.7, gap=3, ylab=c(&quot;Proportion of NAs&quot;,&quot;NA Pattern&quot;))</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre><code>## 
+##  Variables sorted by number of missings: 
+##      Variable      Count
+##           IBU 0.41701245
+##           ABV 0.02572614
+##       Brew_ID 0.00000000
+##  Brewery_Name 0.00000000
+##          City 0.00000000
+##         State 0.00000000
+##     Beer_Name 0.00000000
+##       Beer_ID 0.00000000
+##         Style 0.00000000
+##        Ounces 0.00000000</code></pre>
+<pre class="r"><code>#Using Knn imputation as means to fill in the NA values
+beer_breweries_impute &lt;- knnImputation(beer_breweries)
+beer_breweries &lt;- beer_breweries_impute</code></pre>
+<p>#question 4: Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.</p>
+<p>Median alcohol content by state ranged from .04 ABV in UT to just over .06 ABV in DC. Below shows graphs of the median ABV by state.</p>
+<p>Median bitterness by state ranged from about 20 IBU in KS to just under 60 IBU in WV. Below shows graphs of the median IBU by state.</p>
+<pre class="r"><code>#median abv by state
+state_abv = beer_breweries %&gt;%
+  group_by(State) %&gt;%
+  summarise(median = median(ABV, na.rm = TRUE))
+head(state_abv)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   State median
+##   &lt;fct&gt;  &lt;dbl&gt;
+## 1 &quot; AK&quot; 0.056 
+## 2 &quot; AL&quot; 0.06  
+## 3 &quot; AR&quot; 0.052 
+## 4 &quot; AZ&quot; 0.055 
+## 5 &quot; CA&quot; 0.058 
+## 6 &quot; CO&quot; 0.0609</code></pre>
+<pre class="r"><code>#Bar plot of median abv by state
+state_abv %&gt;%
+  ggplot(aes(x=reorder(State, -median), y=median)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  ggtitle(&quot;Median ABV by State&quot;) +
+  xlab(&quot;State&quot;) +
+  ylab(&quot;Median ABV&quot;)</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>#median ibu by state
+state_ibu = beer_breweries %&gt;%
+  group_by(State) %&gt;%
+  summarise(median = median(IBU, na.rm = TRUE))
+head(state_ibu)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   State median
+##   &lt;fct&gt;  &lt;dbl&gt;
+## 1 &quot; AK&quot;   26.0
+## 2 &quot; AL&quot;   39.5
+## 3 &quot; AR&quot;   22.1
+## 4 &quot; AZ&quot;   22.2
+## 5 &quot; CA&quot;   35  
+## 6 &quot; CO&quot;   33.0</code></pre>
+<pre class="r"><code>#Bar plot of median IBU by state
+state_ibu %&gt;%
+  ggplot(aes(x=reorder(State, -median), y=median)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  ggtitle(&quot;Median IBU by State&quot;) +
+  xlab(&quot;State&quot;) +
+  ylab(&quot;Median IBU&quot;)</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p>#question 5: Which state has the maximum alcoholic (ABV) beer? Which state has the most bitter (IBU) beer?</p>
+<p>The beer with most alcoholic content is the Lee Hill Quadruple Ale from Upslope Brewing Company in Colorado, at .128 ABV.</p>
+<p>The beer with the most bitterness is Bitter Bitch Imperial IPA from Astoria Brewing Company in Oregon, at 138 IBU.</p>
+<pre class="r"><code>#Create a dataset where we arrange the beer with highest ABV in descending order
+#CO has the beer with the highest ABV
+top_ABV &lt;- beer_breweries %&gt;% 
+  arrange(desc(ABV)) %&gt;%
+  top_n(10, ABV)
+head(top_ABV[c(&quot;State&quot;, &quot;Brewery_Name&quot;, &quot;Beer_Name&quot;, &quot;ABV&quot;)])</code></pre>
+<pre><code>##   State              Brewery_Name                                            Beer_Name   ABV
+## 1    CO   Upslope Brewing Company Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale 0.128
+## 2    KY Against the Grain Brewery                                       London Balling 0.125
+## 3    IN   Tin Man Brewing Company                                                 Csar 0.120
+## 4    CO   Upslope Brewing Company     Lee Hill Series Vol. 4 - Manhattan Style Rye Ale 0.104
+## 5    NY       Sixpoint Craft Ales                                               4Beans 0.100
+## 6    MI            Brewery Vivant                                 Wizard Burial Ground 0.099</code></pre>
+<pre class="r"><code>#Create a dataset where we arrange the beer with highest IBU in descending order
+#OR has the beer with the highest IBU
+top_IBU &lt;- beer_breweries %&gt;%
+  arrange(desc(IBU)) %&gt;%
+  top_n(10, IBU)
+head(top_IBU[c(&quot;State&quot;, &quot;Brewery_Name&quot;, &quot;Beer_Name&quot;, &quot;IBU&quot;)])</code></pre>
+<pre><code>##   State                       Brewery_Name                       Beer_Name IBU
+## 1    OR            Astoria Brewing Company       Bitter Bitch Imperial IPA 138
+## 2    VA         Wolf Hills Brewing Company              Troopers Alley IPA 135
+## 3    MA           Cape Ann Brewing Company                   Dead-Eye DIPA 130
+## 4    OH Christian Moerlein Brewing Company Bay of Bengal Double IPA (2014) 126
+## 5    MN              Surly Brewing Company                    Abrasive Ale 120
+## 6    VT                      The Alchemist                    Heady Topper 120</code></pre>
+<p>#question 6: Comment on the summary statistics and distribution of the ABV variable. The ABV ranges from .027 to .125, with a median of .057 and mean of .0599. The distribution looks somewhat right skewed.</p>
+<pre class="r"><code>#Plot a histogram of the ABV distribution
+summary(beer_breweries$ABV)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.00100 0.05000 0.05600 0.05971 0.06700 0.12800</code></pre>
+<pre class="r"><code>beer_breweries %&gt;%
+  ggplot(aes(x=ABV)) +
+  geom_histogram() +
+  ggtitle(&quot;Histogram of ABV&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>#question 7: Is there a relationship between the bitterness of the beer and its alcoholic content?</p>
+<p>There seems to be a positive correlation between ABV and IBU. So that means there is a positive relationship betwen ABV and IBU so as ABV increases, so does IBU.</p>
+<pre class="r"><code>#Plot a scatterplot comparing the two variables ABV and IBU with a regression line
+beer_breweries %&gt;% ggplot(aes(x=ABV,y=IBU)) + theme_fivethirtyeight() + geom_point()+geom_smooth(method=lm) +
+  xlab(&quot;Alcohol By Volume (ABV)&quot;) +
+  ylab(&quot;International Bitterness Unit (IBU)&quot;) + 
+  ggtitle( &quot;Relationship Between ABV and IBU&quot;)</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>#Calculate the correlation betwen ABV and IBU
+cor(beer_breweries$ABV,beer_breweries$IBU)</code></pre>
+<pre><code>## [1] 0.539295</code></pre>
+<p>#question 8: IPA vs Ale</p>
+<pre class="r"><code># We use Regex to find which style is an Ale and create a boolean column for that
+summary(as.factor(beer_breweries$Style))</code></pre>
+<pre><code>##                                                        Abbey Single Ale 
+##                                   5                                   2 
+##                             Altbier              American Adjunct Lager 
+##                                  13                                  18 
+##            American Amber / Red Ale          American Amber / Red Lager 
+##                                 133                                  29 
+##                 American Barleywine                  American Black Ale 
+##                                   3                                  36 
+##                 American Blonde Ale                  American Brown Ale 
+##                                 108                                  70 
+##             American Dark Wheat Ale      American Double / Imperial IPA 
+##                                   7                                 105 
+##  American Double / Imperial Pilsner    American Double / Imperial Stout 
+##                                   2                                   9 
+##           American India Pale Lager                        American IPA 
+##                                   3                                 424 
+##                American Malt Liquor             American Pale Ale (APA) 
+##                                   1                                 245 
+##                 American Pale Lager             American Pale Wheat Ale 
+##                                  39                                  97 
+##                    American Pilsner                     American Porter 
+##                                  25                                  68 
+##                      American Stout                 American Strong Ale 
+##                                  39                                  14 
+##                  American White IPA                   American Wild Ale 
+##                                  11                                   6 
+##                       Baltic Porter                    Belgian Dark Ale 
+##                                   6                                  11 
+##                         Belgian IPA                    Belgian Pale Ale 
+##                                  18                                  24 
+##             Belgian Strong Dark Ale             Belgian Strong Pale Ale 
+##                                   6                                   7 
+##                  Berliner Weissbier                      Bière de Garde 
+##                                  11                                   7 
+##                                Bock                             Braggot 
+##                                   7                                   1 
+##      California Common / Steam Beer                          Chile Beer 
+##                                   6                                   3 
+##                               Cider                           Cream Ale 
+##                                  37                                  29 
+##                      Czech Pilsener                          Doppelbock 
+##                                  28                                   7 
+##           Dortmunder / Export Lager                              Dubbel 
+##                                   6                                   5 
+##                        Dunkelweizen                  English Barleywine 
+##                                   4                                   3 
+##                      English Bitter                   English Brown Ale 
+##                                   3                                  18 
+##               English Dark Mild Ale        English India Pale Ale (IPA) 
+##                                   6                                  13 
+##                    English Pale Ale               English Pale Mild Ale 
+##                                  12                                   3 
+##                       English Stout                  English Strong Ale 
+##                                   2                                   4 
+##                     Euro Dark Lager                     Euro Pale Lager 
+##                                   5                                   2 
+## Extra Special / Strong Bitter (ESB)                  Flanders Oud Bruin 
+##                                  20                                   1 
+##                    Flanders Red Ale              Foreign / Export Stout 
+##                                   1                                   6 
+##              Fruit / Vegetable Beer                     German Pilsener 
+##                                  49                                  36 
+##                                Gose                            Grisette 
+##                                  10                                   1 
+##                          Hefeweizen                Herbed / Spiced Beer 
+##                                  40                                   9 
+##                     Irish Dry Stout                       Irish Red Ale 
+##                                   5                                  12 
+##          Keller Bier / Zwickel Bier                              Kölsch 
+##                                   3                                  42 
+##                       Kristalweizen                         Light Lager 
+##                                   1                                  12 
+##                    Low Alcohol Beer               Maibock / Helles Bock 
+##                                   1                                   5 
+##                Märzen / Oktoberfest                                Mead 
+##                                  30                                   5 
+##                  Milk / Sweet Stout                 Munich Dunkel Lager 
+##                                  10                                   4 
+##                 Munich Helles Lager                       Oatmeal Stout 
+##                                  20                                  18 
+##                             Old Ale                               Other 
+##                                   2                                   1 
+##                         Pumpkin Ale                    Quadrupel (Quad) 
+##                                  23                                   4 
+##                              Radler                           Rauchbier 
+##                                   3                                   2 
+##                          Roggenbier              Russian Imperial Stout 
+##                                   2                                  11 
+##                            Rye Beer              Saison / Farmhouse Ale 
+##                                  18                                  52 
+##                         Schwarzbier              Scotch Ale / Wee Heavy 
+##                                   9                                  15 
+##                        Scottish Ale                              Shandy 
+##                                  19                                   3 
+##                         Smoked Beer                              Tripel 
+##                                   1                                  11 
+##                        Vienna Lager                           Wheat Ale 
+##                                  20                                   1 
+##                       Winter Warmer                             Witbier 
+##                                  15                                  51</code></pre>
+<pre class="r"><code>beer_breweries$Style &lt;- as.character(beer_breweries$Style)
+beer_breweries$is_ale &lt;- str_detect(beer_breweries$Style, &quot;\\bAle\\b&quot;)
+summary(beer_breweries$is_ale)</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    1434     976</code></pre>
+<pre class="r"><code>beer_breweries %&gt;%
+  filter(is_ale) %&gt;%
+  select(Style) %&gt;%
+  count(Style)</code></pre>
+<pre><code>## # A tibble: 29 x 2
+##    Style                        n
+##    &lt;chr&gt;                    &lt;int&gt;
+##  1 Abbey Single Ale             2
+##  2 American Amber / Red Ale   133
+##  3 American Black Ale          36
+##  4 American Blonde Ale        108
+##  5 American Brown Ale          70
+##  6 American Dark Wheat Ale      7
+##  7 American Pale Ale (APA)    245
+##  8 American Pale Wheat Ale     97
+##  9 American Strong Ale         14
+## 10 American Wild Ale            6
+## # … with 19 more rows</code></pre>
+<pre class="r"><code># We use Regex to find which style is an IPA and create a boolean column for that
+beer_breweries$is_IPA &lt;- str_detect(beer_breweries$Style, &quot;\\bIPA\\b&quot;)
+summary(beer_breweries$is_IPA)</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    1839     571</code></pre>
+<pre class="r"><code>beer_breweries %&gt;%
+  filter(is_IPA) %&gt;%
+  select(Style) %&gt;%
+  count(Style)</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   Style                              n
+##   &lt;chr&gt;                          &lt;int&gt;
+## 1 American Double / Imperial IPA   105
+## 2 American IPA                     424
+## 3 American White IPA                11
+## 4 Belgian IPA                       18
+## 5 English India Pale Ale (IPA)      13</code></pre>
+<pre class="r"><code>beer_breweries</code></pre>
+<pre><code>##    Brew_ID                 Brewery_Name          City State
+## 1        1           NorthGate Brewing    Minneapolis    MN
+## 2        1           NorthGate Brewing    Minneapolis    MN
+## 3        1           NorthGate Brewing    Minneapolis    MN
+## 4        1           NorthGate Brewing    Minneapolis    MN
+## 5        1           NorthGate Brewing    Minneapolis    MN
+## 6        1           NorthGate Brewing    Minneapolis    MN
+## 7        2    Against the Grain Brewery    Louisville    KY
+## 8        2    Against the Grain Brewery    Louisville    KY
+## 9        2    Against the Grain Brewery    Louisville    KY
+## 10       2    Against the Grain Brewery    Louisville    KY
+## 11       2    Against the Grain Brewery    Louisville    KY
+## 12       2    Against the Grain Brewery    Louisville    KY
+## 13       2    Against the Grain Brewery    Louisville    KY
+## 14       2    Against the Grain Brewery    Louisville    KY
+## 15       2    Against the Grain Brewery    Louisville    KY
+## 16       2    Against the Grain Brewery    Louisville    KY
+## 17       2    Against the Grain Brewery    Louisville    KY
+## 18       2    Against the Grain Brewery    Louisville    KY
+## 19       2    Against the Grain Brewery    Louisville    KY
+## 20       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 21       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 22       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 23       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 24       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 25       4    Mike Hess Brewing Company     San Diego    CA
+## 26       4    Mike Hess Brewing Company     San Diego    CA
+## 27       4    Mike Hess Brewing Company     San Diego    CA
+## 28       4    Mike Hess Brewing Company     San Diego    CA
+## 29       4    Mike Hess Brewing Company     San Diego    CA
+## 30       4    Mike Hess Brewing Company     San Diego    CA
+## 31       5      Fort Point Beer Company San Francisco    CA
+## 32       5      Fort Point Beer Company San Francisco    CA
+## 33       5      Fort Point Beer Company San Francisco    CA
+## 34       5      Fort Point Beer Company San Francisco    CA
+## 35       6        COAST Brewing Company    Charleston    SC
+## 36       6        COAST Brewing Company    Charleston    SC
+## 37       6        COAST Brewing Company    Charleston    SC
+## 38       6        COAST Brewing Company    Charleston    SC
+## 39       6        COAST Brewing Company    Charleston    SC
+## 40       6        COAST Brewing Company    Charleston    SC
+## 41       7 Great Divide Brewing Company        Denver    CO
+## 42       7 Great Divide Brewing Company        Denver    CO
+## 43       7 Great Divide Brewing Company        Denver    CO
+## 44       7 Great Divide Brewing Company        Denver    CO
+## 45       7 Great Divide Brewing Company        Denver    CO
+## 46       7 Great Divide Brewing Company        Denver    CO
+## 47       7 Great Divide Brewing Company        Denver    CO
+## 48       7 Great Divide Brewing Company        Denver    CO
+## 49       7 Great Divide Brewing Company        Denver    CO
+## 50       8             Tapistry Brewing      Bridgman    MI
+## 51       8             Tapistry Brewing      Bridgman    MI
+## 52       8             Tapistry Brewing      Bridgman    MI
+## 53       9             Big Lake Brewing       Holland    MI
+## 54       9             Big Lake Brewing       Holland    MI
+## 55      10   The Mitten Brewing Company  Grand Rapids    MI
+## 56      11               Brewery Vivant  Grand Rapids    MI
+## 57      11               Brewery Vivant  Grand Rapids    MI
+## 58      11               Brewery Vivant  Grand Rapids    MI
+## 59      11               Brewery Vivant  Grand Rapids    MI
+## 60      11               Brewery Vivant  Grand Rapids    MI
+## 61      11               Brewery Vivant  Grand Rapids    MI
+## 62      11               Brewery Vivant  Grand Rapids    MI
+## 63      11               Brewery Vivant  Grand Rapids    MI
+## 64      11               Brewery Vivant  Grand Rapids    MI
+## 65      11               Brewery Vivant  Grand Rapids    MI
+## 66      11               Brewery Vivant  Grand Rapids    MI
+## 67      11               Brewery Vivant  Grand Rapids    MI
+## 68      11               Brewery Vivant  Grand Rapids    MI
+## 69      11               Brewery Vivant  Grand Rapids    MI
+## 70      11               Brewery Vivant  Grand Rapids    MI
+## 71      11               Brewery Vivant  Grand Rapids    MI
+## 72      11               Brewery Vivant  Grand Rapids    MI
+## 73      11               Brewery Vivant  Grand Rapids    MI
+## 74      11               Brewery Vivant  Grand Rapids    MI
+## 75      11               Brewery Vivant  Grand Rapids    MI
+## 76      11               Brewery Vivant  Grand Rapids    MI
+## 77      11               Brewery Vivant  Grand Rapids    MI
+## 78      11               Brewery Vivant  Grand Rapids    MI
+## 79      11               Brewery Vivant  Grand Rapids    MI
+## 80      11               Brewery Vivant  Grand Rapids    MI
+## 81      11               Brewery Vivant  Grand Rapids    MI
+## 82      11               Brewery Vivant  Grand Rapids    MI
+## 83      11               Brewery Vivant  Grand Rapids    MI
+##                                   Beer_Name Beer_ID        ABV       IBU
+## 1                              Get Together    2692 0.04500000  50.00000
+## 2                             Maggie&#39;s Leap    2691 0.04900000  26.00000
+## 3                                Wall&#39;s End    2690 0.04800000  19.00000
+## 4                                   Pumpion    2689 0.06000000  38.00000
+## 5                                Stronghold    2688 0.06000000  25.00000
+## 6                               Parapet ESB    2687 0.05600000  47.00000
+## 7                            Citra Ass Down    2686 0.08000000  68.00000
+## 8                            London Balling    2685 0.12500000  80.00000
+## 9                                      35 K    2684 0.07700000  25.00000
+## 10                                   A Beer    2683 0.04200000  42.00000
+## 11                          Rules are Rules    2682 0.05000000  25.00000
+## 12                            Flesh Gourd&#39;n    2681 0.06600000  21.00000
+## 13                                 Sho&#39;nuff    2680 0.04000000  13.00000
+## 14                              Bloody Show    2679 0.05500000  17.00000
+## 15                              Rico Sauvin    2678 0.07600000  68.00000
+## 16                         Coq de la Marche    2677 0.05100000  38.00000
+## 17                           Kamen Knuddeln    2676 0.06500000  27.07077
+## 18                             Pile of Face    2675 0.06000000  65.00000
+## 19                           The Brown Note    2674 0.05000000  20.00000
+## 20                              House Lager    2673 0.05200000  18.00000
+## 21                             Leisure Time    2672 0.04800000  15.00000
+## 22                               Excess IPL    2671 0.07200000  80.00000
+## 23                           Hoponius Union    2670 0.06700000  65.00000
+## 24                                 Calyptra    2669 0.04900000  45.00000
+## 25                           Habitus (2014)    2668 0.08000000 100.00000
+## 26                                    Solis    2667 0.07500000  85.00000
+## 27                                 Jucundus    2666 0.06000000  24.00000
+## 28                                  Habitus    2664 0.08000000 100.00000
+## 29                                  Grazias    2663 0.06300000  30.00000
+## 30                                 Claritas    2662 0.05800000  28.00000
+## 31                                     Park    2661 0.04700000  19.00000
+## 32                                Westfalia    2660 0.05600000  16.00000
+## 33                                      KSA    2659 0.04600000  17.00000
+## 34                                 Villager    2658 0.06300000  42.00000
+## 35                               Blackbeard    2657 0.09300000  68.83336
+## 36                                 Rye Knot    2656 0.06200000  31.06694
+## 37                                 Dead Arm    2655 0.06000000  29.45501
+## 38                          32°/50° Kölsch     2654 0.04800000  17.37159
+## 39                                   HopArt    2653 0.07700000  50.42000
+## 40                                 Boy King    2652 0.09700000  73.88710
+## 41    Denver Pale Ale (Artist Series No. 1)    2650 0.05000000  43.55786
+## 42                          Hibernation Ale    2649 0.08700000  45.38342
+## 43                               Whitewater    2648 0.06100000  34.05883
+## 44                                   Rumble    2647 0.07100000  57.10431
+## 45                                 Orabelle    2646 0.08300000  24.52820
+## 46                                    Lasso    2645 0.05000000  40.66554
+## 47                     Yeti  Imperial Stout    2644 0.09500000  75.00000
+## 48                                  Colette    2643 0.07300000  36.67217
+## 49                                Titan IPA    2642 0.07100000  59.11284
+## 50                            Peck&#39;s Porter    2640 0.06500000  35.00000
+## 51                                  Reactor    2448 0.07000000  46.26044
+## 52                               Mr. Orange    2447 0.05700000  20.90620
+## 53                                Dark Star    2639 0.08000000  54.00000
+## 54                                   Ryecoe    2469 0.06200000  36.11265
+## 55 G. B. Russo’s Italian Pistachio Pale Ale    2638 0.05200000  35.72599
+## 56                                  Belfort    2637 0.06700000  29.53670
+## 57                              Star Runner    2636 0.06000000  19.65575
+## 58                  Tart Side of the Barrel    2598 0.09800000  44.50419
+## 59                       Linnaeus Mango IPA    2597 0.06000000  40.63963
+## 60                         Beasts A&#39;Burnin&#39;    2548 0.07000000  29.60718
+## 61                                   Verdun    2542 0.07700000  18.11551
+## 62                     Barrel Aged Triomphe    2541 0.06500000  29.99927
+## 63                        Cherry Doppelbock    2504 0.06500000  30.20745
+## 64                          Tropical Saison    2500 0.06500000  21.85160
+## 65                             Beach Patrol    2499 0.06500000  19.01107
+## 66                             Nuit Serpent    2498 0.05000000  24.73114
+## 67                                    Paris    2481 0.09000000  24.72110
+## 68                           The Grand Army    2476 0.05500000  18.03187
+## 69                          Acidulated Trip    2467 0.05900000  26.72386
+## 70                               Root Stock    2466 0.06600000  23.44952
+## 71                               Mind Games    2465 0.04100000  24.64602
+## 72                                Sous Chef    2433 0.08200000  24.05908
+## 73                             Dubbelicious    2418 0.06500000  27.83011
+## 74                               Psychopomp    2416 0.06200000  24.44261
+## 75                               Fat Paczki    2382 0.05299270  26.52762
+## 76                       Earth-Like Planets    2381 0.05299534  26.52686
+## 77                               Ski Patrol    2290 0.06100000  19.31383
+## 78                          Viking Ice Hole    2241 0.06300000  19.91014
+## 79                               Rye Porter    2240 0.05600000  22.56262
+## 80                     Wizard Burial Ground    2137 0.09900000  29.56784
+## 81                              Smoky Wheat    2101 0.05100000  22.16818
+## 82                                    BRIPA    2092 0.06200000  28.31030
+## 83                                     Mela    2091 0.06200000  26.96199
+##                                  Style Ounces is_ale is_IPA
+## 1                         American IPA     16  FALSE   TRUE
+## 2                   Milk / Sweet Stout     16  FALSE  FALSE
+## 3                    English Brown Ale     16   TRUE  FALSE
+## 4                          Pumpkin Ale     16   TRUE  FALSE
+## 5                      American Porter     16  FALSE  FALSE
+## 6  Extra Special / Strong Bitter (ESB)     16  FALSE  FALSE
+## 7       American Double / Imperial IPA     16  FALSE   TRUE
+## 8                   English Barleywine     16  FALSE  FALSE
+## 9                   Milk / Sweet Stout     16  FALSE  FALSE
+## 10             American Pale Ale (APA)     16   TRUE  FALSE
+## 11                     German Pilsener     16  FALSE  FALSE
+## 12                         Pumpkin Ale     16   TRUE  FALSE
+## 13                    Belgian Pale Ale     16   TRUE  FALSE
+## 14                    American Pilsner     16  FALSE  FALSE
+## 15      American Double / Imperial IPA     16  FALSE   TRUE
+## 16              Saison / Farmhouse Ale     16   TRUE  FALSE
+## 17                   American Wild Ale     16   TRUE  FALSE
+## 18                        American IPA     16  FALSE   TRUE
+## 19                   English Brown Ale     16   TRUE  FALSE
+## 20          Keller Bier / Zwickel Bier     16  FALSE  FALSE
+## 21                 American Pale Lager     12  FALSE  FALSE
+## 22           American India Pale Lager     16  FALSE  FALSE
+## 23           American India Pale Lager     12  FALSE  FALSE
+## 24           American India Pale Lager     12  FALSE  FALSE
+## 25      American Double / Imperial IPA     16  FALSE   TRUE
+## 26                        American IPA     16  FALSE   TRUE
+## 27                           Wheat Ale     16   TRUE  FALSE
+## 28      American Double / Imperial IPA     16  FALSE   TRUE
+## 29                           Cream Ale     16   TRUE  FALSE
+## 30                              Kölsch     16  FALSE  FALSE
+## 31             American Pale Wheat Ale     12   TRUE  FALSE
+## 32            American Amber / Red Ale     12   TRUE  FALSE
+## 33                              Kölsch     12  FALSE  FALSE
+## 34                        American IPA     12  FALSE   TRUE
+## 35    American Double / Imperial Stout     12  FALSE  FALSE
+## 36                  American Brown Ale     12   TRUE  FALSE
+## 37             American Pale Ale (APA)     12   TRUE  FALSE
+## 38                              Kölsch     16  FALSE  FALSE
+## 39                        American IPA     16  FALSE   TRUE
+## 40      American Double / Imperial IPA     16  FALSE   TRUE
+## 41             American Pale Ale (APA)     12   TRUE  FALSE
+## 42                             Old Ale     12   TRUE  FALSE
+## 43             American Pale Wheat Ale     12   TRUE  FALSE
+## 44                        American IPA     12  FALSE   TRUE
+## 45                              Tripel     12  FALSE  FALSE
+## 46                        American IPA     12  FALSE   TRUE
+## 47              Russian Imperial Stout     12  FALSE  FALSE
+## 48              Saison / Farmhouse Ale     12   TRUE  FALSE
+## 49                        American IPA     12  FALSE   TRUE
+## 50                     American Porter     16  FALSE  FALSE
+## 51                        American IPA     16  FALSE   TRUE
+## 52                             Witbier     16  FALSE  FALSE
+## 53                      American Stout     16  FALSE  FALSE
+## 54                        American IPA     16  FALSE   TRUE
+## 55             American Pale Ale (APA)     16   TRUE  FALSE
+## 56              Saison / Farmhouse Ale     16   TRUE  FALSE
+## 57                    Belgian Pale Ale     16   TRUE  FALSE
+## 58    American Double / Imperial Stout     16  FALSE  FALSE
+## 59                        American IPA     16  FALSE   TRUE
+## 60                           Rauchbier     16  FALSE  FALSE
+## 61                      Bière de Garde     16  FALSE  FALSE
+## 62                         Belgian IPA     16  FALSE   TRUE
+## 63                          Doppelbock     16  FALSE  FALSE
+## 64              Saison / Farmhouse Ale     16   TRUE  FALSE
+## 65                             Witbier     16  FALSE  FALSE
+## 66                         Belgian IPA     16  FALSE   TRUE
+## 67              Saison / Farmhouse Ale     16   TRUE  FALSE
+## 68                         Belgian IPA     16  FALSE   TRUE
+## 69              Saison / Farmhouse Ale     16   TRUE  FALSE
+## 70                            Rye Beer     16  FALSE  FALSE
+## 71                        Dunkelweizen     16  FALSE  FALSE
+## 72             Belgian Strong Pale Ale     16   TRUE  FALSE
+## 73                              Dubbel     16  FALSE  FALSE
+## 74                    Belgian Dark Ale     16   TRUE  FALSE
+## 75                    Belgian Dark Ale     16   TRUE  FALSE
+## 76                    Belgian Pale Ale     16   TRUE  FALSE
+## 77                             Witbier     16  FALSE  FALSE
+## 78                       Oatmeal Stout     16  FALSE  FALSE
+## 79                     American Porter     16  FALSE  FALSE
+## 80                    Quadrupel (Quad)     16  FALSE  FALSE
+## 81                           Rauchbier     16  FALSE  FALSE
+## 82                         Belgian IPA     16  FALSE   TRUE
+## 83                    Belgian Dark Ale     16   TRUE  FALSE
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 2327 rows ]</code></pre>
+<pre class="r"><code>#Based on the two previous columns we create a new column which labels the observations as IPA or Ale
+for(i in 1:dim(beer_breweries)[1])
+{
+  if (beer_breweries$is_ale[i]==&quot;TRUE&quot;&amp; beer_breweries$is_IPA[i]== &quot;FALSE&quot;)
+  {
+    beer_breweries$IPA_Ale[i] &lt;- &quot;Ale&quot;
+  }
+ else if (beer_breweries$is_IPA[i]==&quot;TRUE&quot; &amp; beer_breweries$is_ale[i]==&quot;FALSE&quot;)
+  {
+    beer_breweries$IPA_Ale[i] &lt;- &quot;IPA&quot;
+ }
+  else
+  {
+    beer_breweries$IPA_Ale[i] &lt;- &quot;Other&quot;
+  }
+  
+}
+beer_breweries</code></pre>
+<pre><code>##    Brew_ID                 Brewery_Name          City State
+## 1        1           NorthGate Brewing    Minneapolis    MN
+## 2        1           NorthGate Brewing    Minneapolis    MN
+## 3        1           NorthGate Brewing    Minneapolis    MN
+## 4        1           NorthGate Brewing    Minneapolis    MN
+## 5        1           NorthGate Brewing    Minneapolis    MN
+## 6        1           NorthGate Brewing    Minneapolis    MN
+## 7        2    Against the Grain Brewery    Louisville    KY
+## 8        2    Against the Grain Brewery    Louisville    KY
+## 9        2    Against the Grain Brewery    Louisville    KY
+## 10       2    Against the Grain Brewery    Louisville    KY
+## 11       2    Against the Grain Brewery    Louisville    KY
+## 12       2    Against the Grain Brewery    Louisville    KY
+## 13       2    Against the Grain Brewery    Louisville    KY
+## 14       2    Against the Grain Brewery    Louisville    KY
+## 15       2    Against the Grain Brewery    Louisville    KY
+## 16       2    Against the Grain Brewery    Louisville    KY
+## 17       2    Against the Grain Brewery    Louisville    KY
+## 18       2    Against the Grain Brewery    Louisville    KY
+## 19       2    Against the Grain Brewery    Louisville    KY
+## 20       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 21       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 22       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 23       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 24       3     Jack&#39;s Abby Craft Lagers    Framingham    MA
+## 25       4    Mike Hess Brewing Company     San Diego    CA
+## 26       4    Mike Hess Brewing Company     San Diego    CA
+## 27       4    Mike Hess Brewing Company     San Diego    CA
+## 28       4    Mike Hess Brewing Company     San Diego    CA
+## 29       4    Mike Hess Brewing Company     San Diego    CA
+## 30       4    Mike Hess Brewing Company     San Diego    CA
+## 31       5      Fort Point Beer Company San Francisco    CA
+## 32       5      Fort Point Beer Company San Francisco    CA
+## 33       5      Fort Point Beer Company San Francisco    CA
+## 34       5      Fort Point Beer Company San Francisco    CA
+## 35       6        COAST Brewing Company    Charleston    SC
+## 36       6        COAST Brewing Company    Charleston    SC
+## 37       6        COAST Brewing Company    Charleston    SC
+## 38       6        COAST Brewing Company    Charleston    SC
+## 39       6        COAST Brewing Company    Charleston    SC
+## 40       6        COAST Brewing Company    Charleston    SC
+## 41       7 Great Divide Brewing Company        Denver    CO
+## 42       7 Great Divide Brewing Company        Denver    CO
+## 43       7 Great Divide Brewing Company        Denver    CO
+## 44       7 Great Divide Brewing Company        Denver    CO
+## 45       7 Great Divide Brewing Company        Denver    CO
+## 46       7 Great Divide Brewing Company        Denver    CO
+## 47       7 Great Divide Brewing Company        Denver    CO
+## 48       7 Great Divide Brewing Company        Denver    CO
+## 49       7 Great Divide Brewing Company        Denver    CO
+## 50       8             Tapistry Brewing      Bridgman    MI
+## 51       8             Tapistry Brewing      Bridgman    MI
+## 52       8             Tapistry Brewing      Bridgman    MI
+## 53       9             Big Lake Brewing       Holland    MI
+## 54       9             Big Lake Brewing       Holland    MI
+## 55      10   The Mitten Brewing Company  Grand Rapids    MI
+## 56      11               Brewery Vivant  Grand Rapids    MI
+## 57      11               Brewery Vivant  Grand Rapids    MI
+## 58      11               Brewery Vivant  Grand Rapids    MI
+## 59      11               Brewery Vivant  Grand Rapids    MI
+## 60      11               Brewery Vivant  Grand Rapids    MI
+## 61      11               Brewery Vivant  Grand Rapids    MI
+## 62      11               Brewery Vivant  Grand Rapids    MI
+## 63      11               Brewery Vivant  Grand Rapids    MI
+## 64      11               Brewery Vivant  Grand Rapids    MI
+## 65      11               Brewery Vivant  Grand Rapids    MI
+## 66      11               Brewery Vivant  Grand Rapids    MI
+## 67      11               Brewery Vivant  Grand Rapids    MI
+## 68      11               Brewery Vivant  Grand Rapids    MI
+## 69      11               Brewery Vivant  Grand Rapids    MI
+## 70      11               Brewery Vivant  Grand Rapids    MI
+## 71      11               Brewery Vivant  Grand Rapids    MI
+## 72      11               Brewery Vivant  Grand Rapids    MI
+## 73      11               Brewery Vivant  Grand Rapids    MI
+## 74      11               Brewery Vivant  Grand Rapids    MI
+## 75      11               Brewery Vivant  Grand Rapids    MI
+## 76      11               Brewery Vivant  Grand Rapids    MI
+##                                   Beer_Name Beer_ID        ABV       IBU
+## 1                              Get Together    2692 0.04500000  50.00000
+## 2                             Maggie&#39;s Leap    2691 0.04900000  26.00000
+## 3                                Wall&#39;s End    2690 0.04800000  19.00000
+## 4                                   Pumpion    2689 0.06000000  38.00000
+## 5                                Stronghold    2688 0.06000000  25.00000
+## 6                               Parapet ESB    2687 0.05600000  47.00000
+## 7                            Citra Ass Down    2686 0.08000000  68.00000
+## 8                            London Balling    2685 0.12500000  80.00000
+## 9                                      35 K    2684 0.07700000  25.00000
+## 10                                   A Beer    2683 0.04200000  42.00000
+## 11                          Rules are Rules    2682 0.05000000  25.00000
+## 12                            Flesh Gourd&#39;n    2681 0.06600000  21.00000
+## 13                                 Sho&#39;nuff    2680 0.04000000  13.00000
+## 14                              Bloody Show    2679 0.05500000  17.00000
+## 15                              Rico Sauvin    2678 0.07600000  68.00000
+## 16                         Coq de la Marche    2677 0.05100000  38.00000
+## 17                           Kamen Knuddeln    2676 0.06500000  27.07077
+## 18                             Pile of Face    2675 0.06000000  65.00000
+## 19                           The Brown Note    2674 0.05000000  20.00000
+## 20                              House Lager    2673 0.05200000  18.00000
+## 21                             Leisure Time    2672 0.04800000  15.00000
+## 22                               Excess IPL    2671 0.07200000  80.00000
+## 23                           Hoponius Union    2670 0.06700000  65.00000
+## 24                                 Calyptra    2669 0.04900000  45.00000
+## 25                           Habitus (2014)    2668 0.08000000 100.00000
+## 26                                    Solis    2667 0.07500000  85.00000
+## 27                                 Jucundus    2666 0.06000000  24.00000
+## 28                                  Habitus    2664 0.08000000 100.00000
+## 29                                  Grazias    2663 0.06300000  30.00000
+## 30                                 Claritas    2662 0.05800000  28.00000
+## 31                                     Park    2661 0.04700000  19.00000
+## 32                                Westfalia    2660 0.05600000  16.00000
+## 33                                      KSA    2659 0.04600000  17.00000
+## 34                                 Villager    2658 0.06300000  42.00000
+## 35                               Blackbeard    2657 0.09300000  68.83336
+## 36                                 Rye Knot    2656 0.06200000  31.06694
+## 37                                 Dead Arm    2655 0.06000000  29.45501
+## 38                          32°/50° Kölsch     2654 0.04800000  17.37159
+## 39                                   HopArt    2653 0.07700000  50.42000
+## 40                                 Boy King    2652 0.09700000  73.88710
+## 41    Denver Pale Ale (Artist Series No. 1)    2650 0.05000000  43.55786
+## 42                          Hibernation Ale    2649 0.08700000  45.38342
+## 43                               Whitewater    2648 0.06100000  34.05883
+## 44                                   Rumble    2647 0.07100000  57.10431
+## 45                                 Orabelle    2646 0.08300000  24.52820
+## 46                                    Lasso    2645 0.05000000  40.66554
+## 47                     Yeti  Imperial Stout    2644 0.09500000  75.00000
+## 48                                  Colette    2643 0.07300000  36.67217
+## 49                                Titan IPA    2642 0.07100000  59.11284
+## 50                            Peck&#39;s Porter    2640 0.06500000  35.00000
+## 51                                  Reactor    2448 0.07000000  46.26044
+## 52                               Mr. Orange    2447 0.05700000  20.90620
+## 53                                Dark Star    2639 0.08000000  54.00000
+## 54                                   Ryecoe    2469 0.06200000  36.11265
+## 55 G. B. Russo’s Italian Pistachio Pale Ale    2638 0.05200000  35.72599
+## 56                                  Belfort    2637 0.06700000  29.53670
+## 57                              Star Runner    2636 0.06000000  19.65575
+## 58                  Tart Side of the Barrel    2598 0.09800000  44.50419
+## 59                       Linnaeus Mango IPA    2597 0.06000000  40.63963
+## 60                         Beasts A&#39;Burnin&#39;    2548 0.07000000  29.60718
+## 61                                   Verdun    2542 0.07700000  18.11551
+## 62                     Barrel Aged Triomphe    2541 0.06500000  29.99927
+## 63                        Cherry Doppelbock    2504 0.06500000  30.20745
+## 64                          Tropical Saison    2500 0.06500000  21.85160
+## 65                             Beach Patrol    2499 0.06500000  19.01107
+## 66                             Nuit Serpent    2498 0.05000000  24.73114
+## 67                                    Paris    2481 0.09000000  24.72110
+## 68                           The Grand Army    2476 0.05500000  18.03187
+## 69                          Acidulated Trip    2467 0.05900000  26.72386
+## 70                               Root Stock    2466 0.06600000  23.44952
+## 71                               Mind Games    2465 0.04100000  24.64602
+## 72                                Sous Chef    2433 0.08200000  24.05908
+## 73                             Dubbelicious    2418 0.06500000  27.83011
+## 74                               Psychopomp    2416 0.06200000  24.44261
+## 75                               Fat Paczki    2382 0.05299270  26.52762
+## 76                       Earth-Like Planets    2381 0.05299534  26.52686
+##                                  Style Ounces is_ale is_IPA IPA_Ale
+## 1                         American IPA     16  FALSE   TRUE     IPA
+## 2                   Milk / Sweet Stout     16  FALSE  FALSE   Other
+## 3                    English Brown Ale     16   TRUE  FALSE     Ale
+## 4                          Pumpkin Ale     16   TRUE  FALSE     Ale
+## 5                      American Porter     16  FALSE  FALSE   Other
+## 6  Extra Special / Strong Bitter (ESB)     16  FALSE  FALSE   Other
+## 7       American Double / Imperial IPA     16  FALSE   TRUE     IPA
+## 8                   English Barleywine     16  FALSE  FALSE   Other
+## 9                   Milk / Sweet Stout     16  FALSE  FALSE   Other
+## 10             American Pale Ale (APA)     16   TRUE  FALSE     Ale
+## 11                     German Pilsener     16  FALSE  FALSE   Other
+## 12                         Pumpkin Ale     16   TRUE  FALSE     Ale
+## 13                    Belgian Pale Ale     16   TRUE  FALSE     Ale
+## 14                    American Pilsner     16  FALSE  FALSE   Other
+## 15      American Double / Imperial IPA     16  FALSE   TRUE     IPA
+## 16              Saison / Farmhouse Ale     16   TRUE  FALSE     Ale
+## 17                   American Wild Ale     16   TRUE  FALSE     Ale
+## 18                        American IPA     16  FALSE   TRUE     IPA
+## 19                   English Brown Ale     16   TRUE  FALSE     Ale
+## 20          Keller Bier / Zwickel Bier     16  FALSE  FALSE   Other
+## 21                 American Pale Lager     12  FALSE  FALSE   Other
+## 22           American India Pale Lager     16  FALSE  FALSE   Other
+## 23           American India Pale Lager     12  FALSE  FALSE   Other
+## 24           American India Pale Lager     12  FALSE  FALSE   Other
+## 25      American Double / Imperial IPA     16  FALSE   TRUE     IPA
+## 26                        American IPA     16  FALSE   TRUE     IPA
+## 27                           Wheat Ale     16   TRUE  FALSE     Ale
+## 28      American Double / Imperial IPA     16  FALSE   TRUE     IPA
+## 29                           Cream Ale     16   TRUE  FALSE     Ale
+## 30                              Kölsch     16  FALSE  FALSE   Other
+## 31             American Pale Wheat Ale     12   TRUE  FALSE     Ale
+## 32            American Amber / Red Ale     12   TRUE  FALSE     Ale
+## 33                              Kölsch     12  FALSE  FALSE   Other
+## 34                        American IPA     12  FALSE   TRUE     IPA
+## 35    American Double / Imperial Stout     12  FALSE  FALSE   Other
+## 36                  American Brown Ale     12   TRUE  FALSE     Ale
+## 37             American Pale Ale (APA)     12   TRUE  FALSE     Ale
+## 38                              Kölsch     16  FALSE  FALSE   Other
+## 39                        American IPA     16  FALSE   TRUE     IPA
+## 40      American Double / Imperial IPA     16  FALSE   TRUE     IPA
+## 41             American Pale Ale (APA)     12   TRUE  FALSE     Ale
+## 42                             Old Ale     12   TRUE  FALSE     Ale
+## 43             American Pale Wheat Ale     12   TRUE  FALSE     Ale
+## 44                        American IPA     12  FALSE   TRUE     IPA
+## 45                              Tripel     12  FALSE  FALSE   Other
+## 46                        American IPA     12  FALSE   TRUE     IPA
+## 47              Russian Imperial Stout     12  FALSE  FALSE   Other
+## 48              Saison / Farmhouse Ale     12   TRUE  FALSE     Ale
+## 49                        American IPA     12  FALSE   TRUE     IPA
+## 50                     American Porter     16  FALSE  FALSE   Other
+## 51                        American IPA     16  FALSE   TRUE     IPA
+## 52                             Witbier     16  FALSE  FALSE   Other
+## 53                      American Stout     16  FALSE  FALSE   Other
+## 54                        American IPA     16  FALSE   TRUE     IPA
+## 55             American Pale Ale (APA)     16   TRUE  FALSE     Ale
+## 56              Saison / Farmhouse Ale     16   TRUE  FALSE     Ale
+## 57                    Belgian Pale Ale     16   TRUE  FALSE     Ale
+## 58    American Double / Imperial Stout     16  FALSE  FALSE   Other
+## 59                        American IPA     16  FALSE   TRUE     IPA
+## 60                           Rauchbier     16  FALSE  FALSE   Other
+## 61                      Bière de Garde     16  FALSE  FALSE   Other
+## 62                         Belgian IPA     16  FALSE   TRUE     IPA
+## 63                          Doppelbock     16  FALSE  FALSE   Other
+## 64              Saison / Farmhouse Ale     16   TRUE  FALSE     Ale
+## 65                             Witbier     16  FALSE  FALSE   Other
+## 66                         Belgian IPA     16  FALSE   TRUE     IPA
+## 67              Saison / Farmhouse Ale     16   TRUE  FALSE     Ale
+## 68                         Belgian IPA     16  FALSE   TRUE     IPA
+## 69              Saison / Farmhouse Ale     16   TRUE  FALSE     Ale
+## 70                            Rye Beer     16  FALSE  FALSE   Other
+## 71                        Dunkelweizen     16  FALSE  FALSE   Other
+## 72             Belgian Strong Pale Ale     16   TRUE  FALSE     Ale
+## 73                              Dubbel     16  FALSE  FALSE   Other
+## 74                    Belgian Dark Ale     16   TRUE  FALSE     Ale
+## 75                    Belgian Dark Ale     16   TRUE  FALSE     Ale
+## 76                    Belgian Pale Ale     16   TRUE  FALSE     Ale
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 2334 rows ]</code></pre>
+<p>#question 8 Pt. 2: Knn for IPA Vs. Ale</p>
+<pre class="r"><code># We do Knn where we loop for many K  and find the average accuracy with one training and test partion set
+
+#Filter the classifications and then create the training set
+beer_breweriesKnn&lt;-beer_breweries %&gt;% filter(IPA_Ale==&quot;IPA&quot;|IPA_Ale==&quot;Ale&quot;)
+set.seed(6)
+splitPerc = .7
+trainIndices = sample(1:dim(beer_breweriesKnn)[1],round(splitPerc * dim(beer_breweriesKnn)[1]))
+train = beer_breweriesKnn[trainIndices,]
+test = beer_breweriesKnn[-trainIndices,]
+accs = data.frame(accuracy = numeric(100), k = numeric(100))
+
+#Use Knn for when k = 1-100 and find the accuracy for each value of K
+for(i in c(1, 10, 50, 100))
+{
+styles = knn.cv(beer_breweriesKnn[,c(7,8)],beer_breweriesKnn$IPA_Ale, prob = TRUE, k = i)
+  table(beer_breweriesKnn$IPA_Ale,styles)
+  CM = confusionMatrix(table(beer_breweriesKnn$IPA_Ale,styles))
+  accs$accuracy[i] = CM$overall[1]
+  accs$k[i] = i
+}
+#Plot the accuracy of of value of k
+plot(accs$k,accs$accuracy, type = &quot;l&quot;, xlab = &quot;k&quot;)</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>accu = accs$accuracy
+max(accu)</code></pre>
+<pre><code>## [1] 0.8113083</code></pre>
+<p>#question 8 Pt. 3: Knn with multiiple iterations for IPA Vs. Ale</p>
+<pre class="r"><code># We loop for many K where we take the average accuracy of many training and partition sets
+
+#Create 5 different iterations of training and test sets
+iterations = 5
+numks = 100
+
+masterAcc = matrix(nrow = iterations, ncol = numks)
+  
+for(j in 1:iterations)
+{
+accs = data.frame(accuracy = numeric(100), k = numeric(100))
+trainIndices = sample(1:dim(beer_breweriesKnn)[1],round(splitPerc * dim(beer_breweriesKnn)[1]))
+train = beer_breweriesKnn[trainIndices,]
+test = beer_breweriesKnn[-trainIndices,]
+
+# Find the average accuracy with each iteration of the training and tests sets where k = 1-10
+for(i in 1:numks)
+{
+  classifications = knn(train[,c(7,8)],test[,c(7,8)],train$IPA_Ale, prob = TRUE, k = i)
+  table(classifications,test$IPA_Ale)
+  CM = confusionMatrix(table(classifications,test$IPA_Ale))
+  masterAcc[j,i] = CM$overall[1]
+}
+
+}
+
+MeanAcc = colMeans(masterAcc)
+
+#Plot the average accuracy of K
+plot(seq(1,numks,1),MeanAcc, type = &quot;l&quot;,xlab = &quot;k&quot;,ylab = &quot;Mean Accuracy&quot;)</code></pre>
+<p><img src="CaseStudy_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>#Find the maximum average accuracy
+max(MeanAcc)</code></pre>
+<pre><code>## [1] 0.820614</code></pre>
+<p>#question 9: freeform EDA–most common word used in Beer_Names?</p>
+<p>An interesting fact: in beer names, the most common words after the types of beers themselves are colors (red, blonde, brown), then “Wheat”, “Porter”, and “Summer”.</p>
+<pre class="r"><code>#Look at beer names and remove duplicates
+head(beer_breweries$Beer_Name)</code></pre>
+<pre><code>## [1] Get Together  Maggie&#39;s Leap Wall&#39;s End    Pumpion       Stronghold    Parapet ESB  
+## 2305 Levels: #001 Golden Amber Lager #002 American I.P.A. ... Zonker Stout</code></pre>
+<pre class="r"><code>beer_breweries = beer_breweries %&gt;%
+  distinct(Beer_Name)
+
+#put all the names into one big long string of words
+Beer_Words = str_c(beer_breweries$Beer_Name, collapse = &quot; &quot;)
+Beer_Words</code></pre>
+<pre><code>## [1] &quot;Get Together Maggie&#39;s Leap Wall&#39;s End Pumpion Stronghold Parapet ESB Citra Ass Down London Balling 35 K A Beer Rules are Rules Flesh Gourd&#39;n Sho&#39;nuff Bloody Show Rico Sauvin Coq de la Marche Kamen Knuddeln Pile of Face The Brown Note House Lager Leisure Time Excess IPL Hoponius Union Calyptra Habitus (2014) Solis Jucundus Habitus Grazias Claritas Park Westfalia KSA Villager Blackbeard Rye Knot Dead Arm 32°/50° Kölsch  HopArt Boy King Denver Pale Ale (Artist Series No. 1) Hibernation Ale Whitewater Rumble Orabelle Lasso Yeti  Imperial Stout Colette Titan IPA Peck&#39;s Porter Reactor Mr. Orange Dark Star Ryecoe G. B. Russo’s Italian Pistachio Pale Ale Belfort Star Runner Tart Side of the Barrel Linnaeus Mango IPA Beasts A&#39;Burnin&#39; Verdun Barrel Aged Triomphe Cherry Doppelbock Tropical Saison Beach Patrol Nuit Serpent Paris The Grand Army Acidulated Trip Root Stock Mind Games Sous Chef Dubbelicious Psychopomp Fat Paczki Earth-Like Planets Ski Patrol Viking Ice Hole Rye Porter Wizard Burial Ground Smoky Wheat BRIPA Mela W.I.P.A Snappa Pepper in the Rye Moe Lasses&#39; Pumpkin Tart Undertaker Undertaker (2014) Coq D&#39;Or North French Agent a Deux Belgian Wit Pothole Stout Tree Bucket Le Flaneur Ale Maize &amp; Blueberry Trebuchet Double IPA Contemplation Black Rabbit Zaison Vivant Tripel Tart Side of the Moon Big Red Coq Hubris Quadrupel Anniversary Ale Plow Horse Belgian Style Imperial Stout Escoffier Bretta Ale Contemplation (2012) Vivant Belgian Style Imperial Stout (2012) Big Red Coq (2012) Zaison (2012) Vivant Tripel (2012) Trebuchet Double IPA (2012) Kludde Farm Hand Solitude Triomphe Sparkle North 45 Amber Ale Horny Monk Mind&#39;s Eye PA Nordskye  North Third Stout Honey Lav Coconut Brown Ale 51K IPA Grand Rabbits Hotbox Brown Gold Black 98 Problems (Cuz A Hop Ain&#39;t One) Veteran’s Pale Ale (VPA) Grapefruit IPA Train Hopper Edward’s Portly Brown Dirty Bastard Centennial IPA All Day IPA Deflator Hinchtown Hammer Down Half Cycle IPA Cafe Leche Damascene Apricot Sour Csar Klingon Warnog Roggen Dunkel Overlord Imperial IPA Alloy Rivet Irish Red Ale 3 Gear Robust Porter Circuit Bohemian Pilsner Saucy Intruder Insert Hop Reference Thai.p.a Citra Faced Pole Barn Stout Pale Yoshi&#39;s Nectar Feel Like Maplin&#39; Love Father&#39;s Beer The 26th The Gadget Tribute Wrath of Pele Black Beer&#39;d Mr. Tea Pale Alement Hopkick Dropkick Kreamed Corn Coconoats Joey Wheat 3:33 Black IPA MCA Tip Off Java Mac Cowbell Hop Up Offa That Brett (2014) PV Muckle (2013) Bourbon Barrel Batch 666: Sympathy for the Devil Whip Fight Port Barrel Wee Mac  Fistful Of Hops Red Fistful of Hops Orange Fistful Of Hops Blue Fistful of Hops Green 30 Min Coma Wee Muckle Royal Brat Grapefruit Jungle (GFJ) Osiris Pale Ale Bourbon Barrel Aged Timmie Stupid Sexy Flanders Bourbon Barrel Cowbell Popcorn Pilsner Ring of Dingle Bourbon Barrel Wee Mac Bourbon Barrel Johan The Deuce The Velvet Fog Sun King Oktoberfest Indianapolis Indians Lager Indians Victory Lager (2012) Chaka Isis Wee Muckle (2011) Grapefruit Jungle (GFJ) (2011) Sun King Oktoberfest (2011) Johan the Barleywine Wee Mac Scottish-Style Ale Sunlight Cream Ale Osiris Pale Ale (2010) Blonde Czich White Reaper Bobblehead Lucky Dog Voodoo General George Patton Pilsner Galaxyfest Citrafest Barn Yeti Scarecrow Ironman Honey Kolsch Copperhead Amber Deduction Gone A-Rye Special Release Dankosaurus Scruffy&#39;s Smoked Alt Elliott&#39;s Phoned Home Pale Ale The Lawn Ranger Sex Panther Winter Warmer (Vault Series) Count Hopula (Vault Series) Oktoberfest SunSpot Golden Ale I.W.A. (2011) Supermonk I.P.A. Epicenter Amber Ale SanTan HefeWeizen Hop Shock IPA Sex Panther (2014) Devil’s Ale Rail Slide Imperial Spiced Ale Mr. Pineapple American Idiot Ale (2012) Hop Shock IPA (2010) SanTan HefeWeizen (2010) Devil’s Ale (2010) Epicenter Amber Ale (2010) Heavy Lifting Bastian Healani Yabba Dhaba Chai Tea Porter A Capella Gluten Free Pale Ale Casper White Stout JP&#39;s Ould Sod Irish Red IPA Surfrider Kolschtal Eddy South Bay Session IPA Grandma&#39;s Pecan Double Trunk Grapefruit Sculpin Even Keel Ballast Point Pale Ale Big Eye India Pale Ale Longfin Lager Sculpin IPA Liberty Ale IPA Summer Wheat California Lager Brotherhood Steam Weiss Weiss Baby Czech Yo Self FMB 101 Raja Perzik Saison Avery Joe’s Premium American Pilsner White Rascal Avery India Pale Ale Ellie’s Brown Ale Cow Creek Chupahopra Twisted X Vanilla Porter Blueberry Blonde Galaxy IPA Gose Vermont Pilsner Mosaic Single Hop IPA Lost Galaxy Maine Island Trail Ale Jah Mon Headless Wylie Dayman IPA All Aboard! Anniversary Stout Hop Lace OH-PA Session Pale Ale Patrick&#39;s Poison Rudolph&#39;s Red Babbling Blonde Maxwell&#39;s Scottish Ale Grateful White RT Lager Old Wylie&#39;s IPA Hala Kahiki Pineapple Beer Fist City A Little Crazy Rosa Hibiscus Ale Fistmas Ale Oktoberfest Revolution Eugene Porter Anti-Hero IPA Bottom Up Belgian Wit Wooden Rooster Ginger Peach Saison Zombie Monkie Wild Plum Farmhouse Ale Vanilla Bean Buffalo Sweat Ethos IPA Tallgrass Pub Ale Oasis Buffalo Sweat Halcyon Unfiltered Wheat 8-Bit Pale Ale Velvet Rooster Köld Lager (2010) Oasis (2010) Tallgrass Ale Buffalo Sweat (2010) Tallgrass IPA 4Beans Jammer Abigale Rad Bengali Sensi Harvest Hi-Res Global Warmer Autumnation (2013) The Crisp Sweet Action Righteous Ale Bengali Tiger 3Beans Brownstone Apollo Harbinger Resin Diesel Autumnation (2011-12) (2011) The Crisp (2011) Sweet Action (2011) Righteous Ale (2011) Bengali Tiger (2011) Raspberry Berliner Weisse Hop Session Blueberry Berliner Weisse Berliner Weisse Easy Jack Union Jack Pivo Pils 805 Blonde Ale 805 Take Two Pils Waterkeeper SweetWater IPA 420 Extra Pale Ale Flying Mouse 8 Flying Mouse 4 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale Lee Hill Series Vol. 4 - Manhattan Style Rye Ale Lee Hill Series Vol. 2 - Wild Saison Lee Hill Series Vol. 3 - Barrel Aged Imperial Stout Lee Hill Series Vol. 1 - Barrel Aged Brown Ale Blood Orange Saison Thai Style White IPA Ferus Fluxus Wild Belgian Pale Ale Upslope Imperial India Pale Ale Upslope Christmas Ale Upslope Pumpkin Ale Upslope Belgian Style Pale Ale Upslope Foreign Style Stout Top Rope Mexican-style Craft Lager Upslope Craft Lager Upslope Brown Ale Upslope Pale Ale Upslope India Pale Ale Blood of the Unicorn Moar Uber Lupin Schwarz IPA Nordic Blonde Moped Traveler Mazzie Painted Turtle Weissenheimer Abbey&#39;s Single (2015- ) Vertex IPA Here Gose Nothin&#39; Strawberry Blonde Hoperation Overload Abbey&#39;s Single Ale (Current) Make It So Hopvale Organic Ale Unchained #18 Hop Silo Beach Cruiser I.P. Eh! Schoolhouse Honey 10 Degrees of Separation Passion Fruit Prussia Send Help Cast Iron Oatmeal Brown Reprise Centennial Red Alter Ego Divided Sky Resurrected Contact High Todd the Axe Man Doomtree BLAKKR Overrated! West Coast Style IPA WET Bitter Brewer SurlyFest Coffee Bender Bender Abrasive Ale Hell CynicAle Furious Neomexicanus Native Old Soul Snowcat Coffee Stout WinterWonderGrass Festival Ale Boohai Red Ale Lava Lake Wit Mountain Livin&#39; Pale Ale Crazy Mountain Amber Ale Monkey Dancing On A Razor Blade Tripel Deke Vinyl Frontier Disco Superfly Misty Mountain Hop One-Hit Wonderful En Parfaite Harmonie Daft Funk Love In An Ellavator Spin Doctor OktoberFiesta Texicali  Pinata Protest Bat Outta Helles Original Rye Wit Soul Doubt Yo Soy Un Berliner Bimini Twist Beach Blonde Rod Bender Red Farmer&#39;s Daughter Blonde Pump House IPA Suicide Blonde IPA Honey Rye Long Leaf Honey Badger Blonde Porter (a/k/a Black Gold Porter) Jalapeno Pale Ale Double Duckpin Old Pro Duckpin Pale Ale Balt Altbier Hop A-Peel Vanilla Java Porter Michelada Dirty Blonde Ale Grand Circus IPA Atwater&#39;s Lager Hopalicious Wobble Night Cat Night Cat (2014) Dog Days Lager Sidekick Extra Pale Ale Atom Smasher Testudo Hobnob B &amp; B Pale Ale Cane and Ebel Outlaw IPA (2015) Cold Press Harness the Winter 14° ESB  Bent Hop Golden IPA Bent Paddle Black Ale Venture Pils Oberon Smitten Winter White Two Hearted Best Brown Professor Black Little Boss Van Dayum! Spirit Animal Baby Daddy Session IPA Saddle Bronc Brown Ale Bomber Mountain Amber Ale Hard Cider Totally Radler Nonstop Hef Hop Rise Up Red Survival Stout Hopworks IPA Abominable Winter Ale Pigwar White India Pale Ale Rise-Up Red (2014) Abominable Winter Ale (2012) HUB Lager Hopworks IPA (2012) Lil&#39; Brainless Raspberries Element 29 Hop Syndrome Escape to Colorado Slow Ride Ranger IPA Shift 1554 Black Lager Blue Paddle California Route Snapshot Sunshine Wheat Beer Fat Tire Amber Ale Shift (1) Fat Tire Amber Ale (2011) Ranger IPA (Current) Sunshine Wheat Beer (2009) Fat Tire Amber Ale (2008) Nooner Torpedo Yonder Bock CANfusion Rye Bock Sierra Nevada Pale Ale Old Chico Crystal Wheat Summerfest U. P. Witbier November Gale Pale Ale Olde Ore Dock Scottish Ale Widow Maker Black Ale Lift Bridge Brown Ale Pick Axe Blonde Ale Red Jacket Amber Ale Manitou Amber Autumn Winds Fest Beer Captain&#39;s Daughter India Pale Ale Blackberry Wheat 312 Urban Pale Ale 312 Urban Wheat Ale 312 Urban Wheat Ale (2012) Broad Brook Ale Lionshead Galaxy High Sol Drifter Thunder Snow The Great Pumpcan LIFT SPRYE Psychopathy Gnarly Brown Happy Amber Razz Wheat Hop Ryot Mystic Mama IPA Firefly Amber Ale Chomolungma Honey Nut Brown Ale Hustle Pure Fury Dad Panther Franz Zen Truth Cougar Self Starter Ermal&#39;s 10 Ton Flyin&#39; Rye Flying Sailor Peanut Butter Jelly Time King Coconut Troegenator Nugget Nectar Sunshine Pils Troegenator Doublebock Perpetual IPA Cortez Gold Mission IPA El Conquistador Extra Pale Ale Shipwrecked Double IPA Bay of Bengal Double IPA (2014) Christmas Ale Pay It Forward Cocoa Porter West Sixth Amber Ale West Sixth IPA Rhode Island Blueberry Newport Storm IPA Hurricane Amber Ale (2004) Hurricane Amber Ale Amber Ale King Street Pilsner King Street IPA King Street Hefeweizen King Street Blonde Ale Watermelon Ale Fenway American Pale Ale Back Bay IPA Bunker Hill Blueberry Ale  Peach Pale Ale Four String Vanilla Porter Suncaster Summer Wheat Brass Knuckle Pale Ale Big Star White IPA Clean Shave IPA Firestarter India Pale Ale Kilt Dropper Scotch Ale Wood Splitter Pilsner Gyptoberfest Farmer Wirtz India Pale Ale Slow &amp; Steady Golden Ale Pink-I Raspberry IPA Moe&#39;s Original Bar B Que &#39;Bama Brew Golden Ale Live Local Golden Ale Screaming Eagle Special Ale ESB Dirtbag Dunkel Kindler Pale Ale Mistress Winter Wheat Tent Pole Vanilla Porter Awry Rye Pale Ale Demshitz Brown Ale Wood Splitter Pilsner (2012) Brush Creek Blonde 4000 Footer IPA Summer Brew Consilium Hammer &amp; Sickle Redacted Rye IPA Elevation Triple India Pale Ale 5:00 O&#39;Clock Afternoon Ale Ryeteous Rye IPA (2012) Cali Creamin&#39; Deception Blackmarket Rye IPA Black Market Hefeweizen Aftermath Pale Ale Nitro Can Coffee Stout Welcome to Scoville Rule G IPA Murphy&#39;s Law Alter Ego  Hop in the ‘Pool Helles Ultra Gnar Gnar IPA In-Tents India Pale Lager Lost Meridian Wit Celestial Meridian Cascadian Dark Lager P-Town Pilsner Klickitat Pale Ale Yellow Wolf Imperial IPA Pine Belt Pale Ale Walloon Le Mort Vivant Red Cockaded Ale Valkyrie Double IPA Red Cockaded Ale (2013) Old Potentate Bombshell Blonde PRO-AM (2012) (2012) Walloon (2014) Le Mort Vivant (2011) Buried Hatchet Stout Third Eye Enlightened Pale Ale Colorado Kölsch Steam Engine Lager Third Eye Pale Ale Watermelon Wheat Laka Laka Pineapple IPA #11 Blood Orange Honey Lighthouse Amber Main St. Virginia Ale Chin Music Amber Lager Ray Ray’s Pale Ale Summer Ale Mr. Blue Sky 3 Scrooges Screamin’ Pumpkin Grand Trunk Bohemian Pils El Rojo Norm&#39;s Raggedy Ass IPA Grind Line Norm&#39;s Gateway IPA Lemon Shandy Tripel Weisse Versa (2012) Mother in Lager Weekend Warrior Pale Ale Karbachtoberfest Love Street Summer Seasonal (2014) Barn Burner Saison Rodeo Clown Double IPA Sympathy for the Lager Weisse Versa Hopadillo India Pale Ale The Green Room Humbucker Helles Neato Bandito Oak Cliff Coffee Ale Dream Crusher Double IPA Deep Ellum Pale Ale Double Brown Stout Farmhouse Wit Rye Pils Session Lager Dallas Blonde Deep Ellum IPA 18th Anniversary Gose White (2015) Firemans #4 Blonde Ale (2013) The Sword Iron Swan Ale Hans&#39; Pils (2015) Four Squared (2015) Firemans #4 Blonde Ale (2015) Straub Beer (Current) American Lager American Amber American Light Black Hop IPA Point Special (Current) Point Special Point Cascade Pale Ale (2013) Onyx Black Ale Beyond The Pale IPA Point Special (2013) Point Special (2012) Point Special Lager St. Benedict&#39;s Winter Ale Point Oktoberfest Point Nude Beach Summer Wheat Point Nude Beach Summer Wheat (2011) Drop Dead Blonde Three Kings Ale 2012 Black Ale Point Nude Beach Summer Wheat (2010) Point Cascade Pale Ale Point Amber Classic Royal Lager Rip Van Winkle (Current) O’Malley’s Stout O’Malley’s IPA O’Malley’s Irish Style Cream Ale L&#39;il Lucy&#39;s Hot Pepper Ale Drop Kick Ale 2014 IPA Cicada Series Sinister Minister Black IPA Jack the Sipper Devil&#39;s Harvest Extra Pale Ale Suzy B Dirty Blonde Ale Mississippi Fire Ant Hipster Breakfast Axe Head Malt Liquor Huber Bock (2014) Minhas Light (2012) Huber Clear Creek Ice Mountain Crest Mountain Creek (2013) Boxer Boxer Light Boxer Ice Morning Wood Wheat (Current) Hideout Helles Dead Eye Dunkel Peacemaker Pilsner Over the Rail Pale Ale Pallavicini Pilsner (2009) Porter Culture Sietsema Red Label Extra Pale Ale Behemoth Arkansas Red Core Oatmeal Stout Core ESB Oklahoma Suks Power &amp; Light White Rabbit  Cubano Espresso Operation Homefront Wandering Pelican Sugar Plum Puppy&#39;s Breath Porter Happening Now Hopped on the High Seas (Hop #529) Hopped on the High Seas (Calypso) Wiregrass Post-Prohibition Ale Dry-Hopped On The High Seas Caribbean-Style IPA Hopped on the High Seas (Citra) Hopped on the High Seas (Ahtanum) Gwar Beer Tropical Heatwave Humidor Series India Pale Ale Jai Alai IPA Aged on White Oak José Martí American Porter Invasion Pale Ale Maduro Brown Ale Hotter Than Helles Lager Tocobaga Red Ale Jai Alai IPA Florida Cracker Belgian Wit Hunny Do Wheat Three Way Pale Ale Rise to the Top Lost Trout Brown Ale Gansett Light Bohemian Pils Autocrat Coffee Milk Stout Narragansett Bohemian Pilsner Narragansett Summer Ale Narragansett Cream Ale Narragansett Porter Narragansett Bock Narragansett Fest Lager Little Red Cap Shark Tracker Light lager Pumple Drumkin Grey Lady Summer of Lager Indie Pale Ale Sankaty Light Lager Whale&#39;s Tale Pale Ale Charlie&#39;s Rye IPA New Cleveland Palesner Perpetual Darkness Clan Warrior Psycho Penguin Vanilla Porter Heliocentric Hefeweizen Ghose Drifter Pale Ale Ghost Rider Pale Ale (2013) Helios Hefeweizen (2013) Deadeye Jack Pistols at Dawn Peacemaker Pale Ale Shotgun Betty Sweet Josie Watershed IPA Oakshire Amber Ale Overcast Espresso Stout Watershed IPA (2013) Fort Pitt Ale Turnrow Harvest Ale Juke Joint IPA Parade Ground Coffee Porter Tin Roof Watermelon Wheat Tin Roof Blonde Ale Voodoo Bengal Pale Ale Perfect Tin Amber Knotty Blonde Ale Fivepine Chocolate Porter Hoodoo Voodoo IPA Ginja Ninja Cherried Away Rhubarbarian BrightCider Hopportunity Knocks IPA Pilot Rock Porter Caldera Pale Ale Lawnmower Lager Ashland Amber Ale (2009) Caldera IPA (2009) Caldera IPA (2007) Caldera Pale Ale (2010) Caldera Pale Ale (2009) Caldera Pale Ale (2005) Caldera Pale Ale (2007) Caldera Pale Ale (2011) Ashland Amber Ale Caldera IPA Wild Trail Pale Ale Mothman Black IPA Camelback Knotty Pine Lumberyard Pilsner Lumberyard IPA Lumberyard Red Ale PUNK&#39;N Yard Sale Winter Lager Trader Session IPA Hop Nosh IPA SUM&#39;R Organic Baba Black Lager Hop Notch IPA (2013) Cutthroat Pale Ale WYLD Extra Pale Ale Sunbru Kölsch Kilt Lifter Scottish-Style Ale Pumpkin Porter Four Peaks Peach Ale Hop Knot IPA Kilt Lifter Scottish-Style Ale (2009) River House Pretzel Stout Rubberneck Red The Imperial Texan Day Break 4-Grain Breakfast Beer River House Saison There Will Be Stout Smooth Operator Homefront IPA Sundown Sanctified Fear of a Brett Planet Original Slacker Ale Alpha Blackback Kiss Off IPA Dog Days Summer Ale Beer Agent Re-Ignition Cherry Ale Bourbon Barrel Aged Coconut Porter Great Crescent IPA Aurora Lager Great Crescent Blonde Ale Great Crescent Coconut Porter Great Crescent Oktoberfest Lager Great Crescent Brown Ale Cherry Ale (1) Aurora Lager (2011) Frosted Fields Winter Wheat Great Crescent Belgian Style Wit Bourbon&#39;s Barrel Stout Great Crescent Stout Great Crescent Coconut Porter (2012) Great Crescent Dark Lager Great Crescent Mild Ale Great Crescent IPA (2011) Great Crescent Blonde Ale (2011) Pinner Throwback IPA Centennial State Pale Ale Old Chub NITRO The CROWLER™ CAN&#39;D AID Foundation Icey.P.A. One Nut Brown Birth IPA Dale&#39;s Pale Ale Mama&#39;s Little Yella Pils oSKAr the G&#39;Rauch Dale&#39;s Pale Ale (10 Year Anniversary) Dale&#39;s Pale Ale (2012) Gordon Imperial Red (2010) Dale&#39;s Pale Ale (2011) Dale&#39;s Pale Ale (2010) G&#39;KNIGHT (16 oz.) 15th Anniversary Abbey Ale (2012) HGH (Home Grown Hops): Part Duh Deviant Dale&#39;s IPA One Hit Wonder G&#39;KNIGHT (12 oz.) Ten Fidy Imperial Stout GUBNA Imperial IPA Old Chub Gordon Ale (2009) 1492 Mango Ginger Passenger The Golden One The Power of Zeus Aviator Raspberry Blonde 3 Picket Porter Rusty Nail Pale Ale Little Sister India Style Session Ale Country Boy IPA Blood Orange Gose Keebarlin&#39; Pale Ale the Kimmie, the Yink and the Holy Gose Fall Hornin&#39; Barney Flats Oatmeal Stout Summer Solstice Hop Ottin&#39; IPA Boont Amber Ale El Steinber Dark Lager Boont Amber Ale (2010) Summer Solstice Cerveza Crema (2009) Barney Flats Oatmeal Stout (2012) Winter Solstice Hop Ottin&#39; IPA (2011) Boont Amber Ale (2011) Summer Solstice (2011) Poleeko Gold Pale Ale (2009) Mastermind Hyzer Flip Second Fiddle Hodad Porter Nomader Weiss Molotov Lite Hipster Ale (Two Roads Brewing) Bikini Beer Hipster Ale (Westbrook Brewing) Rebirth Pale Ale Irish Channel Stout MechaHopzilla Hopitoulas IPA NOLA Brown Ale NOLA Blonde Ale Ball &amp; Chain (2014) Bitter Biker Double IPA God Damn Pigeon Porter Working for the Weekend Angry Adam Freedom Fries Ghost Bike Pale Ale Spiteful IPA Alley Time Fat Badger In the Weeds Rahr&#39;s Blonde Pride of Texas Pale Ale Devil&#39;s Cup Rise of the Phoenix Sinister Sex and Candy Black Exodus Lake Street Express Foreman Jade Cone Crusher Sophomoric Saison Regional Ring Of Fire Garce Selé Troll Destroyer Bitter Bitch Remain in Light Flower Child (2014) Santa&#39;s Secret Flagship IPA Sky Blue Golden Ale Salamander Slam Blonde Hunny Wild Wolf Wee Heavy Scottish Style Ale Wild Wolf American Pilsner Alpha Ale Gran Sport Horny Toad Cerveza Native Amber F5 IPA Native Amber (2013) Horny Toad Cerveza (2013) Seventh Son of a Seventh Son Stone Fort Brown Ale Seventh Son Hopped Red Ale Humulus Nimbus Super Pale Ale Golden Ratio IPA Lake Monster London Homesick Ale Luchesa Lager Nunica Pine Ginger Peach Totally Roasted Blue Gold Hard Apple Gunga Din Lobo Lito Robert Earl Keen Honey Pils Towhead Lil&#39; Helper Monkadelic Day Hike Session Trailhead ISA Immersion Amber Evo IPA Presidential Pils Evolutionary IPA (2012) Persnickety Pale SoDo Brown Ale Immersion Amber Ale (2011) Evolutionary IPA (2011) Trailhead India Style Session Ale (2011) Panorama Wheat Ale Monarch Pilsner Snow King Pale Ale Zonker Stout OB-1 Organic Ale Snake River Lager Snake River Pale Ale Pako’s EyePA Dark Voyage Black IPA (2013) Wisconsin Amber Lake House Ghost Ship White IPA Mutiny IPA Wisconsin Amber (1998) Island Wheat Wisconsin Amber (2013) U.S. Pale Ale Supper Club Lager Golden One Arjuna Uroboros Mountain Rescue Pale Ale Post Time Kölsch Goose Island India Pale Ale Couch Select Lager Double D Blonde Festeroo Winter Ale Proxima IPA Double D Blonde (2013) 541 American Lager Alphadelic IPA Alphadelic IPA (2011) Double D Blonde (2011) Worthy IPA Easy Day Kolsch Lights Out Vanilla Cream Extra Stout Worthy IPA (2013) Worthy Pale Occidental Hefeweizen Occidental Dunkel Occidental Altbier Occidental Kölsch Loki Red Ale Peaches &amp; Cream Quaff India Style Session Ale Loki Red Ale (2013) Mjolnir Imperial IPA Fearless Scottish Ale Campside Session IPA Upland Wheat Ale Dragonfly IPA Tsunami IPA Humpback Blonde Ale Hawaiian Crow Porter Volcano Red Ale Mauna Kea Pale Ale Kaua&#39;i Golden Ale Sunset Amber Hapa Brown Ale Southern Cross Mound Builder IPA Amazon Princess IPA Farmer&#39;s Daughter Wheat People&#39;s Pilsner Quick WIT The Optimist Suicide Squeeze IPA Java the Hop Next Adventure Black IPA 3-Way IPA (2013) Tender Loving Empire NWPA Quick Wit Belgianesque Ale Sunrise Oatmeal Pale Ale Cavatica Stout 1811 Lager Vortex IPA Evil Owl Sucha Much IPA Lewbricator Wheat Dopplebock  City of the Sun Booming Rollers Oneida Aurora  Lomaland Fortunate Islands Black House Blazing World Smittytown Greenwood Beach Gatecrasher #001 Golden Amber Lager #002 American I.P.A. #003 Brown &amp; Robust Porter #004 Session I.P.A. Red Water Irish Style Red Mjöllnir Bear Butte Nut Brown Ale Easy Livin&#39; Summer Ale Canyon Cream Ale Pile O&#39;Dirt Porter 11th Hour IPA Monarch Classic American Wheat Sir William&#39;s English Brown Ale Lakefire Rye Pale Ale 1836 Summer&#39;s Wit More Cowbell First Stand Battle LIne Broken Bridge Brutus Lyric Ale Atalanta What the Butler Saw 1916 Shore Shiver Laughing Dog Cream Ale Two-One Niner Laughing Dog IPA Plum St. Porter Bozone HopZone IPA Bozone Hefe Weizen Bozone Select Amber Ale Aprè Shred Hemlock Double IPA West Portal Colorado Common Summer Ale Disconnected Red Arcus IPA Wavemaker Epitome Monkey Chased the Weasel 077XX Boat Beer Pleasure Town Pleasure Town IPA Snowshoe White Ale Kodiak Brown Ale Sockeye Red IPA Trail Head Hop Stalker Fresh Hop IPA Blood Orange Wit 8 Barrel Stone of Arbroath The Tradition El Hefe Speaks Penn Quarter Porter On the Wings of Armageddon The Corruption The Citizen The Public No Wake IPA Boathouse Blonde Cedar Point Pine Knob Pilsner Cal and Co. Black Cherry Porter Lazy Daze Lager Rochester Red Ale Milkshake Stout Cornerstone IPA Imperial Pumpkin Stout Dead-Eye DIPA Fisherman&#39;s IPA Fisherman&#39;s Pils Fisherman&#39;s Brew Noche Dulce Big Blue Van Weize Guy Fox Tail Gluten Free Ale Hop Box Imperial IPA Joseph James American Lager UFO Gingerland The Long Thaw White IPA Honey Cider Harpoon Summer Beer Harpoon IPA UFO Pumpkin Harpoon Octoberfest Harpoon IPA (2012) Harpoon Summer Beer (2012) UFO White Harpoon Summer Beer (2010) Harpoon IPA (2010) Palate Mallet Back East Porter Back East Golden Ale Misty Mountain IPA Back East Ale Stickin&#39; In My Rye Black Me Stout Killer Kolsch Missile IPA Bravo Four Point Striped Bass Pale Ale Cream Ale Tarasque Ananda India Pale Ale Tiny Bomb Might As Well IPL Saison Pamplemousse 2020 IPA Wolf Among Weeds IPA Better Weather IPA Point the Way IPA Golden Road Hefeweizen Heal the Bay IPA Cabrillo Kölsch Get Up Offa That Brown Burning Bush Smoked IPA Wolf Among Weeds IPA (2012) Point the Way IPA (2012) Golden Road Hefeweizen (2012) Skylight Kadigan Dammit Jim! Infamous IPA Hijack The Gilded Age Getaway Farm Girl Saison Pub Ale Ballistic Blonde Golden Fleece Smoking Mirror Tropicalia Athena Pursuit Half Full Bright Ale Montauk Light Enlighten Ale Cider Pail Ale Englishman Barrio Blanco Barrio Tucson Blonde Giant DIPA Dread Brown Ale Casinos IPA Old Detroit Batch 69 IPA Twisted Helles Summer Lager Bushwhacker Cider Weim-R-Iner Cherry Bomb Brontide Classique Hardcore Chimera Sobek &amp; Set Nuclear Winter Wet Hot American Wheat Ale Secret Stache Stout Fascist Pig Ale Cut Throat Pale Ale Threadless IPA Cut Throat Pale Ale (2011) Golden Wing Blonde Ale LuckenBock Texas Pale Ale (TPA) 6 String Saison Kol&#39; Beer Wagon Party Sky-Five Stargrazer Wonderstuff Ozark American Pale Ale Train Wreck Overgrown American Pale Ale Birdhouse Pale Ale Ozzy Resurrection Incredible Pedal IPA Graham Cracker Porter Rudie Session IPA Taster&#39;s Choice Modus Hoperandi Estival Cream Stout Vernal Minthe Stout Hibernal Vinifera Stout Autumnal Molé Stout Mexican Logger True Blonde Ale Euphoria Pale Ale ESB Special Ale Almanac IPA Milk Mustachio Stout Farmer&#39;s Tan Red Ale Fresh Cut Pilsner Summer Session Ale Cape Cod Red Long Trail IPA Long Trail Ale Double Bag Blackbeary Wheat Long Trail Ale (1) Commotion APA Southern Drawl Pale Lager Freeride APA Alaskan Amber Left of the Dial IPA Notch Session Pils Petit Mutant The Crusher Beelzebub Focal Banger Heady Topper Hydraulion Red 40 Mile IPA Big Chuck Barleywine Fresh Slice White IPA Montauk Summer Ale Driftwood Ale Let It Ride IPA Stir Crazy Winter Ale Sweet Yamma Jamma Ale Shenanigans Summer Ale Midnight Ryder Day Tripper Pale Ale Lost Sailor IPA Steel Rail Extra Pale Ale La Ferme Urbaine Farmhouse Ale Backyahd IPA Raincloud Robust Porter Barstool American Golden Ale Groupe G Pt. Bonita Rustic Lager Hill 88 Double IPA Longhop IPA Lucky Buck Leatherhead Red Cropduster Mid-American IPA Golden Frau Honey Wheat Cornstalker Dark Wheat Thrasher Session India Pale Ale Gutch English Style Mild Ale Hop Freak Louie&#39;s Demise Amber Ale Hop Happy Booyah Farmhouse Ale O-Gii Flaming Damsel Lager (2010) Louie’s Demise Immort-Ale (2010) Whitecap Wit Seiche Scottish Ale Truck Stop Honey Brown Ale Naked Pig Pale Ale El Chingon IPA Block Party Robust Porter Local Buzz Saint Archer White Ale Saint Archer IPA Saint Archer Pale Ale Saint Archer Blonde Rogue American Amber Ale Supergoose IPA Hale&#39;s Pale American Ale IPA &amp; a Half Ornery Amber Lager (2003) Tarnation California-Style Lager On the Count of 3 (2015) Summer Swelter Phantom Punch Winter Stout Hayride Autumn Ale Celsius Summer Ale (2012) Amber Road Pamola Xtra Pale Ale Stowaway IPA Blue Boots IPA American India Red Ale American Red Porter American Red Saison Colorado Red Ale Wachusett Light IPA Green Monsta IPA Wachusett IPA Strawberry White Larry Imperial IPA Wachusett Summer Country Pale Ale Wachusett Light IPA (2013) Pumpkan Wachusett Blueberry Ale Hefe Lemon Hefe Black Widmer Brothers Hefeweizen Provision Hop Farm IPA Adam&#39;s Stout American Hero Schweet Ale Irregardless IPA Our Legacy IPA Saranac Shandy Saranac Golden Pilsener (2003) Saranac Adirondack Light (2002) DAX Light (1998) Saranac Traditional Lager (2000) Pomegranate Wheat (2008) Blueberry Blonde Ale Saranac White IPA Saranac Summer Ale (2011) Saranac Pale Ale (12 oz.) Saranac Pale Ale (16 oz.) Porch Rocker Rebel IPA Cold Snap Samuel Adams Winter Lager Boston Lager Samuel Adams Octoberfest Samuel Adams Summer Ale Hopsmith Pale Lager Falling Down Brown Ale Resolution Rye Stout Plowshare Porter Old Forge Pumpkin Ale Endless Sun Ale Celestial Blonde Ale Overbite IPA T-Rail Pale Ale Endless Summer Ale (2011) Squatters Full Suspension Pale Ale Squatters Hop Rising Double IPA Devastator Double Bock Wasatch Ghostrider White IPA Wasatch Ghostrider White IPA (2014) Wasatch Apricot Hefeweizen Squatters Hop Rising Double IPA (2014) #9 Elder Betty Quarter Mile Double IPA Marblehead Hoptopus Double IPA Rodeo Rye Pale Ale Outlaw IPA North Fork Lager Payette Pale Ale Mutton Buster You&#39;re My Boy, Blue Last Stop IPA Rollin Dirty Red Ale Are Wheat There Yet? Thanksgiving Ale Double Dagger Imperial IPA Dagger Falls IPA Socktoberfest Hopnoxious Imperial IPA Barrel Aged Seven Devils Imperial Stout Boise Co-Op Two Score Ale Sockeye Belgian Style Summer Ale Sockeye Maibock Old Devil&#39;s Tooth Galena Golden Hell-Diver Pale Ale Woolybugger Wheat Power House Porter Winterfest Black Bay Milk Stout Atom Splitter Pale Ale Filthy Hoppin&#39; IPA Thunder Ann Iron Butt Red Ale Initial Point India Pale Ale Hot Date Ale Masked Bandit IPA Sweet Potato Ale Float Trip Ale Old Tom Porter Black Walnut Wheat McKinney Eddy Amber Ale Missouri Mule India Pale Ale Lost River Blonde Ale Monon Wheat Floyd&#39;s Folly Half Court IPA Appreciation Ale Toughcats IPA Tug Pale Ale Sexy Chaos Ace Hole American Pale Ale Cant Dog Imperial Pale Ale All Nighter Ale Banner American Rye Banner American Ale 12 Man Pale Ale Jacaranada Rye IPA Lil SIPA Hop Bomber Rye Pale Ale Voodoo Love Child White Magick of the Sun Wynona&#39;s Big Brown Ale Gran Met Good Vibes IPA Pilzilla Geary&#39;s Pale Ale Geary&#39;s Summer Ale GreyBeard™ IPA Pisgah Pale Ale County Line IPA Trauger Pilsner When Helles Freezes Over Morgan Street Oktoberfest Honey Wheat Black Bear Dark Lager Golden Pilsner Heyoka IPA Guest Lager Pony Pilsner Akari Shogun American Wheat Ale Meat Wave Over Ale Gossamer Golden Ale Daisy Cutter Pale Ale Just IPA Bronx Summer Pale Ale Bronx Black Pale Ale Bronx Pale Ale Dead Armadillo Amber Ale Farmer Ted&#39;s Cream Ale Firewater India Pale Ale White Zombie Ale King Winterbolt Winter Ale Farmer Ted&#39;s Farmhouse Cream Ale A Slice of Hefen Elevated IPA Sprocket Blonde Ale (2006) Sprocket Pale Ale (2006) Curious Traveler Shandy Iron Horse Pale Ale Stone&#39;s Throw IPA Wood Chipper India Pale Ale Big Sky IPA Scape Goat Pale Ale Montana Trout Slayer Ale Moose Drool Brown Ale Powder Hound Winter Ale Moose Drool Brown Ale (2011) Montana Trout Slayer Ale (2012) Big Sky IPA (2012) Summer Honey Scape Goat Pale Ale (2010) Montana Trout Slayer Ale (2009) Moose Drool Brown Ale (2009) Wick For Brains Nebraska India Pale Ale EOS Hefeweizen Brunette Nut Brown Ale Cardinal Pale Ale Uncle John&#39;s Apple Cherry Cider Uncle John&#39;s Apricot Apple Cider Draught Hard Apple Cider Be Hoppy IPA Category 3 IPA Hula Hoppie Session IPA Dirty Hippie Dark Wheat KelSo Nut Brown Lager KelSo India Pale Ale KelSo Pilsner The Great Return Hardywood Cream Ale Capital Trail Pale Ale Troopers Alley IPA Madra Allta Duluchan India Pale Ale Chaotic Double IPA Manzanita IPA Riverwalk Blonde Ale Gillespie Brown Ale Manzanita Pale Ale Cack-A-Lacky Leprechaun Lager White Cap White IPA Chai Ale Lucky Day IPA Terrace Hill Double IPA Catch 23 Westfield Octoberfest Pop&#39;s Old Fashioned Lager Charlie in the Rye Bleeding Buckeye Red Ale Aslan Kölsch Aslan IPA Aslan Amber Bellingham Beer Week 2013 Collaboration Local 5 Pale Ale Devils Head Red Ale Elephant Rock IPA Festivus (1) Manayunk Oktoberfest Belgian Style Session Ale Manayunk IPA Yunkin&#39; Punkin&#39; Summer Paradise Monk from the &#39;Yunk Schuylkill Punch Dreamin&#39; Double IPA Cleveland Beer Week 2013 Lift Off IPA Jam Session Hop Drop &#39;N Roll IPA Pumpkin Beast OktoberBeast Mad Beach Hog Wild India Pale Ale Devils Tramping Ground Tripel Hot Rod Red Hop Slayer Double IPA Pumpkin Ale Big Bowl Blonde Ale Phat Chance Hop Slayer Double IPA (2011) Wild Onion Summer Wit Jack Stout Wild Onion Pumpkin Ale (2010) Paddy Pale Ale The 12th Can™ Hilliard&#39;s Pils Hilliard&#39;s Blonde Hilliard&#39;s Amber Ale Hilliard&#39;s Saison Keeper (Current) Better Half Bohemian Export Lager Altus Bohemes Altbier Cherny Bock Czech Pilsner Viennese Lager Chickawawa Lemonale Barrel Aged Farmer Great River Golden Ale Dirty Blonde Chocolate Ale Dos Pistolas Owney Irish Style Red Ale Aaah Bock Lager Widespread Wit Roller Dam Red Ale 483 Pale Ale Hop A Potamus Double Dark Rye Pale Ale Farmer Brown Ale Big Cock IPA 40th Annual Bix Street Fest Copper Ale (Current) Redband Stout 483 Pale Ale (2010) Roller Dam Red Ale (2010) Mustang Sixty-Six Mustang &#39;33 Session &#39;33 (2011) Mustang Golden Ale Washita Wheat Maylani&#39;s Coconut Stout Oatmeal PSA Pre Flight Pilsner He Said Baltic-Style Porter He Said Belgian-Style Tripel Lower De Boom Fireside Chat Marooned On Hog Island Bitter American Hell or High Watermelon Wheat (2009) 21st Amendment Watermelon Wheat Beer (2006) 21st Amendment IPA (2006) Brew Free! or Die IPA (2008) Brew Free! or Die IPA (2009) Special Edition: Allies Win The War! Hop Crisis Bitter American (2011) Fireside Chat (2010) Back in Black Monk&#39;s Blood Brew Free! or Die IPA Hell or High Watermelon Wheat Pumpkin Patch Ale Crank Yanker IPA River Runners Pale Ale Pumpkin Patch Ale (2012) Mountain Fairy Raspberry Wheat Boater Beer Crank Yanker IPA (2011) PONTO S.I.P.A. Chronic Ale Swami&#39;s India Pale Ale Sly Fox Christmas Ale 2013 Grisette 360° India Pale Ale Helles Golden Lager Sly Fox Christmas Ale 2012 (2012) Odyssey Imperial IPA Oktoberfest Lager 113 IPA Dunkel Lager Royal Weisse Ale Pikeland Pils Phoenix Pale Ale Seven Gates Pale Ale Wolfman&#39;s Berliner Trolley Stop Stout Bitter Bitch Imperial IPA Poop Deck Porter Old Red Beard Amber Ale Lahaina Town Brown Pau Hana Pilsner Lemongrass Saison Aloha B’ak’tun Liquid Breadfruit Sobrehumano Palena&#39;ole La Perouse White Flyin&#39; HI.P.Hay Mana Wheat Bikini Blonde Lager CoCoNut Porter Big Swell IPA 12th Round RoughTail IPA Polar Night Stout Slow Hand Stout Mad Manatee IPA Killer Whale Cream Ale Duke&#39;s Cold Nose Brown Ale Autumn Winds Flying Jenny Extra Pale Ale Hazy Day Belgian-Style Wit Bring Back the Beach Blonde Ale Leaning Chimney Smoked Porter Flying Jenny Extra Pale Ale (2012) Flagship Ale 1800 Big Log Wheat (2012) Double Play Pilsner Brewerhood Brown Ale Last Call Imperial Amber Ale Pernicious Double IPA 6-4-3 Double Play Pilsner N Street Drive-In 50th Anniversary IPA 467 Ethan&#39;s Stout 1335 Wicked Snout 543 Skull Creek Fresh Hopped Pale Ale 1327 Pod&#39;s ESB 834 Happy As Ale Bermuda Triangle Ginger Beer Full Nelson Pale Ale Steel Wheels ESB Blue Mountain Classic Lager Full Nelson Pale Ale (2010) Starr Pils Northern Lights India Pale Ale Festie One Claw Westbrook Gose White Thai Westbrook IPA Monkey Fist IPA Shipyard Summer Ale Pumpkinhead Ale Shipyard Export Stout Ol&#39; Friend Stout Ol&#39; Friend (2012) Miner&#39;s Gold Vienna Lager Jessie&#39;s Garage Undun Blonde Ale CuDa Cascadian Dark Ale Old Grogham Imperial India Pale Ale Old Grogham Imperial India Pale Ale (2012) CuDa Cascadian Dark Ale (2012) Undun Blonde Ale (2012) Kentucky Kölsch Kentucky IPA G&#39;KNIGHT Ten Fidy Clem&#39;s Gold Lizzy&#39;s Red Orlison India Pale Lager Brünette Havanüther Agave Wheat SummerBright Ale Lucky U IPA Avalanche Ale Saison 88 Black IPA Santa Fe Irish Red Ale Santa Fe Oktoberfest Imperial Java Stout Freestyle Pilsner Happy Camper IPA Shark Bait Gator Tail Brown Ale Miami Vice IPA Big Rod Coconut Ale Oak Aged Cider Ginger Cider Schilling Hard Cider Green House India Pale Ale The One They Call Zoe Alteration Pale Dog Super G IPA 1881 California Red CAPT Black IPA Ruhstaller&#39;s Gilt Edge Lager Beer 1881 California Red Ale Oval Beach Blonde Ale Squeaky Bike Nut Brown Ale Dead Horse Amber Rocket Bike American Lager Johnny&#39;s American IPA Macon Progress Ale Macon History Ale Dusty Trail Pale Ale Damnesia Desolation IPA Wolverine Premium Lager Happy Cider Granny Smith Hard Apple Cider Dry Hard Apple Cider Sudice American Stout Parcae Belgian Style Pale Ale Norns Roggenbier Laimas Kölsch Style Ale Moirai India Pale Ale Lazy Monk Bohemian Pilsner Blown Out Brown Single Hop Ale Sawtooth Ale Pub Beer Hat Trick Hop IPA Yard Sale Amber Ale Weiss Trash Culture Sea Hag IPA Elm City Pilsner Atlantic Amber Ale (2004) 668 Neighbor of the Beast12 oz. Gandhi-Bot Double IPA (12 oz.) 668 Neighbor of the Beast (16 oz.) (2010) Gandhi-Bot Double IPA (16 oz.) (2010) Elm City Lager (2007) Atlantic Amber Ale (2007) Sea Hag IPA (Current) Dry Cider Dry Hard Cider Sand Island Lighthouse Lily Flagg Milk Stout Monkeynaut IPA Heavy Machinery IPA Series #1: Heavy Fist Fire Eagle IPA Peacemaker Pearl-Snap Black Thunder Kölsch 151 Tybee Island Blonde Savannah Brown Ale Helen&#39;s Blend Jack&#39;s Hard Cider Hazed &amp; Infused Hoopla Pale Ale Hazed &amp; Infused (2010) Cascadian Dark Ale Wheat the People Sanitas Saison Ale Sanitas Black IPA Beaver Logger Nectar of the Hops Sunshine Nectar Black Raspberry Nectar Yellow Collar Green Collar Habitus IPA Ex Umbris Rye Imperial Stout Patty&#39;s Chile Beer Colorojo Imperial Red Ale Wynkoop Pumpkin Ale Rocky Mountain Oyster Stout Belgorado Rail Yard Ale B3K Black Lager Silverback Pale Ale Rail Yard Ale (2009) First Press Magic Apple Quakertown Stout Greenbelt Farmhouse Ale Track 1 Amber Lager Schlafly Yakima Wheat Ale Schlafly Black Lager Schlafly IPA Schlafly American Brown Ale Schlafly Hefeweizen Schlafly Summer Lager Green Bullet Organic India Pale Ale Face Plant IPA Rhino Chasers Pilsner Paleo IPA Buck Snort Stout Station 33 Firehouse Red Slimy Pebble Pils Blur India Pale Ale Gateway Kolsch Style Ale Wee-Heavy-Er Scotch Ale 13 Rebels ESB Angry Orchard Apple Ginger Angry Orchard Crisp Apple No Limits Hefeweizen Honeyspot Road White IPA Road 2 Ruin Double IPA Workers Comp Saison Ol&#39; Factory Pils Na Zdraví Pilsner Nice Rack IPA East India Pale Ale Brooklyn Summer Ale Brooklyn Summer Ale (2011) Brooklyn Lager (16 oz.) Brooklyn Lager (12 oz.) Northern Hawk Owl Amber CEO Stout Will Power Pale Ale Longboard Island Lager SNO White Ale BRIK Irish Red Ale AXL Pale Ale Rustic Red Stimulator Pale Ale Old Town Ale Car 21 Cache La Porter O&#39;Fallon Pumpkin Beer 5 Day IPA O&#39;Fallon Wheach Marble Pilsner Marble India Pale Ale Jack Pine Savage Forest Fire Imperial Smoked Rye Bad Axe Imperial IPA Morning Wood Bark Bite IPA Trail Maker Pale Ale Action Man Lager Cranberry Blend Orignal Blend Big Nose Cotton Mouth Stump Knocker Pale Ale Midnight Oil Wild Night Pit Stop Chocolate Porter Pace Setter Belgian Style Wit Back in the Saddle Rye Pale Ale Dodgy Knight Imperial IPA TailGate Saison TailGate IPA TailGate Hefeweizen Blacktop Blonde Hoppy Bitch IPA Three Skulls Ale Pale Ale Dank IPA Dank IPA (2012) All American Blonde Ale All American Red Ale Chuli Stout Mother Ale Twister Creek India Pale Ale Single Engine Red Mirror Pond Pale Ale Dam Lager Red Clay IPA Hips Don&#39;t Lie Ride Again Pale Ale The Farmer&#39;s Daughter Bomber Mountain Amber Ale (2013) Indian Paintbrush IPA Saddle Bronc Brown Ale (2013) Wagon Box Wheat Beer Skilak Scottish Ale Peninsula Brewers Reserve (PBR) Sunken Island IPA Skilak Scottish Ale (2011) River North White Ale River North Ale 77 Fremont Select Spring Session IPA Fremont Organic Pale Ale Abominable Ale Harvest Ale Fremont Summer Ale Universale Pale Ale Interurban IPA Mo&#39;s Gose Colorado Native Colorado Native (2011) La Frontera Premium IPA Tejas Lager Number 22 Porter Big Bend Hefeweizen Terlingua Gold Descender IPA Sweet As Pacific Ale Nut Sack Imperial Brown Ale Pablo Beach Pale Ale Tampa Pale Ale Orange Grove Wheat Ale Side Kick Kölsch RecreationAle Pete&#39;s ESP Lager (1998) Pete&#39;s Wicked Summer Brew (1995) Pete&#39;s Wicked Bohemian Pilsner (1997) Pete&#39;s Wicked Pale Ale (1997) Pete&#39;s Wicked Summer Brew (2002) Pete&#39;s Wicked Summer Brew (1997) Pete&#39;s Wicked Summer Brew (1996) The Hole in Hadrian&#39;s Wall 33 Select Brown Ale Midwest Charm Farmhouse Ale Boji Blue Pale Ale Winter Games Select #32 Stout Boji Beach Golden Rye Ale South Ridge Amber Ale Summertime Ale Underachiever Big Island Shandy Preservation IPA Watership Brown Ale Gangway IPA Long Day Lager Orange Wheat Hangar 24 Helles Lager Big Elm IPA Gerry Dog Stout 413 Farmhouse Ale Good People Pale Ale Snake Handler Double IPA Coffee Oatmeal Stout Good People IPA Good People American Brown Ale Loose Cannon AARGHtoberfest! Davy Jones Lager Face Down Brown Ale Tempter IPA Bridal Veil Rye Pale Ale Rude Parrot IPA British Pale Ale (2010) British Pale Ale Ballz Deep Double IPA Des Moines IPA Capital Gold Golden Lager Farmer John&#39;s Multi-Grain Ale Topcutter India Pale Ale Field 41 Pale Ale Manhattan Gold Lager (1990) Mac&#39;s Highlander Pale Ale (2000) Mac&#39;s Scottish Style Amber Ale (2000) Wisco Disco Long Hammer IPA Copper Hook (2011) Dock Street Amber Beer (1992) Toxic Sludge Blue Point White IPA Blue Point Summer Ale Toasted Lager Loafin Bräu Old Elephant Foot IPA Deadicated Amber Kaleidoscope Collaboration 2012 California Sunshine Rye IPA Full Boar Scotch Ale Sunsplash Golden Ale (2004) Northern Lights Amber Ale Polar Pale Ale Chugach Session Ale Fairweather IPA Frankenlou&#39;s IPA Becky&#39;s Black Cat Porter Green Head IPA Plum Island Belgian White Newburyport Pale Ale Hop Abomination Apricot Blonde Dry Dock Hefeweizen Dry Dock Amber Ale THP White (2006) THP Amber (2006) THP Light (2006) THP Dark (2006) Special Amber Mystical Stout Bodacious Bock Ambitious Lager Tonganoxie Honey Wheat Oregon Trail Unfiltered Raspberry Wheat Annie&#39;s Amber Ale Woodchuck Amber Hard Cider Sea Dog Wild Blueberry Wheat Ale Gordon (2005) Ten Fidy Imperial Stout (2008) Ten Fidy Imperial Stout (2007) Old Chub (2008) Old Chub (2004) Old Chub (2003) Dale&#39;s Pale Ale (2008) Dale&#39;s Pale Ale (2006) Dale&#39;s Pale Ale (2004) Dale&#39;s Pale Ale (2003) Dale&#39;s Pale Ale (2002) Leroy (2005) Gordon Beer (2006) Carolina Lighthouse (2007) Carolina Blonde (2006) Carolina Blonde Light (2005) Choc Beer (2003) T-6 Red Ale (2004) Full Moon Belgian White Ale Desert Magic IPA Up River Light Full Moon Belgian White Ale (2007) Dry Heat Hefeweizen (2006) Hopluia (2004) Ace IPA P-51 Porter Cold Smoke Scotch Ale (2007) Double Haul IPA (2009) Double Haul IPA (2006) Eddy Out Pale Ale Double Haul IPA Cold Smoke Scotch Ale Archer&#39;s Ale (2004) Chester&#39;s Beer (2005) On-On Ale (2008) Sweet Georgia Brown Rich Man&#39;s IIPA Monkey Paw Oatmeal Pale Ale Trigger Blonde Ale Crabtree Oatmeal Stout Eclipse Black IPA Dottie Seattle Lager Mucho Aloha Hawaiian Pale Ale Nut Brown Ale White Ale Big River Pilsner House Brand IPA Hoppy Boy Snake Dog IPA Underdog Atlantic Lager Scotty K NA Bacon Brown Ale Golden State Ale Baltic Porter Siamese twin This Season&#39;s Blonde Independence Pass Ale Triangle India Pale Ale Triangle White Ale Triangle Belgian Golden Ale Bomb Lager (New Recipe) Bomb Lager (Old Recipe) Churchkey Pilsner Style Beer Jon Boat Coastal Ale I-10 IPA People&#39;s Pale Ale Rocket Girl Ninja Porter Shiva IPA Walter&#39;s Premium Pilsener Beer Floppin&#39; Crappie Tour de Nez Belgian IPA (Current) Roler Bock (Current) Black Adder IBA (Current) Very Noddy Lager (Current) Tule Duck Red Ale (Current) Original Orange Blossom Ale (Current) Black Noddy Lager (Current) Dolores River Hefeweizen Dolores River ESB Snaggletooth Double Pale Ale Dolores River Pale Ale Dolores River Dry Stout Dolores River Mild Inclined Plane Ale Jockamo IPA Purple Haze Abita Amber High Country Pilsner (Current) Epic IPA Golden Trout Pilsner Real McCoy Amber Ale (Current) Great Falls Select Pale Ale Beltian White White Water Wheat Grand Canyon American Pilsner Grand Canyon Sunset Amber Ale Black Iron India Pale Ale Yellowstone Golden Ale Tumbleweed IPA Lewis &amp; Clark Amber Ale Miner&#39;s Gold Hefeweizen Back Country Scottish Ale Dundee Summer Wheat Beer Greenville Pale Ale Second Wind Pale Ale Sunny Haze Sky High Rye Whitsun River Pig Pale Ale Oaky&#39;s Oatmeal Stout Black Star Double Hopped Golden Lager (24 oz.) Black Star Double Hopped Golden Lager (12 oz.) Pyramid Hefeweizen (2011) Haywire Hefeweizen (2010) Rumspringa Golden Bock Lancaster German Style Kölsch Common Sense Kentucky Common Ale Upstate I.P.W. Boneshaker Brown Ale Iron Mike Pale Ale Ponderosa IPA Liquid Amber Ale Wapiti Amber Ale Wyoming Pale Ale Wind River Blonde Ale Bear Ass Brown Red Mountain Ale Ice Pick Ale Mickey Finn&#39;s Amber Ale Heiner Brau Kölsch BrewFarm Select Golden Lager Pilsner Ukiah Heinnieweisse Weissebier Snapperhead IPA Moo Thunder Stout Porkslap Pale Ale Urban Wilderness Pale Ale&quot;</code></pre>
+<pre class="r"><code>#parse the individual words out into a data frame
+Beer_words_distinct = str_match_all(Beer_Words, &quot;(\\b\\w+\\b)&quot;)
+head(Beer_words_distinct, 15)</code></pre>
+<pre><code>## [[1]]
+##         [,1]                [,2]               
+##    [1,] &quot;Get&quot;               &quot;Get&quot;              
+##    [2,] &quot;Together&quot;          &quot;Together&quot;         
+##    [3,] &quot;Maggie&quot;            &quot;Maggie&quot;           
+##    [4,] &quot;s&quot;                 &quot;s&quot;                
+##    [5,] &quot;Leap&quot;              &quot;Leap&quot;             
+##    [6,] &quot;Wall&quot;              &quot;Wall&quot;             
+##    [7,] &quot;s&quot;                 &quot;s&quot;                
+##    [8,] &quot;End&quot;               &quot;End&quot;              
+##    [9,] &quot;Pumpion&quot;           &quot;Pumpion&quot;          
+##   [10,] &quot;Stronghold&quot;        &quot;Stronghold&quot;       
+##   [11,] &quot;Parapet&quot;           &quot;Parapet&quot;          
+##   [12,] &quot;ESB&quot;               &quot;ESB&quot;              
+##   [13,] &quot;Citra&quot;             &quot;Citra&quot;            
+##   [14,] &quot;Ass&quot;               &quot;Ass&quot;              
+##   [15,] &quot;Down&quot;              &quot;Down&quot;             
+##   [16,] &quot;London&quot;            &quot;London&quot;           
+##   [17,] &quot;Balling&quot;           &quot;Balling&quot;          
+##   [18,] &quot;35&quot;                &quot;35&quot;               
+##   [19,] &quot;K&quot;                 &quot;K&quot;                
+##   [20,] &quot;A&quot;                 &quot;A&quot;                
+##   [21,] &quot;Beer&quot;              &quot;Beer&quot;             
+##   [22,] &quot;Rules&quot;             &quot;Rules&quot;            
+##   [23,] &quot;are&quot;               &quot;are&quot;              
+##   [24,] &quot;Rules&quot;             &quot;Rules&quot;            
+##   [25,] &quot;Flesh&quot;             &quot;Flesh&quot;            
+##   [26,] &quot;Gourd&quot;             &quot;Gourd&quot;            
+##   [27,] &quot;n&quot;                 &quot;n&quot;                
+##   [28,] &quot;Sho&quot;               &quot;Sho&quot;              
+##   [29,] &quot;nuff&quot;              &quot;nuff&quot;             
+##   [30,] &quot;Bloody&quot;            &quot;Bloody&quot;           
+##   [31,] &quot;Show&quot;              &quot;Show&quot;             
+##   [32,] &quot;Rico&quot;              &quot;Rico&quot;             
+##   [33,] &quot;Sauvin&quot;            &quot;Sauvin&quot;           
+##   [34,] &quot;Coq&quot;               &quot;Coq&quot;              
+##   [35,] &quot;de&quot;                &quot;de&quot;               
+##   [36,] &quot;la&quot;                &quot;la&quot;               
+##   [37,] &quot;Marche&quot;            &quot;Marche&quot;           
+##   [38,] &quot;Kamen&quot;             &quot;Kamen&quot;            
+##   [39,] &quot;Knuddeln&quot;          &quot;Knuddeln&quot;         
+##   [40,] &quot;Pile&quot;              &quot;Pile&quot;             
+##   [41,] &quot;of&quot;                &quot;of&quot;               
+##   [42,] &quot;Face&quot;              &quot;Face&quot;             
+##   [43,] &quot;The&quot;               &quot;The&quot;              
+##   [44,] &quot;Brown&quot;             &quot;Brown&quot;            
+##   [45,] &quot;Note&quot;              &quot;Note&quot;             
+##   [46,] &quot;House&quot;             &quot;House&quot;            
+##   [47,] &quot;Lager&quot;             &quot;Lager&quot;            
+##   [48,] &quot;Leisure&quot;           &quot;Leisure&quot;          
+##   [49,] &quot;Time&quot;              &quot;Time&quot;             
+##   [50,] &quot;Excess&quot;            &quot;Excess&quot;           
+##   [51,] &quot;IPL&quot;               &quot;IPL&quot;              
+##   [52,] &quot;Hoponius&quot;          &quot;Hoponius&quot;         
+##   [53,] &quot;Union&quot;             &quot;Union&quot;            
+##   [54,] &quot;Calyptra&quot;          &quot;Calyptra&quot;         
+##   [55,] &quot;Habitus&quot;           &quot;Habitus&quot;          
+##   [56,] &quot;2014&quot;              &quot;2014&quot;             
+##   [57,] &quot;Solis&quot;             &quot;Solis&quot;            
+##   [58,] &quot;Jucundus&quot;          &quot;Jucundus&quot;         
+##   [59,] &quot;Habitus&quot;           &quot;Habitus&quot;          
+##   [60,] &quot;Grazias&quot;           &quot;Grazias&quot;          
+##   [61,] &quot;Claritas&quot;          &quot;Claritas&quot;         
+##   [62,] &quot;Park&quot;              &quot;Park&quot;             
+##   [63,] &quot;Westfalia&quot;         &quot;Westfalia&quot;        
+##   [64,] &quot;KSA&quot;               &quot;KSA&quot;              
+##   [65,] &quot;Villager&quot;          &quot;Villager&quot;         
+##   [66,] &quot;Blackbeard&quot;        &quot;Blackbeard&quot;       
+##   [67,] &quot;Rye&quot;               &quot;Rye&quot;              
+##   [68,] &quot;Knot&quot;              &quot;Knot&quot;             
+##   [69,] &quot;Dead&quot;              &quot;Dead&quot;             
+##   [70,] &quot;Arm&quot;               &quot;Arm&quot;              
+##   [71,] &quot;32&quot;                &quot;32&quot;               
+##   [72,] &quot;50&quot;                &quot;50&quot;               
+##   [73,] &quot;Kölsch&quot;            &quot;Kölsch&quot;           
+##   [74,] &quot;HopArt&quot;            &quot;HopArt&quot;           
+##   [75,] &quot;Boy&quot;               &quot;Boy&quot;              
+##   [76,] &quot;King&quot;              &quot;King&quot;             
+##   [77,] &quot;Denver&quot;            &quot;Denver&quot;           
+##   [78,] &quot;Pale&quot;              &quot;Pale&quot;             
+##   [79,] &quot;Ale&quot;               &quot;Ale&quot;              
+##   [80,] &quot;Artist&quot;            &quot;Artist&quot;           
+##   [81,] &quot;Series&quot;            &quot;Series&quot;           
+##   [82,] &quot;No&quot;                &quot;No&quot;               
+##   [83,] &quot;1&quot;                 &quot;1&quot;                
+##   [84,] &quot;Hibernation&quot;       &quot;Hibernation&quot;      
+##   [85,] &quot;Ale&quot;               &quot;Ale&quot;              
+##   [86,] &quot;Whitewater&quot;        &quot;Whitewater&quot;       
+##   [87,] &quot;Rumble&quot;            &quot;Rumble&quot;           
+##   [88,] &quot;Orabelle&quot;          &quot;Orabelle&quot;         
+##   [89,] &quot;Lasso&quot;             &quot;Lasso&quot;            
+##   [90,] &quot;Yeti&quot;              &quot;Yeti&quot;             
+##   [91,] &quot;Imperial&quot;          &quot;Imperial&quot;         
+##   [92,] &quot;Stout&quot;             &quot;Stout&quot;            
+##   [93,] &quot;Colette&quot;           &quot;Colette&quot;          
+##   [94,] &quot;Titan&quot;             &quot;Titan&quot;            
+##   [95,] &quot;IPA&quot;               &quot;IPA&quot;              
+##   [96,] &quot;Peck&quot;              &quot;Peck&quot;             
+##   [97,] &quot;s&quot;                 &quot;s&quot;                
+##   [98,] &quot;Porter&quot;            &quot;Porter&quot;           
+##   [99,] &quot;Reactor&quot;           &quot;Reactor&quot;          
+##  [100,] &quot;Mr&quot;                &quot;Mr&quot;               
+##  [101,] &quot;Orange&quot;            &quot;Orange&quot;           
+##  [102,] &quot;Dark&quot;              &quot;Dark&quot;             
+##  [103,] &quot;Star&quot;              &quot;Star&quot;             
+##  [104,] &quot;Ryecoe&quot;            &quot;Ryecoe&quot;           
+##  [105,] &quot;G&quot;                 &quot;G&quot;                
+##  [106,] &quot;B&quot;                 &quot;B&quot;                
+##  [107,] &quot;Russo&quot;             &quot;Russo&quot;            
+##  [108,] &quot;s&quot;                 &quot;s&quot;                
+##  [109,] &quot;Italian&quot;           &quot;Italian&quot;          
+##  [110,] &quot;Pistachio&quot;         &quot;Pistachio&quot;        
+##  [111,] &quot;Pale&quot;              &quot;Pale&quot;             
+##  [112,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [113,] &quot;Belfort&quot;           &quot;Belfort&quot;          
+##  [114,] &quot;Star&quot;              &quot;Star&quot;             
+##  [115,] &quot;Runner&quot;            &quot;Runner&quot;           
+##  [116,] &quot;Tart&quot;              &quot;Tart&quot;             
+##  [117,] &quot;Side&quot;              &quot;Side&quot;             
+##  [118,] &quot;of&quot;                &quot;of&quot;               
+##  [119,] &quot;the&quot;               &quot;the&quot;              
+##  [120,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [121,] &quot;Linnaeus&quot;          &quot;Linnaeus&quot;         
+##  [122,] &quot;Mango&quot;             &quot;Mango&quot;            
+##  [123,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [124,] &quot;Beasts&quot;            &quot;Beasts&quot;           
+##  [125,] &quot;A&quot;                 &quot;A&quot;                
+##  [126,] &quot;Burnin&quot;            &quot;Burnin&quot;           
+##  [127,] &quot;Verdun&quot;            &quot;Verdun&quot;           
+##  [128,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [129,] &quot;Aged&quot;              &quot;Aged&quot;             
+##  [130,] &quot;Triomphe&quot;          &quot;Triomphe&quot;         
+##  [131,] &quot;Cherry&quot;            &quot;Cherry&quot;           
+##  [132,] &quot;Doppelbock&quot;        &quot;Doppelbock&quot;       
+##  [133,] &quot;Tropical&quot;          &quot;Tropical&quot;         
+##  [134,] &quot;Saison&quot;            &quot;Saison&quot;           
+##  [135,] &quot;Beach&quot;             &quot;Beach&quot;            
+##  [136,] &quot;Patrol&quot;            &quot;Patrol&quot;           
+##  [137,] &quot;Nuit&quot;              &quot;Nuit&quot;             
+##  [138,] &quot;Serpent&quot;           &quot;Serpent&quot;          
+##  [139,] &quot;Paris&quot;             &quot;Paris&quot;            
+##  [140,] &quot;The&quot;               &quot;The&quot;              
+##  [141,] &quot;Grand&quot;             &quot;Grand&quot;            
+##  [142,] &quot;Army&quot;              &quot;Army&quot;             
+##  [143,] &quot;Acidulated&quot;        &quot;Acidulated&quot;       
+##  [144,] &quot;Trip&quot;              &quot;Trip&quot;             
+##  [145,] &quot;Root&quot;              &quot;Root&quot;             
+##  [146,] &quot;Stock&quot;             &quot;Stock&quot;            
+##  [147,] &quot;Mind&quot;              &quot;Mind&quot;             
+##  [148,] &quot;Games&quot;             &quot;Games&quot;            
+##  [149,] &quot;Sous&quot;              &quot;Sous&quot;             
+##  [150,] &quot;Chef&quot;              &quot;Chef&quot;             
+##  [151,] &quot;Dubbelicious&quot;      &quot;Dubbelicious&quot;     
+##  [152,] &quot;Psychopomp&quot;        &quot;Psychopomp&quot;       
+##  [153,] &quot;Fat&quot;               &quot;Fat&quot;              
+##  [154,] &quot;Paczki&quot;            &quot;Paczki&quot;           
+##  [155,] &quot;Earth&quot;             &quot;Earth&quot;            
+##  [156,] &quot;Like&quot;              &quot;Like&quot;             
+##  [157,] &quot;Planets&quot;           &quot;Planets&quot;          
+##  [158,] &quot;Ski&quot;               &quot;Ski&quot;              
+##  [159,] &quot;Patrol&quot;            &quot;Patrol&quot;           
+##  [160,] &quot;Viking&quot;            &quot;Viking&quot;           
+##  [161,] &quot;Ice&quot;               &quot;Ice&quot;              
+##  [162,] &quot;Hole&quot;              &quot;Hole&quot;             
+##  [163,] &quot;Rye&quot;               &quot;Rye&quot;              
+##  [164,] &quot;Porter&quot;            &quot;Porter&quot;           
+##  [165,] &quot;Wizard&quot;            &quot;Wizard&quot;           
+##  [166,] &quot;Burial&quot;            &quot;Burial&quot;           
+##  [167,] &quot;Ground&quot;            &quot;Ground&quot;           
+##  [168,] &quot;Smoky&quot;             &quot;Smoky&quot;            
+##  [169,] &quot;Wheat&quot;             &quot;Wheat&quot;            
+##  [170,] &quot;BRIPA&quot;             &quot;BRIPA&quot;            
+##  [171,] &quot;Mela&quot;              &quot;Mela&quot;             
+##  [172,] &quot;W&quot;                 &quot;W&quot;                
+##  [173,] &quot;I&quot;                 &quot;I&quot;                
+##  [174,] &quot;P&quot;                 &quot;P&quot;                
+##  [175,] &quot;A&quot;                 &quot;A&quot;                
+##  [176,] &quot;Snappa&quot;            &quot;Snappa&quot;           
+##  [177,] &quot;Pepper&quot;            &quot;Pepper&quot;           
+##  [178,] &quot;in&quot;                &quot;in&quot;               
+##  [179,] &quot;the&quot;               &quot;the&quot;              
+##  [180,] &quot;Rye&quot;               &quot;Rye&quot;              
+##  [181,] &quot;Moe&quot;               &quot;Moe&quot;              
+##  [182,] &quot;Lasses&quot;            &quot;Lasses&quot;           
+##  [183,] &quot;Pumpkin&quot;           &quot;Pumpkin&quot;          
+##  [184,] &quot;Tart&quot;              &quot;Tart&quot;             
+##  [185,] &quot;Undertaker&quot;        &quot;Undertaker&quot;       
+##  [186,] &quot;Undertaker&quot;        &quot;Undertaker&quot;       
+##  [187,] &quot;2014&quot;              &quot;2014&quot;             
+##  [188,] &quot;Coq&quot;               &quot;Coq&quot;              
+##  [189,] &quot;D&quot;                 &quot;D&quot;                
+##  [190,] &quot;Or&quot;                &quot;Or&quot;               
+##  [191,] &quot;North&quot;             &quot;North&quot;            
+##  [192,] &quot;French&quot;            &quot;French&quot;           
+##  [193,] &quot;Agent&quot;             &quot;Agent&quot;            
+##  [194,] &quot;a&quot;                 &quot;a&quot;                
+##  [195,] &quot;Deux&quot;              &quot;Deux&quot;             
+##  [196,] &quot;Belgian&quot;           &quot;Belgian&quot;          
+##  [197,] &quot;Wit&quot;               &quot;Wit&quot;              
+##  [198,] &quot;Pothole&quot;           &quot;Pothole&quot;          
+##  [199,] &quot;Stout&quot;             &quot;Stout&quot;            
+##  [200,] &quot;Tree&quot;              &quot;Tree&quot;             
+##  [201,] &quot;Bucket&quot;            &quot;Bucket&quot;           
+##  [202,] &quot;Le&quot;                &quot;Le&quot;               
+##  [203,] &quot;Flaneur&quot;           &quot;Flaneur&quot;          
+##  [204,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [205,] &quot;Maize&quot;             &quot;Maize&quot;            
+##  [206,] &quot;Blueberry&quot;         &quot;Blueberry&quot;        
+##  [207,] &quot;Trebuchet&quot;         &quot;Trebuchet&quot;        
+##  [208,] &quot;Double&quot;            &quot;Double&quot;           
+##  [209,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [210,] &quot;Contemplation&quot;     &quot;Contemplation&quot;    
+##  [211,] &quot;Black&quot;             &quot;Black&quot;            
+##  [212,] &quot;Rabbit&quot;            &quot;Rabbit&quot;           
+##  [213,] &quot;Zaison&quot;            &quot;Zaison&quot;           
+##  [214,] &quot;Vivant&quot;            &quot;Vivant&quot;           
+##  [215,] &quot;Tripel&quot;            &quot;Tripel&quot;           
+##  [216,] &quot;Tart&quot;              &quot;Tart&quot;             
+##  [217,] &quot;Side&quot;              &quot;Side&quot;             
+##  [218,] &quot;of&quot;                &quot;of&quot;               
+##  [219,] &quot;the&quot;               &quot;the&quot;              
+##  [220,] &quot;Moon&quot;              &quot;Moon&quot;             
+##  [221,] &quot;Big&quot;               &quot;Big&quot;              
+##  [222,] &quot;Red&quot;               &quot;Red&quot;              
+##  [223,] &quot;Coq&quot;               &quot;Coq&quot;              
+##  [224,] &quot;Hubris&quot;            &quot;Hubris&quot;           
+##  [225,] &quot;Quadrupel&quot;         &quot;Quadrupel&quot;        
+##  [226,] &quot;Anniversary&quot;       &quot;Anniversary&quot;      
+##  [227,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [228,] &quot;Plow&quot;              &quot;Plow&quot;             
+##  [229,] &quot;Horse&quot;             &quot;Horse&quot;            
+##  [230,] &quot;Belgian&quot;           &quot;Belgian&quot;          
+##  [231,] &quot;Style&quot;             &quot;Style&quot;            
+##  [232,] &quot;Imperial&quot;          &quot;Imperial&quot;         
+##  [233,] &quot;Stout&quot;             &quot;Stout&quot;            
+##  [234,] &quot;Escoffier&quot;         &quot;Escoffier&quot;        
+##  [235,] &quot;Bretta&quot;            &quot;Bretta&quot;           
+##  [236,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [237,] &quot;Contemplation&quot;     &quot;Contemplation&quot;    
+##  [238,] &quot;2012&quot;              &quot;2012&quot;             
+##  [239,] &quot;Vivant&quot;            &quot;Vivant&quot;           
+##  [240,] &quot;Belgian&quot;           &quot;Belgian&quot;          
+##  [241,] &quot;Style&quot;             &quot;Style&quot;            
+##  [242,] &quot;Imperial&quot;          &quot;Imperial&quot;         
+##  [243,] &quot;Stout&quot;             &quot;Stout&quot;            
+##  [244,] &quot;2012&quot;              &quot;2012&quot;             
+##  [245,] &quot;Big&quot;               &quot;Big&quot;              
+##  [246,] &quot;Red&quot;               &quot;Red&quot;              
+##  [247,] &quot;Coq&quot;               &quot;Coq&quot;              
+##  [248,] &quot;2012&quot;              &quot;2012&quot;             
+##  [249,] &quot;Zaison&quot;            &quot;Zaison&quot;           
+##  [250,] &quot;2012&quot;              &quot;2012&quot;             
+##  [251,] &quot;Vivant&quot;            &quot;Vivant&quot;           
+##  [252,] &quot;Tripel&quot;            &quot;Tripel&quot;           
+##  [253,] &quot;2012&quot;              &quot;2012&quot;             
+##  [254,] &quot;Trebuchet&quot;         &quot;Trebuchet&quot;        
+##  [255,] &quot;Double&quot;            &quot;Double&quot;           
+##  [256,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [257,] &quot;2012&quot;              &quot;2012&quot;             
+##  [258,] &quot;Kludde&quot;            &quot;Kludde&quot;           
+##  [259,] &quot;Farm&quot;              &quot;Farm&quot;             
+##  [260,] &quot;Hand&quot;              &quot;Hand&quot;             
+##  [261,] &quot;Solitude&quot;          &quot;Solitude&quot;         
+##  [262,] &quot;Triomphe&quot;          &quot;Triomphe&quot;         
+##  [263,] &quot;Sparkle&quot;           &quot;Sparkle&quot;          
+##  [264,] &quot;North&quot;             &quot;North&quot;            
+##  [265,] &quot;45&quot;                &quot;45&quot;               
+##  [266,] &quot;Amber&quot;             &quot;Amber&quot;            
+##  [267,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [268,] &quot;Horny&quot;             &quot;Horny&quot;            
+##  [269,] &quot;Monk&quot;              &quot;Monk&quot;             
+##  [270,] &quot;Mind&quot;              &quot;Mind&quot;             
+##  [271,] &quot;s&quot;                 &quot;s&quot;                
+##  [272,] &quot;Eye&quot;               &quot;Eye&quot;              
+##  [273,] &quot;PA&quot;                &quot;PA&quot;               
+##  [274,] &quot;Nordskye&quot;          &quot;Nordskye&quot;         
+##  [275,] &quot;North&quot;             &quot;North&quot;            
+##  [276,] &quot;Third&quot;             &quot;Third&quot;            
+##  [277,] &quot;Stout&quot;             &quot;Stout&quot;            
+##  [278,] &quot;Honey&quot;             &quot;Honey&quot;            
+##  [279,] &quot;Lav&quot;               &quot;Lav&quot;              
+##  [280,] &quot;Coconut&quot;           &quot;Coconut&quot;          
+##  [281,] &quot;Brown&quot;             &quot;Brown&quot;            
+##  [282,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [283,] &quot;51K&quot;               &quot;51K&quot;              
+##  [284,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [285,] &quot;Grand&quot;             &quot;Grand&quot;            
+##  [286,] &quot;Rabbits&quot;           &quot;Rabbits&quot;          
+##  [287,] &quot;Hotbox&quot;            &quot;Hotbox&quot;           
+##  [288,] &quot;Brown&quot;             &quot;Brown&quot;            
+##  [289,] &quot;Gold&quot;              &quot;Gold&quot;             
+##  [290,] &quot;Black&quot;             &quot;Black&quot;            
+##  [291,] &quot;98&quot;                &quot;98&quot;               
+##  [292,] &quot;Problems&quot;          &quot;Problems&quot;         
+##  [293,] &quot;Cuz&quot;               &quot;Cuz&quot;              
+##  [294,] &quot;A&quot;                 &quot;A&quot;                
+##  [295,] &quot;Hop&quot;               &quot;Hop&quot;              
+##  [296,] &quot;Ain&quot;               &quot;Ain&quot;              
+##  [297,] &quot;t&quot;                 &quot;t&quot;                
+##  [298,] &quot;One&quot;               &quot;One&quot;              
+##  [299,] &quot;Veteran&quot;           &quot;Veteran&quot;          
+##  [300,] &quot;s&quot;                 &quot;s&quot;                
+##  [301,] &quot;Pale&quot;              &quot;Pale&quot;             
+##  [302,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [303,] &quot;VPA&quot;               &quot;VPA&quot;              
+##  [304,] &quot;Grapefruit&quot;        &quot;Grapefruit&quot;       
+##  [305,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [306,] &quot;Train&quot;             &quot;Train&quot;            
+##  [307,] &quot;Hopper&quot;            &quot;Hopper&quot;           
+##  [308,] &quot;Edward&quot;            &quot;Edward&quot;           
+##  [309,] &quot;s&quot;                 &quot;s&quot;                
+##  [310,] &quot;Portly&quot;            &quot;Portly&quot;           
+##  [311,] &quot;Brown&quot;             &quot;Brown&quot;            
+##  [312,] &quot;Dirty&quot;             &quot;Dirty&quot;            
+##  [313,] &quot;Bastard&quot;           &quot;Bastard&quot;          
+##  [314,] &quot;Centennial&quot;        &quot;Centennial&quot;       
+##  [315,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [316,] &quot;All&quot;               &quot;All&quot;              
+##  [317,] &quot;Day&quot;               &quot;Day&quot;              
+##  [318,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [319,] &quot;Deflator&quot;          &quot;Deflator&quot;         
+##  [320,] &quot;Hinchtown&quot;         &quot;Hinchtown&quot;        
+##  [321,] &quot;Hammer&quot;            &quot;Hammer&quot;           
+##  [322,] &quot;Down&quot;              &quot;Down&quot;             
+##  [323,] &quot;Half&quot;              &quot;Half&quot;             
+##  [324,] &quot;Cycle&quot;             &quot;Cycle&quot;            
+##  [325,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [326,] &quot;Cafe&quot;              &quot;Cafe&quot;             
+##  [327,] &quot;Leche&quot;             &quot;Leche&quot;            
+##  [328,] &quot;Damascene&quot;         &quot;Damascene&quot;        
+##  [329,] &quot;Apricot&quot;           &quot;Apricot&quot;          
+##  [330,] &quot;Sour&quot;              &quot;Sour&quot;             
+##  [331,] &quot;Csar&quot;              &quot;Csar&quot;             
+##  [332,] &quot;Klingon&quot;           &quot;Klingon&quot;          
+##  [333,] &quot;Warnog&quot;            &quot;Warnog&quot;           
+##  [334,] &quot;Roggen&quot;            &quot;Roggen&quot;           
+##  [335,] &quot;Dunkel&quot;            &quot;Dunkel&quot;           
+##  [336,] &quot;Overlord&quot;          &quot;Overlord&quot;         
+##  [337,] &quot;Imperial&quot;          &quot;Imperial&quot;         
+##  [338,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [339,] &quot;Alloy&quot;             &quot;Alloy&quot;            
+##  [340,] &quot;Rivet&quot;             &quot;Rivet&quot;            
+##  [341,] &quot;Irish&quot;             &quot;Irish&quot;            
+##  [342,] &quot;Red&quot;               &quot;Red&quot;              
+##  [343,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [344,] &quot;3&quot;                 &quot;3&quot;                
+##  [345,] &quot;Gear&quot;              &quot;Gear&quot;             
+##  [346,] &quot;Robust&quot;            &quot;Robust&quot;           
+##  [347,] &quot;Porter&quot;            &quot;Porter&quot;           
+##  [348,] &quot;Circuit&quot;           &quot;Circuit&quot;          
+##  [349,] &quot;Bohemian&quot;          &quot;Bohemian&quot;         
+##  [350,] &quot;Pilsner&quot;           &quot;Pilsner&quot;          
+##  [351,] &quot;Saucy&quot;             &quot;Saucy&quot;            
+##  [352,] &quot;Intruder&quot;          &quot;Intruder&quot;         
+##  [353,] &quot;Insert&quot;            &quot;Insert&quot;           
+##  [354,] &quot;Hop&quot;               &quot;Hop&quot;              
+##  [355,] &quot;Reference&quot;         &quot;Reference&quot;        
+##  [356,] &quot;Thai&quot;              &quot;Thai&quot;             
+##  [357,] &quot;p&quot;                 &quot;p&quot;                
+##  [358,] &quot;a&quot;                 &quot;a&quot;                
+##  [359,] &quot;Citra&quot;             &quot;Citra&quot;            
+##  [360,] &quot;Faced&quot;             &quot;Faced&quot;            
+##  [361,] &quot;Pole&quot;              &quot;Pole&quot;             
+##  [362,] &quot;Barn&quot;              &quot;Barn&quot;             
+##  [363,] &quot;Stout&quot;             &quot;Stout&quot;            
+##  [364,] &quot;Pale&quot;              &quot;Pale&quot;             
+##  [365,] &quot;Yoshi&quot;             &quot;Yoshi&quot;            
+##  [366,] &quot;s&quot;                 &quot;s&quot;                
+##  [367,] &quot;Nectar&quot;            &quot;Nectar&quot;           
+##  [368,] &quot;Feel&quot;              &quot;Feel&quot;             
+##  [369,] &quot;Like&quot;              &quot;Like&quot;             
+##  [370,] &quot;Maplin&quot;            &quot;Maplin&quot;           
+##  [371,] &quot;Love&quot;              &quot;Love&quot;             
+##  [372,] &quot;Father&quot;            &quot;Father&quot;           
+##  [373,] &quot;s&quot;                 &quot;s&quot;                
+##  [374,] &quot;Beer&quot;              &quot;Beer&quot;             
+##  [375,] &quot;The&quot;               &quot;The&quot;              
+##  [376,] &quot;26th&quot;              &quot;26th&quot;             
+##  [377,] &quot;The&quot;               &quot;The&quot;              
+##  [378,] &quot;Gadget&quot;            &quot;Gadget&quot;           
+##  [379,] &quot;Tribute&quot;           &quot;Tribute&quot;          
+##  [380,] &quot;Wrath&quot;             &quot;Wrath&quot;            
+##  [381,] &quot;of&quot;                &quot;of&quot;               
+##  [382,] &quot;Pele&quot;              &quot;Pele&quot;             
+##  [383,] &quot;Black&quot;             &quot;Black&quot;            
+##  [384,] &quot;Beer&quot;              &quot;Beer&quot;             
+##  [385,] &quot;d&quot;                 &quot;d&quot;                
+##  [386,] &quot;Mr&quot;                &quot;Mr&quot;               
+##  [387,] &quot;Tea&quot;               &quot;Tea&quot;              
+##  [388,] &quot;Pale&quot;              &quot;Pale&quot;             
+##  [389,] &quot;Alement&quot;           &quot;Alement&quot;          
+##  [390,] &quot;Hopkick&quot;           &quot;Hopkick&quot;          
+##  [391,] &quot;Dropkick&quot;          &quot;Dropkick&quot;         
+##  [392,] &quot;Kreamed&quot;           &quot;Kreamed&quot;          
+##  [393,] &quot;Corn&quot;              &quot;Corn&quot;             
+##  [394,] &quot;Coconoats&quot;         &quot;Coconoats&quot;        
+##  [395,] &quot;Joey&quot;              &quot;Joey&quot;             
+##  [396,] &quot;Wheat&quot;             &quot;Wheat&quot;            
+##  [397,] &quot;3&quot;                 &quot;3&quot;                
+##  [398,] &quot;33&quot;                &quot;33&quot;               
+##  [399,] &quot;Black&quot;             &quot;Black&quot;            
+##  [400,] &quot;IPA&quot;               &quot;IPA&quot;              
+##  [401,] &quot;MCA&quot;               &quot;MCA&quot;              
+##  [402,] &quot;Tip&quot;               &quot;Tip&quot;              
+##  [403,] &quot;Off&quot;               &quot;Off&quot;              
+##  [404,] &quot;Java&quot;              &quot;Java&quot;             
+##  [405,] &quot;Mac&quot;               &quot;Mac&quot;              
+##  [406,] &quot;Cowbell&quot;           &quot;Cowbell&quot;          
+##  [407,] &quot;Hop&quot;               &quot;Hop&quot;              
+##  [408,] &quot;Up&quot;                &quot;Up&quot;               
+##  [409,] &quot;Offa&quot;              &quot;Offa&quot;             
+##  [410,] &quot;That&quot;              &quot;That&quot;             
+##  [411,] &quot;Brett&quot;             &quot;Brett&quot;            
+##  [412,] &quot;2014&quot;              &quot;2014&quot;             
+##  [413,] &quot;PV&quot;                &quot;PV&quot;               
+##  [414,] &quot;Muckle&quot;            &quot;Muckle&quot;           
+##  [415,] &quot;2013&quot;              &quot;2013&quot;             
+##  [416,] &quot;Bourbon&quot;           &quot;Bourbon&quot;          
+##  [417,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [418,] &quot;Batch&quot;             &quot;Batch&quot;            
+##  [419,] &quot;666&quot;               &quot;666&quot;              
+##  [420,] &quot;Sympathy&quot;          &quot;Sympathy&quot;         
+##  [421,] &quot;for&quot;               &quot;for&quot;              
+##  [422,] &quot;the&quot;               &quot;the&quot;              
+##  [423,] &quot;Devil&quot;             &quot;Devil&quot;            
+##  [424,] &quot;Whip&quot;              &quot;Whip&quot;             
+##  [425,] &quot;Fight&quot;             &quot;Fight&quot;            
+##  [426,] &quot;Port&quot;              &quot;Port&quot;             
+##  [427,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [428,] &quot;Wee&quot;               &quot;Wee&quot;              
+##  [429,] &quot;Mac&quot;               &quot;Mac&quot;              
+##  [430,] &quot;Fistful&quot;           &quot;Fistful&quot;          
+##  [431,] &quot;Of&quot;                &quot;Of&quot;               
+##  [432,] &quot;Hops&quot;              &quot;Hops&quot;             
+##  [433,] &quot;Red&quot;               &quot;Red&quot;              
+##  [434,] &quot;Fistful&quot;           &quot;Fistful&quot;          
+##  [435,] &quot;of&quot;                &quot;of&quot;               
+##  [436,] &quot;Hops&quot;              &quot;Hops&quot;             
+##  [437,] &quot;Orange&quot;            &quot;Orange&quot;           
+##  [438,] &quot;Fistful&quot;           &quot;Fistful&quot;          
+##  [439,] &quot;Of&quot;                &quot;Of&quot;               
+##  [440,] &quot;Hops&quot;              &quot;Hops&quot;             
+##  [441,] &quot;Blue&quot;              &quot;Blue&quot;             
+##  [442,] &quot;Fistful&quot;           &quot;Fistful&quot;          
+##  [443,] &quot;of&quot;                &quot;of&quot;               
+##  [444,] &quot;Hops&quot;              &quot;Hops&quot;             
+##  [445,] &quot;Green&quot;             &quot;Green&quot;            
+##  [446,] &quot;30&quot;                &quot;30&quot;               
+##  [447,] &quot;Min&quot;               &quot;Min&quot;              
+##  [448,] &quot;Coma&quot;              &quot;Coma&quot;             
+##  [449,] &quot;Wee&quot;               &quot;Wee&quot;              
+##  [450,] &quot;Muckle&quot;            &quot;Muckle&quot;           
+##  [451,] &quot;Royal&quot;             &quot;Royal&quot;            
+##  [452,] &quot;Brat&quot;              &quot;Brat&quot;             
+##  [453,] &quot;Grapefruit&quot;        &quot;Grapefruit&quot;       
+##  [454,] &quot;Jungle&quot;            &quot;Jungle&quot;           
+##  [455,] &quot;GFJ&quot;               &quot;GFJ&quot;              
+##  [456,] &quot;Osiris&quot;            &quot;Osiris&quot;           
+##  [457,] &quot;Pale&quot;              &quot;Pale&quot;             
+##  [458,] &quot;Ale&quot;               &quot;Ale&quot;              
+##  [459,] &quot;Bourbon&quot;           &quot;Bourbon&quot;          
+##  [460,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [461,] &quot;Aged&quot;              &quot;Aged&quot;             
+##  [462,] &quot;Timmie&quot;            &quot;Timmie&quot;           
+##  [463,] &quot;Stupid&quot;            &quot;Stupid&quot;           
+##  [464,] &quot;Sexy&quot;              &quot;Sexy&quot;             
+##  [465,] &quot;Flanders&quot;          &quot;Flanders&quot;         
+##  [466,] &quot;Bourbon&quot;           &quot;Bourbon&quot;          
+##  [467,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [468,] &quot;Cowbell&quot;           &quot;Cowbell&quot;          
+##  [469,] &quot;Popcorn&quot;           &quot;Popcorn&quot;          
+##  [470,] &quot;Pilsner&quot;           &quot;Pilsner&quot;          
+##  [471,] &quot;Ring&quot;              &quot;Ring&quot;             
+##  [472,] &quot;of&quot;                &quot;of&quot;               
+##  [473,] &quot;Dingle&quot;            &quot;Dingle&quot;           
+##  [474,] &quot;Bourbon&quot;           &quot;Bourbon&quot;          
+##  [475,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [476,] &quot;Wee&quot;               &quot;Wee&quot;              
+##  [477,] &quot;Mac&quot;               &quot;Mac&quot;              
+##  [478,] &quot;Bourbon&quot;           &quot;Bourbon&quot;          
+##  [479,] &quot;Barrel&quot;            &quot;Barrel&quot;           
+##  [480,] &quot;Johan&quot;             &quot;Johan&quot;            
+##  [481,] &quot;The&quot;               &quot;The&quot;              
+##  [482,] &quot;Deuce&quot;             &quot;Deuce&quot;            
+##  [483,] &quot;The&quot;               &quot;The&quot;              
+##  [484,] &quot;Velvet&quot;            &quot;Velvet&quot;           
+##  [485,] &quot;Fog&quot;               &quot;Fog&quot;              
+##  [486,] &quot;Sun&quot;               &quot;Sun&quot;              
+##  [487,] &quot;King&quot;              &quot;King&quot;             
+##  [488,] &quot;Oktoberfest&quot;       &quot;Oktoberfest&quot;      
+##  [489,] &quot;Indianapolis&quot;      &quot;Indianapolis&quot;     
+##  [490,] &quot;Indians&quot;           &quot;Indians&quot;          
+##  [491,] &quot;Lager&quot;             &quot;Lager&quot;            
+##  [492,] &quot;Indians&quot;           &quot;Indians&quot;          
+##  [493,] &quot;Victory&quot;           &quot;Victory&quot;          
+##  [494,] &quot;Lager&quot;             &quot;Lager&quot;            
+##  [495,] &quot;2012&quot;              &quot;2012&quot;             
+##  [496,] &quot;Chaka&quot;             &quot;Chaka&quot;            
+##  [497,] &quot;Isis&quot;              &quot;Isis&quot;             
+##  [498,] &quot;Wee&quot;               &quot;Wee&quot;              
+##  [499,] &quot;Muckle&quot;            &quot;Muckle&quot;           
+##  [500,] &quot;2011&quot;              &quot;2011&quot;             
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 6556 rows ]</code></pre>
+<pre class="r"><code>Beer_words_df = data.frame(Beer_words_distinct)
+
+#tally the count of each word
+Beer_words_df %&gt;%
+  count(X1) %&gt;%
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 2,423 x 2
+##    X1         n
+##    &lt;fct&gt;  &lt;int&gt;
+##  1 Ale      591
+##  2 IPA      318
+##  3 Pale     225
+##  4 s        127
+##  5 Lager    101
+##  6 Amber     73
+##  7 Stout     72
+##  8 Red       61
+##  9 Blonde    60
+## 10 Brown     58
+## # … with 2,413 more rows</code></pre>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
