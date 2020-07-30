@@ -1,0 +1,89 @@
+---
+title: "An Example of Using VAR"
+output:
+html_document: default
+---
+  
+```{r, message=FALSE}
+library(tswge)
+library(vars)
+```
+
+```{r, results='hide'}
+#generate an AR(2) realization
+x = gen.arma.wge(n=100, phi = c(.3, -.5))
+
+#check out its ACF
+plotts.true.wge(phi=c(.3, -.5))
+
+#xl4 is lagging 4 time points behind x, so x will be a good predictor for xl4
+xl4 = c(0, 0, 0, 0, x)
+head(xl4)
+head(x)
+length(xl4)
+
+plot(x, type='l')
+lines(xl4, type='l', col='blue')
+
+#x lag -4 perfectly correlates with xl4
+ccf(x, xl4)
+plot(c(0,0,0,0, x), xl4)
+```
+
+```{r, warning=FALSE}
+#take first 80 points as training
+train = data.frame(x = x[1:80], xl4 = xl4[1:80])
+
+#fit the var model
+fit_var <- VAR(train, lag.max=5)
+fit_var
+
+#get the forecasts
+fore_var <- predict(fit_var, n.ahead=20)
+fore_var_x <- fore_var$fcst$x
+fore_var_xl4 <- fore_var$fcst$xl4
+
+#predicting x not particularly good
+plot(x, type="l", main="x")
+lines(seq(81, 100, 1), fore_var_x[,1], col='blue')
+
+#predicting xl4 is very good, at least for the first 4 points 
+plot(xl4, type='l', main="xl4")
+lines(seq(81, 100, 1), fore_var_xl4[,1], col='red')
+```
+
+```{r, warning=FALSE}
+#add an exogenous variable 
+y = gen.arma.wge(104, phi=c(.9))
+xl4plusy <- xl4 + y
+
+plot(xl4plusy, type='l', main = "Black = Red + Blue")
+lines(x, type='l', col='blue')
+lines(y, type='l', col='red')
+
+#fit the model with exogenous variable
+train <- data.frame(x = x[1:80], xl4plusy = xl4plusy[1:80])
+fit_var_exo <- VAR(train, lag.max=5, exogen = y[1:80])
+fit_var_exo
+
+#forecast
+fore_var_exo <- predict(fit_var_exo, n.ahead = 20, dumvar = data.frame(exo1=y[81:100]))
+
+
+plot(xl4plusy, type='l', main = 'xl4plusy forecasts')
+lines(seq(81, 100, 1), fore_var_exo$fcst$xl4plusy[,1], col='blue')
+```
+
+```{r, warning=FALSE}
+#include x as exogenous variable too so that it can see and use future values of x
+exogs <- data.frame(y[1:100], x)
+fit_var_exo <- VAR(train, lag.max=5, exogen = exogs[1:80,])
+fit_var_exo
+
+#forecast
+fore_var_exo <- predict(fit_var_exo, n.ahead = 20, dumvar = exogs[81:100,])
+
+#plot forecasts
+plot(xl4plusy, type='l', main = 'xl4plusy forecasts')
+lines(seq(81, 100, 1), fore_var_exo$fcst$xl4plusy[,1], col='blue')
+```

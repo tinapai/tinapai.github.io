@@ -5,8 +5,9 @@ date: "3/25/2020"
 output: html_document
 ---
 
-# About Tina Pai
+# Hello! 
 
 I am a student at SMU getting my masters in data science!
+Browse through the tabs to see some of my work.
 
 ![Alt text](myPortrait.jpg)

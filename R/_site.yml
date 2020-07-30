@@ -4,7 +4,11 @@ navbar:
   left:
     - text: "Home"
       href: Index.html
-    - text: "Studies"
+    - text: "Time Series VAR"
+      href: var_exogs_example.html
+    - text: "Attrition Classification"
+      href: Attrition.html
+    - text: "Beers"
       href: CaseStudy.html
     - text: "Berkeley"
       href: Berkeley.html

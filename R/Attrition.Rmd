@@ -1,0 +1,913 @@
+---
+title: "Employee Data Analysis"
+author: "Tina Pai"
+date: "4/13/2020"
+output: html_document
+---
+
+## Introduction
+
+See YouTube for my oral presentation walk through of this content: https://youtu.be/3jkTX-NO4VQ
+
+This is an analysis of employee data. We will:
+
+1) Explore trends and insights about job roles
+2) Determine what are the most influential factors in attrition
+3) Make a model of attrition
+4) Make a model of income
+
+```{r setup, include=FALSE}
+library(tidyverse)
+
+```
+
+## Data Overview and Cleaning
+
+An overview of the basic lay of the land of this data shows that:
+
+* There is a mix of categorical, ordinal, and continuous variables
+* There are no missing values
+* The variable Over18 is useless--it is just the same value for all people, and as long as we assume there is a rule that all people who work at the company are over 18, this variable will not change
+
+```{r data}
+#read in data
+employees <- read.csv("CaseStudy2-data.csv")
+#overview of the variables
+str(employees)
+#how many NA values
+colSums(is.na(employees))
+#summaries of monthly income and attrition, the variables of interest for our models
+summary(employees$MonthlyIncome)
+summary(employees$Attrition)
+#useless variable with one value across the whole thing
+employees$Over18 <- NULL
+
+```
+
+
+Because some ordinal variables going in as continuous right now, we will turn them into factors so that they will be treated as factors. I name the factor levels for the ones that I know their meaning.
+
+```{r}
+#Job involvement
+employees$JobInvolvement[which(employees$JobInvolvement == 1)] = 'Low'
+employees$JobInvolvement[which(employees$JobInvolvement == 2)] = 'Medium'
+employees$JobInvolvement[which(employees$JobInvolvement == 3)] = 'High'
+employees$JobInvolvement[which(employees$JobInvolvement == 4)] = 'Very High'
+employees$JobInvolvement = as.factor(employees$JobInvolvement)
+summary(employees$JobInvolvement)
+
+#Job satisfaction
+employees$JobSatisfaction[which(employees$JobSatisfaction == 1)] = 'Low'
+employees$JobSatisfaction[which(employees$JobSatisfaction == 2)] = 'Medium'
+employees$JobSatisfaction[which(employees$JobSatisfaction == 3)] = 'High'
+employees$JobSatisfaction[which(employees$JobSatisfaction == 4)] = 'Very High'
+employees$JobSatisfaction = as.factor(employees$JobSatisfaction)
+summary(employees$JobSatisfaction)
+
+#Performance rating
+employees$PerformanceRating[which(employees$PerformanceRating == 1)] = 'Low'
+employees$PerformanceRating[which(employees$PerformanceRating == 2)] = 'Good'
+employees$PerformanceRating[which(employees$PerformanceRating == 3)] = 'Excellent'
+employees$PerformanceRating[which(employees$PerformanceRating == 4)] = 'Outstanding'
+employees$PerformanceRating = as.factor(employees$PerformanceRating)
+summary(employees$PerformanceRating)
+
+#Relationship status
+employees$RelationshipSatisfaction[which(employees$RelationshipSatisfaction == 1)] = 'Low'
+employees$RelationshipSatisfaction[which(employees$RelationshipSatisfaction == 2)] = 'Medium'
+employees$RelationshipSatisfaction[which(employees$RelationshipSatisfaction == 3)] = 'High'
+employees$RelationshipSatisfaction[which(employees$RelationshipSatisfaction == 4)] = 'Very High'
+employees$RelationshipSatisfaction = as.factor(employees$RelationshipSatisfaction)
+summary(employees$RelationshipSatisfaction)
+
+#Work life balance
+employees$WorkLifeBalance[which(employees$WorkLifeBalance == 1)] = 'Bad'
+employees$WorkLifeBalance[which(employees$WorkLifeBalance == 2)] = 'Good'
+employees$WorkLifeBalance[which(employees$WorkLifeBalance == 3)] = 'Better'
+employees$WorkLifeBalance[which(employees$WorkLifeBalance == 4)] = 'Best'
+employees$WorkLifeBalance = as.factor(employees$WorkLifeBalance)
+summary(employees$WorkLifeBalance)
+
+#Education
+employees$Education[which(employees$Education == 1)] = 'Below College'
+employees$Education[which(employees$Education == 2)] = 'College'
+employees$Education[which(employees$Education == 3)] = 'Bachelor'
+employees$Education[which(employees$Education == 4)] = 'Master'
+employees$Education[which(employees$Education == 5)] = 'Doctor'
+employees$Education = as.factor(employees$Education)
+summary(employees$WorkLifeBalance)
+
+#Environment satisfaction
+employees$EnvironmentSatisfaction[which(employees$EnvironmentSatisfaction == 1)] = 'Low'
+employees$EnvironmentSatisfaction[which(employees$EnvironmentSatisfaction == 2)] = 'Medium'
+employees$EnvironmentSatisfaction[which(employees$EnvironmentSatisfaction == 3)] = 'High'
+employees$EnvironmentSatisfaction[which(employees$EnvironmentSatisfaction == 4)] = 'Very High'
+employees$EnvironmentSatisfaction = as.factor(employees$EnvironmentSatisfaction)
+summary(employees$EnvironmentSatisfaction)
+
+#Stock option level
+employees$StockOptionLevel = factor(employees$StockOptionLevel)
+summary(employees$StockOptionLevel)
+```
+
+## Exploring Job Role Insights
+
+#### Job Satisfaction
+According to this data, job satisfaction does not vary significantly from role to role. The mosaic plot and contingincy table show some variation, but the Chi Square test reveals that the variation in our dataset are not significant enough to conclude that different roles tend to have more or less job satisfaction than others (p value = .35)
+
+```{r jobsatisfaction}
+library(ggmosaic)
+
+ggplot(data = employees) +
+   geom_mosaic(aes(x = product(JobSatisfaction, JobRole), fill=JobRole), na.rm=TRUE) + labs(x = "Job Role", title='Job Satisfaction in Job Roles', y='Job Satisfaction')+
+theme(axis.text.x = element_text(angle = 90))
+
+#Contingency table
+table(employees$JobSatisfaction, employees$JobRole)
+
+#Chi square says no significant difference in job satisfaction across education fields
+chisq.test(table(employees$JobSatisfaction, employees$JobRole))
+
+```
+
+#### Education field background of people in job roles: 
+
+We can see that, as expected, people in more technical roles come from different backgrounds than people in less technical roles:
+
+* Those who got Marketing or Human Resources degrees were all either in HR, management, or sales
+* All the people in research-related jobs had science, medical, technical, or other degrees.
+
+```{r}
+ggplot(data = employees) +
+   geom_mosaic(aes(x = product(EducationField, JobRole), fill=EducationField), na.rm=TRUE) + labs(y = "Education Field", title='Education Field of Job Roles', x='Job Role') +
+theme(axis.text.x = element_text(angle = 90))
+```
+
+#### Income of job roles: 
+
+Clearly, the income of these job roles are very different from each other (p < 2e-16 from one-way ANOVA test). This will come in handy when we make our salary prediction model later.
+
+* HR, lab technician, research scientist, and sales representatives make the least money.
+* Managers and Research directors make the most money.
+* Healthcare representatives, Manufacturing directors, and sales executives make in the middle.
+
+```{r}
+ggplot(data = employees, aes(x=JobRole, y=MonthlyIncome, fill=JobRole)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  ggtitle("Incomes of Job Roles")
+
+#ANOVA of income differences across job roles
+summary(aov(MonthlyIncome ~ JobRole, data = employees))
+```
+
+#### Working years vs job roles:
+
+There is a difference across the job roles regarding how long people of these roles have been in the work force (p < 2e-16 from one-way ANOVA test). Sales represntative and HR seem to be the most entry-level type job, whereas manager and director have generally been working a longer time than those in other roles.
+
+```{r}
+ggplot(data = employees, aes(x=JobRole, y=TotalWorkingYears, fill=JobRole)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  ggtitle("How Long People of Job Roles Have Worked")
+
+#ANOVA of total working years compared across job roles
+summary(aov(TotalWorkingYears ~ JobRole, data = employees))
+```
+
+#### JobInvolvement of job roles: 
+
+All the job roles are similar in their distribution of amount of job involvement, at least according to this data (p = .62 from Chi Square test). We don't have insight as to what the definitions of these job involvement level break outs are, so it is hard to interpret this deeply.
+
+```{r}
+ggplot(data = employees) +
+   geom_mosaic(aes(x = product(factor(JobInvolvement), JobRole), fill=JobInvolvement), na.rm=TRUE) + labs(y = "Job Involvement", title='Involvment of Job Roles', x='Job Role') +
+theme(axis.text.x = element_text(angle = 90))
+
+#Chi square says no significant difference in job satisfaction across education fields
+chisq.test(table(employees$JobInvolvement, employees$JobRole))
+
+```
+
+## Exploratory Analysis for Attrition
+
+
+#### EDA Continuous Variables
+
+What continuous variables have a difference in distribution of attrition? It looks like from these paired scatterplots that attrition is pretty scattered across our continuous variables and none of them show very distinct clusters of attrition. Years at company and years in current role seem, if anything, to show mildly that people who have been at the company past a certain number of years are less likely to leave.
+
+```{r EDAAttrition, message=FALSE}
+library(GGally)
+
+#there's 19 continuous variables
+employees %>%
+  select_if(is.numeric) %>%
+  dim()
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(1:5) %>%
+  mutate(Attrition = employees$Attrition) %>%
+  sample_n(200) %>%
+  ggpairs(aes(colour = Attrition)) + 
+  ggtitle("Pairs Plot")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(6:10) %>%
+  mutate(Attrition = employees$Attrition) %>%
+  sample_n(200) %>%
+  ggpairs(aes(colour = Attrition)) + 
+  ggtitle("Pairs Plot")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(11:15) %>%
+  mutate(Attrition = employees$Attrition) %>%
+  sample_n(200) %>%
+  ggpairs(aes(colour = Attrition)) + 
+  ggtitle("Pairs Plot")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(16:19) %>%
+  mutate(Attrition = employees$Attrition) %>%
+  sample_n(200) %>%
+  ggpairs(aes(colour = Attrition)) + 
+  ggtitle("Pairs Plot")
+```
+
+Taking a closer look at years in current role to compare attrition, we see that those who left the company stayed generally between 0 - 4 years, whereas those who did not leave tend to have been in the company between 2 - 7 years. A t-test shows the p-value for there being a difference in mean of those who left vs those who did not is p=1.522e-6, which is is strong evidence that there is a difference in means of those two populations.
+
+```{r}
+t.test(YearsInCurrentRole ~ Attrition, data=employees,)
+employees %>%
+  ggplot(aes(x=Attrition, y=YearsInCurrentRole)) +
+  geom_boxplot() +
+  ggtitle("Years In Current Role by Attrition")
+```
+
+A check of the correlation matrix shows there is some multicollinearity between continuous variables, particularly the variables related to the number of years of being in a position or at a company.
+
+```{r}
+
+library(corrplot)
+## corrplot 0.84 loaded
+M <- employees %>%
+  select_if(is.numeric) %>%
+  cor()
+
+corrplot(M, method = "circle")
+```
+
+
+#### EDA Categorical Variables
+
+What categorical variables have a difference in distribution in response? Many of them do! Particularly noticeably, those who are likely to leave are:
+
+* those with low job involvement
+* sales representatives
+* single people
+* those working overtime
+* those with bad work life balance
+
+
+```{r, message=FALSE}
+
+#there's 14 categorical variables
+employees %>%
+  select_if(is.factor) %>%
+  dim()
+
+categs <- names(select_if(employees, is.factor))
+
+for(i in 1:length(categs)){
+  print(employees %>%
+    ggplot(aes(x = eval(parse(text=categs[i])), fill = Attrition)) +
+    geom_bar(position = "fill") +
+    xlab(categs[i]) + 
+    ggtitle(paste("Proportion of Attrition by ", categs[i]))
+  )
+}
+
+```
+
+
+## Modeling Attrition
+
+#### Train Test Balanced Setup
+Because there are a much higherp proportion of "No" than "Yes" in our response variable Attrition, I am setting up a balanced train test split to help our models train properly.
+
+```{r}
+
+split_train_test <- function(df) {
+  # dataset with "no"
+  data_no = df[which(df$Attrition=="No"),]
+  # dataset with "yes"
+  data_yes = df[which(df$Attrition=="Yes"),]
+  
+  #making more folds on No to balance the number with Yes 
+  folds_no = createFolds(data_no$Attrition, k=8)
+  folds_yes = createFolds(data_yes$Attrition, k=2)
+  length(folds_no$Fold1)
+  length(folds_no$Fold2)
+  length(folds_yes$Fold1)
+  length(folds_yes$Fold2)
+  
+  #Train
+  train_no = data_no[folds_no$Fold1,]
+  train_yes = data_yes[folds_yes$Fold1,]
+  train = rbind(train_no, train_yes)
+  
+  #Test
+  test_no = data_no[c(folds_no$Fold2, folds_no$Fold3, folds_no$Fold4, folds_no$Fold5),]
+  test_yes = data_yes[folds_yes$Fold2,]
+  test = rbind(test_no, test_yes)
+  
+  return(list(train, test))
+}
+```
+
+### Predict attrition - Naive Bayes Model
+
+The Naive Bayes algorithm works alright. The model trained on the balanced training set has Sensitivity 0.68 and Specificity 0.80 at a .5 probability threshold for categorizing "Yes". The model trained on the unbalanced training set was worse; its ROC curve shows less area under the curve than the one trained on balanced data. So for the remainder of the classification models, we will just use the balanced training test split.
+
+```{r, message=FALSE}
+library(caret)
+library(e1071)
+library(ROCR)
+library(plotROC)
+
+#naive bayes on balanced training set
+train1 <- split_train_test(employees)[[1]]
+test1 <- split_train_test(employees)[[2]]
+model.nb1 <- naiveBayes(Attrition ~ ., data=train1)
+preds.nb1 <- predict(model.nb1, test1)
+confusionMatrix(table(preds.nb1, test1$Attrition))
+preds.nb1 <- predict(model.nb1, test1, type = "raw")
+preds.nb1 <- prediction(preds.nb1[,2], test1$Attrition)
+roc.perf_1 = performance(preds.nb1, measure = "tpr", x.measure = "fpr")
+
+#naive bayes unbalanced training set
+folds <- createFolds(employees$Attrition, k=2)
+train2 <- employees[folds$Fold1,]
+test2 <- employees[folds$Fold2,]
+model.nb2 <- naiveBayes(Attrition ~ ., data=train2)
+preds.nb2 <- predict(model.nb2, test2)
+confusionMatrix(table(preds.nb2, test2$Attrition))
+preds.nb2 <- predict(model.nb2, test2, type = "raw")
+preds.nb2 <- prediction(preds.nb2[,2], test2$Attrition)
+roc.perf_2 = performance(preds.nb2, measure = "tpr", x.measure = "fpr")
+
+#the balanced one definitely looks better and .6 seems a good threshold
+plot(roc.perf_1, col="red", main = "ROCs of NB Model Trained on Balanced (red) and Unbalanced (blue)")
+plot(roc.perf_2, add = TRUE, col="blue")
+plot(roc.perf_1, colorize = TRUE, main="P Threshold Colorized ROC of NB trained on Balanced Data")
+```
+
+### Predict attrition - KNN Model
+
+#### Formatting Data to Numeric and Scaled
+
+Another model for classification is KNN. KNN only takes numeric data and also is highly affected by the scale of the predictors, so I will make all the variables numeric and on a standardize scale for KNN.
+
+```{r}
+#re-read in data
+employees_num <- read.csv("CaseStudy2-data.csv")
+
+#get rid of useless variables
+employees_num$Over18 <- NULL
+employees_num$ID <- NULL
+
+#numericize categorical variables
+employees_num$BusinessTravel = as.numeric(employees_num$BusinessTravel)
+employees_num$Department = as.numeric(employees_num$Department)
+employees_num$EducationField = as.numeric(employees_num$EducationField)
+employees_num$Gender = as.numeric(employees_num$Gender)
+employees_num$JobRole = as.numeric(employees_num$JobRole)
+employees_num$MaritalStatus = as.numeric(employees_num$MaritalStatus)
+employees_num$OverTime = as.numeric(employees_num$OverTime)
+
+n <- dim(employees_num)[2]
+
+#scale
+employees_z <- employees_num %>%
+mutate(zAge = scale(Age))  %>% 
+mutate(zBusinessTravel = scale(BusinessTravel)) %>%
+mutate(zDailyRate = scale(DailyRate)) %>%
+mutate(zDepartment = scale(Department)) %>%
+mutate(zDistanceFromHome = scale(DistanceFromHome)) %>%
+mutate(zEducation = scale(Education)) %>%
+mutate(zEducationField = scale(EducationField)) %>%
+mutate(zEmployeeCount = scale(EmployeeCount)) %>%
+mutate(zEmployeeNumber = scale(EmployeeNumber)) %>%
+mutate(zEnvironmentSatisfaction = scale(EnvironmentSatisfaction)) %>%
+mutate(zGender = scale(Gender)) %>%
+mutate(zHourlyRate = scale(HourlyRate))           %>%
+mutate(zJobInvolvement = scale(JobInvolvement)) %>%
+mutate(zJobLevel = scale(JobLevel)) %>%
+mutate(zJobRole = scale(JobRole)) %>%
+mutate(zJobSatisfaction = scale(JobSatisfaction)) %>%
+mutate(zMaritalStatus = scale(MaritalStatus)) %>%
+mutate(zMonthlyIncome = scale(MonthlyIncome)) %>%
+mutate(zMonthlyRate = scale(MonthlyRate)) %>%
+mutate(zNumCompaniesWorked = scale(NumCompaniesWorked)) %>%
+mutate(zOverTime = scale(OverTime)) %>%
+mutate(zPercentSalaryHike = scale(PercentSalaryHike)) %>%
+mutate(zPerformanceRating = scale(PerformanceRating)) %>%
+mutate(zRelationshipSatisfaction = scale(RelationshipSatisfaction)) %>%
+mutate(zStandardHours = scale(StandardHours)) %>%
+mutate(zStockOptionLevel = scale(StockOptionLevel)) %>%
+mutate(zTotalWorkingYears = scale(TotalWorkingYears)) %>%
+mutate(zTrainingTimesLastYear = scale(TrainingTimesLastYear)) %>%
+mutate(zWorkLifeBalance = scale(WorkLifeBalance)) %>%
+mutate(zYearsAtCompany = scale(YearsAtCompany)) %>%
+mutate(zYearsInCurrentRole = scale(YearsInCurrentRole)) %>%
+mutate(zYearsSinceLastPromotion = scale(YearsSinceLastPromotion)) %>%
+mutate(zYearsWithCurrManager = scale(YearsWithCurrManager))
+
+nz <- dim(employees_z)[2]
+employees_z <- employees_z[,c((n+1):nz)]
+employees_z$Attrition = employees$Attrition
+#get rid of nans
+colSums(is.na(employees_z))
+employees_z$zStandardHours <- NULL
+employees_z$zEmployeeCount <- NULL
+str(employees_z)
+
+```
+
+
+#### KNN Model
+
+The KNN model appears to work quite badly! The ROC is just about the same as a coin flip, and it seems no value of K can make the area under the curve any better, regardless of having scaled or not scaled the variables.
+
+```{r knn, message=FALSE}
+#KNN
+##load the package class
+ library(class)
+
+train <- split_train_test(employees_num)[[1]]
+test <- split_train_test(employees_num)[[2]]
+
+##run knn k=8 and make ROC--it looks really bad
+preds.knn <- knn(train[, names(train) != "Attrition"], test[, names(train) != "Attrition"], cl=train$Attrition, k=8, prob=TRUE)
+prob.knn <- attr(preds.knn, "prob")
+preds.knn <- prediction(prob.knn, test$Attrition)
+roc.perf_knn = performance(preds.knn, measure = "tpr", x.measure = "fpr")
+auc <- performance(preds.knn, measure = "auc")
+auc <- auc@y.values
+plot(roc.perf_knn, colorize = TRUE,main = "ROC of KNN with k=8 on Original Scaled Data")
+
+auc.knns <- c()
+for(i in 1:80) {
+#train test split
+train <- split_train_test(employees_num)[[1]]
+test <- split_train_test(employees_num)[[2]]
+
+##get auc of knn
+preds.knn <- knn(train[, names(train) != "Attrition"], test[, names(train) != "Attrition"], cl=train$Attrition, k=i, prob=TRUE)
+prob.knn <- attr(preds.knn, "prob")
+preds.knn <- prediction(prob.knn, test$Attrition)
+roc.perf_knn = performance(preds.knn, measure = "tpr", x.measure = "fpr")
+auc <- performance(preds.knn, measure = "auc")
+auc <- auc@y.values
+auc.knns <- c(auc.knns, auc)
+}
+plot(x=1:80, y=auc.knns, xlab="k", main = "AUCs of KNN models with k=[1,80]")
+#all the KNN models are bad
+
+#second time, this time with scaled variables
+train <- split_train_test(employees_z)[[1]]
+test <- split_train_test(employees_z)[[2]]
+
+##run knn k=8 and make ROC--it still looks very bad
+preds.knn <- knn(train[, names(train) != "Attrition"], test[, names(train) != "Attrition"], cl=as.factor(train$Attrition), k=8, prob=TRUE)
+prob.knn <- attr(preds.knn, "prob")
+preds.knn <- prediction(prob.knn, test$Attrition)
+roc.perf_knn = performance(preds.knn, measure = "tpr", x.measure = "fpr")
+auc <- performance(preds.knn, measure = "auc")
+auc <- auc@y.values
+auc.knns <- c(auc.knns, auc)
+plot(roc.perf_knn, colorize = TRUE, main = "ROC of KNN with k=8 on Stardard Scaled Data")
+
+auc.knns <- c()
+for(i in 1:80) {
+#train test split
+train <- split_train_test(employees_num)[[1]]
+test <- split_train_test(employees_num)[[2]]
+
+##get auc of knn for many ks
+preds.knn <- knn(train[, names(train) != "Attrition"], test[, names(train) != "Attrition"], cl=train$Attrition, k=i, prob=TRUE)
+prob.knn <- attr(preds.knn, "prob")
+preds.knn <- prediction(prob.knn, test$Attrition)
+roc.perf_knn = performance(preds.knn, measure = "tpr", x.measure = "fpr")
+auc <- performance(preds.knn, measure = "auc")
+auc <- auc@y.values
+auc.knns <- c(auc.knns, auc)
+}
+plot(x=1:80, y=auc.knns, xlab="k", main = "AUCs of KNN models with k=[1,80]")
+#they're all still bad
+```
+
+### Predicting Attrition - Random Forest
+
+Random Forest works well! At a probability threshold of .5 for classifying as "Yes", the Random Forest model gets a .86 accuracy, .79 sensitivity, and .88 specificity. A comparison of its ROC curve verses the Naive Bayes model ROC curve shows that the Random Forest does better.
+
+```{r categorize}
+#RF
+library(randomForest)
+
+train <- split_train_test(employees)[[1]]
+test <- split_train_test(employees)[[2]]
+
+model.rf <- randomForest(Attrition ~ ., data = train, importance = TRUE)
+preds.rf <- predict(model.rf, test)
+
+confusionMatrix(table(preds.rf, test$Attrition), positive = "Yes")
+
+prob.rf <- predict(model.rf, test, type = "prob")
+preds.rf <- prediction(prob.rf[,2], test$Attrition)
+roc.rf = performance(preds.rf, measure = "tpr", x.measure = "fpr")
+
+#the balanced one definitely looks better and .25 seems a good threshold
+plot(roc.perf_1, col="red", main = "ROC of Naive Bayes (red) and Random Forest (green)")
+plot(roc.rf, add = TRUE, col="green")
+
+plot(roc.rf, colorize=TRUE, main = "Colorized P Threshold ROC Curve for RF Model")
+
+#Feature Importances
+featureimportances <- importance(model.rf)
+sort(featureimportances[,2], decreasing=TRUE)
+```
+
+### Conclusion of Attrition Model
+Random forest wins as a predictive model of attrition.
+From my analysis, the top influencing factors for attrition in a company appear to be:
+
+1) Job Involvement
+2) Overtime
+3) Job Role
+
+
+## Modeling Salary
+
+### Exploratory Analysis of Monthly Income
+
+#### EDA Continuous Variables
+
+First, we can see that income has a right skew. What continuous variables have a difference in distribution of the Monthly Income? From the scatterplot matrices, the most noticeable correlations with income are:
+
+* Job Level
+* Total Working Years
+
+
+```{r, message=FALSE}
+library(GGally)
+
+employees %>%
+  ggplot(aes(x=MonthlyIncome)) +
+  geom_histogram() + 
+  ggtitle("Histogram of Monthly Income")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(1:5) %>%
+  mutate(MonthlyIncome = employees$MonthlyIncome) %>%
+  sample_n(200) %>%
+  ggpairs() + 
+  ggtitle("Pairs Plot")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(6:10) %>%
+  mutate(MonthlyIncome = employees$MonthlyIncome) %>%
+  sample_n(200) %>%
+  ggpairs() + 
+  ggtitle("Pairs Plot")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(11:15) %>%
+  mutate(MonthlyIncome = employees$MonthlyIncome) %>%
+  sample_n(200) %>%
+  ggpairs() + 
+  ggtitle("Pairs Plot")
+
+employees %>%
+  select_if(is.numeric) %>%
+  select(16:19) %>%
+  mutate(MonthlyIncome = employees$MonthlyIncome) %>%
+  sample_n(200) %>%
+  ggpairs() + 
+  ggtitle("Pairs Plot")
+
+```
+
+
+#### EDA Categorical Variables
+
+What categorical variables have a difference in distribution in response? Most are not very telling. But as mentioned in the exploration analysis above, one notable categorical variable that shows major differences in income is:
+
+* Job Role
+
+```{r, message=FALSE}
+
+#there's 16 categorical variables
+employees %>%
+  select_if(is.factor) %>%
+  dim()
+
+categs <- names(select_if(employees, is.factor))
+
+for(i in 1:length(categs)){
+  print(
+    employees %>%
+    ggplot(aes(x = eval(parse(text=categs[i])), y=MonthlyIncome)) +
+    geom_boxplot() +
+    xlab(categs[i])
+  )
+}
+
+```
+
+### Predict Monthly Income -- Linear Regression
+
+To model income, we will first try to use linear regression. I try a number of linear regression models shown below--a manual model, a full model with everything, a LASSO selected model without interaction terms, a LASSO selected model with interaction terms, and a forward-selection model including interaction terms. The one with lowest RMSE is as selected by forward selection, and its formula is: 
+
+MonthlyIncome ~ JobLevel + JobRole + TotalWorkingYears + BusinessTravel + 
+    DailyRate + Gender + MonthlyRate + Department + JobRole:TotalWorkingYears + 
+    TotalWorkingYears:BusinessTravel
+    
+* Manual RMSE: 1691
+* Full RMSE: 1143
+* LASSO 1 RMSE: 1057
+* LASSO 2 (with interactions) RMSE: 1026
+* Forward (with interactions) RMSE: 999
+
+
+manually selected variables based on EDA plots
+```{r}
+#make train test split
+folds <- createFolds(employees$ID, k=2)
+train <- employees[folds$Fold1,]
+test <- employees[folds$Fold2,]
+
+#fit the manual model
+lm.manual <- lm(MonthlyIncome ~ Age + EmployeeNumber + NumCompaniesWorked +
+                  TotalWorkingYears + YearsAtCompany + YearsInCurrentRole + YearsSinceLastPromotion + Attrition + BusinessTravel + Department + Education + EducationField + JobRole +  StockOptionLevel, data=train)
+
+#check residuals and summary
+plot(lm.manual)
+summary(lm.manual)
+
+#prediction error
+preds.lm.manual <- predict(lm.manual, test)
+print("RMSE:")
+RMSE(preds.lm.manual, test$MonthlyIncome)
+```
+
+full model
+```{r}
+#make train test split
+folds <- createFolds(employees$ID, k=2)
+train <- employees[folds$Fold1,]
+test <- employees[folds$Fold2,]
+
+#fit the model
+lm.full <- lm(MonthlyIncome ~ ., data=train)
+
+#check residuals and summary
+plot(lm.full)
+summary(lm.full)
+
+#prediction error
+preds.lm.full <- predict(lm.full, test)
+print("RMSE:")
+RMSE(preds.lm.full, test$MonthlyIncome)
+```
+
+LASSO
+```{r}
+library(glmnet)
+
+#make train test split
+folds <- createFolds(employees$ID, k=2)
+train <- employees[folds$Fold1,]
+test <- employees[folds$Fold2,]
+
+#find the lasso variable choices
+x_vars <- model.matrix(MonthlyIncome ~ (Age + EmployeeNumber + NumCompaniesWorked +
+                  TotalWorkingYears + YearsAtCompany + YearsInCurrentRole + YearsSinceLastPromotion + Attrition + BusinessTravel + Department + Education + EducationField + JobRole + StockOptionLevel)^2 + . , employees)[,-1]
+cvfit <- cv.glmnet(x_vars, employees$MonthlyIncome)
+coef(cvfit, s = "lambda.1se")
+
+#fit the model
+lm.lasso <- lm(MonthlyIncome ~ Attrition+BusinessTravel+ DistanceFromHome + Education + EmployeeNumber + EnvironmentSatisfaction + Gender + JobLevel + JobRole + MonthlyRate + RelationshipSatisfaction+ TotalWorkingYears + YearsInCurrentRole + YearsSinceLastPromotion + YearsWithCurrManager, data=train)
+
+lm.lasso2 <- lm(MonthlyIncome ~ TotalWorkingYears+ JobRole+JobLevel + TotalWorkingYears:BusinessTravel + TotalWorkingYears:JobRole + YearsAtCompany:JobRole + Department:JobRole, data=train)
+
+#check residuals and summary
+plot(lm.lasso)
+summary(lm.lasso)
+plot(lm.lasso2)
+summary(lm.lasso2)
+
+#prediction error
+preds.lm.lasso <- predict(lm.lasso, test)
+print("RMSE lasso 1:")
+RMSE(preds.lm.lasso, test$MonthlyIncome)
+
+preds.lm.lasso2 <- predict(lm.lasso2, test)
+print("RMSE lasso 2:")
+RMSE(preds.lm.lasso2, test$MonthlyIncome)
+
+```
+
+Forward step model choosing from all variables plus interactions of manually selected variables
+```{r}
+#make train test split
+folds <- createFolds(employees$ID, k=2)
+train <- employees[folds$Fold1,]
+test <- employees[folds$Fold2,]
+
+#find the forward selection variables
+model.null<-lm(MonthlyIncome ~ 1, data=employees)
+model.complex <- lm(MonthlyIncome ~ (Age + EmployeeNumber + NumCompaniesWorked +
+                  TotalWorkingYears + YearsAtCompany + YearsInCurrentRole + YearsSinceLastPromotion + Attrition + BusinessTravel + Department + Education + EducationField + JobRole +  StockOptionLevel)^2 + ., data=train)
+model.forward <- step(model.null,
+                   scope = list(upper=model.complex),
+                   direction="forward",
+                   data=employees)
+coef(model.forward)
+
+#fit the model
+lm.forward <- lm(MonthlyIncome ~ JobLevel + JobRole + TotalWorkingYears + BusinessTravel + 
+    DailyRate + Gender + MonthlyRate + Department + JobRole:TotalWorkingYears + 
+    TotalWorkingYears:BusinessTravel, data=train)
+
+#check residuals and summary
+summary(lm.forward)
+plot(lm.forward)
+
+#prediction error
+preds.lm.forward <- predict(lm.forward, test)
+print("RMSE:")
+RMSE(preds.lm.forward, test$MonthlyIncome)
+```
+
+### Model coefficients and interpretation
+
+The final picked linear regression model has the following coefficients. The coefficients can be interpreted as (here are a few examples; the rest would follow the same format):
+
+* Intercept: For a person who has 0 working years, is a healthcare representative, 0 years at the company, and is in the Human Resources department, this person would have a salary of -$1378 per month. This is, of course, not a very realistic scenario.
+* TotalWorkingYears: We will ignore this coefficient because we have an interaction term involving TotalWorkingYears
+* JobRoleHumanResources: On average, a person in the human resources job role makes $863 more than a healthcare representative per month, all else being equal.
+* TotalWorkingYears:BusinessTravelTravel_Frequently : On average, a person who travels frequently will make $37 less per total year of work than a person who does not travel for work, all else being equal
+
+```{r}
+#show the coefficients of the favorite linear regression model
+lm.forward
+```
+
+### Predict Monthly Income -- KNN Regression
+
+#### EDA for KNN
+
+Since KNN is about looking like your nearest neightbors, I will do some additional exploratory plots to see what factors make similar neighbors with each other in regards to income. It looks like Total Working Years split up by Job Level give some of the best separation between income levels. The Principal Components also give some amount of distinction but are still quite muddled.
+
+```{r EDALR}
+
+ #Plots of working years vs income, colored by various elements to see if they make a good split
+ employees  %>%
+   mutate(PromotionBins = cut(employees$YearsSinceLastPromotion, 10)) %>%
+   ggplot(aes(x=TotalWorkingYears, MonthlyIncome, colour=PromotionBins)) +
+   geom_point()
+
+ employees  %>%
+   mutate(TenureBins = cut(employees$YearsAtCompany, 10)) %>%
+   ggplot(aes(x=TotalWorkingYears, MonthlyIncome, colour=TenureBins)) +
+   geom_point()
+   
+ employees  %>%
+   mutate(ManagerBins = cut(employees$YearsWithCurrManager, 10)) %>%
+   ggplot(aes(x=TotalWorkingYears, MonthlyIncome, colour=ManagerBins)) +
+   geom_point()
+   
+ employees  %>%
+   mutate(RoleBins = cut(employees$YearsInCurrentRole, 10)) %>%
+   ggplot(aes(x=TotalWorkingYears, MonthlyIncome, colour=RoleBins)) +
+   geom_point()
+
+ employees  %>%
+   ggplot(aes(x=TotalWorkingYears, MonthlyIncome, colour=factor(JobLevel))) +
+   geom_point()
+
+ employees  %>%
+   mutate(IncomeBins = cut(employees$MonthlyIncome, 10)) %>%
+   ggplot(aes(x=TotalWorkingYears, JobLevel, colour=IncomeBins)) +
+   geom_point()
+
+ employees_yrs <- employees  %>%
+   select(c(TotalWorkingYears, YearsAtCompany, YearsInCurrentRole, YearsSinceLastPromotion, YearsWithCurrManager))
+
+ employees_pcs <- prcomp(employees_yrs, scale = TRUE)
+
+ employees %>%
+   ggplot(aes(x=employees_pcs$x[,1], y=MonthlyIncome)) +
+   geom_point()
+
+ employees %>%
+   mutate(IncomeBins = cut(employees$MonthlyIncome, 10)) %>%
+   mutate(PC1 = employees_pcs$x[,1]) %>%
+   mutate(PC2 = employees_pcs$x[,2]) %>%
+ ggplot(aes(x=PC1, y=PC2, colour=IncomeBins)) +
+   geom_point()
+```
+
+### KNN regression
+
+I run KNN a few different times--one with everything, one with a few manually selected models, one with just JobLevel and TotalWorkingYears, and one with principal components. The one with just JobLevel and TotalWorkingYears is the best here, but all of these KNN models are a long shot from the linear regression models!
+
+* Everything RMSE: 7701
+* Manual RMSE: 7677
+* JobLevel TotalWorkingYears RMSE: 7675
+* PCs RMSE: 7685
+
+```{r}
+employees_z2 <- employees_z %>%
+  mutate(MonthlyIncome = employees_num$MonthlyIncome) %>%
+  mutate(zAttrition = scale(as.numeric(Attrition)))
+employees_z2$Attrition <- NULL
+employees_z2$zMonthlyIncome <- NULL
+employees_z2$PC1 <- employees_pcs$x[,1]
+employees_z2$PC2 <- employees_pcs$x[,2]
+employees_z2$PC3 <- employees_pcs$x[,3]
+
+#train test split
+folds <- createFolds(employees_z2$MonthlyIncome, k=2)
+train <- employees_z2[folds$Fold1,]
+test <- employees_z2[folds$Fold2,]
+
+##run knn with everything
+preds.knn <- knn(train[, names(train) != "MonthlyIncome"], test[, names(train) != "MonthlyIncome"], cl=train$MonthlyIncome, k=10)
+preds.knn <- as.numeric(preds.knn)
+plot(x=preds.knn, y=test$MonthlyIncome, main = "Prediction vs Actual of KNN with all predictors")
+#gross
+print("RMSE:")
+RMSE(preds.knn, test$MonthlyIncome)
+
+##run knn with just a few manually selected variables
+preds.knn <- knn(train[, c("zJobRole", "zJobLevel", "zTotalWorkingYears")], test[, c("zJobRole", "zJobLevel", "zTotalWorkingYears")], cl=train$MonthlyIncome, k=10)
+preds.knn <- as.numeric(preds.knn)
+plot(x=preds.knn, y=test$MonthlyIncome, main = "Prediction vs Actual of KNN with manually selected predictors")
+print("RMSE:")
+RMSE(preds.knn, test$MonthlyIncome)
+#not bad
+
+##run knn with only Job Level and TotalWorkingYears
+preds.knn <- knn(train[, c("zJobLevel", "zTotalWorkingYears")], test[, c("zJobLevel", "zTotalWorkingYears")], cl=train$MonthlyIncome, k=10)
+preds.knn <- as.numeric(preds.knn)
+plot(x=preds.knn, y=test$MonthlyIncome, main = "Prediction vs Actual of KNN JobLevel and TotalWorkingYears")
+print("RMSE:")
+RMSE(preds.knn, test$MonthlyIncome)
+#not bad
+
+##run knn with PCs
+preds.knn <- knn(train[, c("zJobRole", "zJobLevel", "PC1", "PC2", "PC3")], test[, c("zJobRole", "zJobLevel", "PC1", "PC2", "PC3")], cl=train$MonthlyIncome, k=10)
+preds.knn <- as.numeric(preds.knn)
+plot(x=preds.knn, y=test$MonthlyIncome, main = "Prediction vs Actual of KNN with Principal Components")
+print("RMSE:")
+RMSE(preds.knn, test$MonthlyIncome)
+```
+
+### Conclusion of Salary Model
+Linear Regression with interaction terms wins as a predictive model of income, with the lowest RMSE of 999. The model formula is:
+
+MonthlyIncome ~ JobLevel + JobRole + TotalWorkingYears + BusinessTravel + 
+    DailyRate + Gender + MonthlyRate + Department + JobRole:TotalWorkingYears + 
+    TotalWorkingYears:BusinessTravel
+  
+
+Overall, the linear regression fit much better than the KNN algorithm for predicting income.
+
+## Overall Conclusion
+
+We went over analysis of job role trends, made a model for predicting attrition, and made a model for predicting income.
+
+Highlights of our job role trends analysis:
+
+* Income is highly distinguishable between the job roles
+* Job roles reflect the education field background of the people in them
+
+Highlights of our attrition model:
+
+* Random Forest worked better than Naive Bayes which worked better than KNN
+* Factors that are strongly telling about attrition are Job Involvement, Overtime, and Job Role
+
+Highlights of our income model:
+
+* Linear Regression worked better than KNN
+* Interaction terms were quite useful
+* Total working years and Job Level were good predictors for income
+

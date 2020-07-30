@@ -275,7 +275,13 @@ $(document).ready(function () {
   <a href="Index.html">Home</a>
 </li>
 <li>
-  <a href="CaseStudy.html">Studies</a>
+  <a href="var_exogs_example.html">Time Series VAR</a>
+</li>
+<li>
+  <a href="Attrition.html">Attrition Classification</a>
+</li>
+<li>
+  <a href="CaseStudy.html">Beers</a>
 </li>
 <li>
   <a href="Berkeley.html">Berkeley</a>
@@ -299,11 +305,43 @@ $(document).ready(function () {
 <p>#case study 1</p>
 <p>Link to rshiny app! <a href="https://tinapai.shinyapps.io/rshiny/" class="uri">https://tinapai.shinyapps.io/rshiny/</a></p>
 <pre class="r"><code>library(tidyverse)
-library(VIM)
-library(lattice)
-library(DMwR)
-library(mice)
-library(ggplot2)
+library(VIM)</code></pre>
+<pre><code>## Loading required package: colorspace</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<pre><code>## Loading required package: data.table</code></pre>
+<pre><code>## data.table 1.12.8 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com</code></pre>
+<pre><code>## 
+## Attaching package: &#39;data.table&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     transpose</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     between, first, last</code></pre>
+<pre><code>## VIM is ready to use. 
+##  Since version 4.0.0 the GUI is in its own package VIMGUI.
+## 
+##           Please use the package to use the new (and old) GUI.</code></pre>
+<pre><code>## Suggestions and bug-reports can be submitted at: https://github.com/alexkowa/VIM/issues</code></pre>
+<pre><code>## 
+## Attaching package: &#39;VIM&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:datasets&#39;:
+## 
+##     sleep</code></pre>
+<pre class="r"><code>library(lattice)
+library(DMwR)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;DMwR&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:VIM&#39;:
+## 
+##     kNN</code></pre>
+<pre class="r"><code>library(mice)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;mice&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     cbind, rbind</code></pre>
+<pre class="r"><code>library(ggplot2)
 library(ggthemes)
 library(stringr)
 library(class)
